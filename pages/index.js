@@ -66,7 +66,7 @@ export default function Home() {
         {/* Grid Card */}
         <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6 mt-8">
           <Link
-            href="/"
+            href="https://grants-dao-two.vercel.app/"
             className="bg-[url('/projects/grants.png')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
@@ -83,7 +83,7 @@ export default function Home() {
             </div>
           </Link>
           <Link
-            href="/"
+            href="https://github.com/achmadfauzanhusain/virgo-app-server"
             className="bg-[url('/projects/virgo.png')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
