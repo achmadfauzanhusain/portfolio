@@ -11,15 +11,15 @@ export default function Home() {
   return (
     <div className="pb-10 md:pb-14">
       {/* Board */}
-      <div className="flex justify-center items-center relative h-screen bg-[url('/doodle.png')] bg-cover bg-left">
+      <div className="flex justify-center items-center relative h-screen bg-[url('/doodle.jpg')] bg-cover bg-left">
         <div className="absolute inset-0 bg-gradient-to-b z-0" />
 
         <div className="relative z-10 text-white w-fit mx-auto">
-          <h1 className={`${baloo.className} text-shadow-custom tracking-[-6px] font-extrabold text-7xl md:text-8xl lg:text-9xl 2xl:text-[160px] text-center`}>
+          <h1 className={`${baloo.className} text-shadow-custom tracking-[-6px] font-extrabold text-5xl sm:text-7xl md:text-8xl lg:text-9xl 2xl:text-[160px] text-center`}>
             Fauzan Husain
           </h1>
 
-          <div className="flex justify-between mt-[-9px] md:-[-12px] leading-3 md:leading-3 2xl:leading-4 w-full text-sm md:text-base 2xl:text-xl font-bold">
+          <div className="flex justify-between mt-[-9px] md:-[-12px] leading-3 md:leading-3 2xl:leading-4 w-full text-xs sm:text-sm md:text-base 2xl:text-xl font-bold">
             <p className='text-shadow-custom'>Fullstack Javascript <br /> Developer</p>
             <p className='text-shadow-custom'>Blockchain <br /> Developer</p>
           </div>
@@ -28,18 +28,18 @@ export default function Home() {
 
       {/* social media */}
       <div>
-        <div className="flex justify-center gap-12 mt-12">
+        <div className="flex justify-center gap-6 sm:gap-12 mt-12">
           <Link href="https://www.instagram.com/_fauzanhusain/">
-            <Image src="/icon/instagram.png" width={30} height={0} className="w-[25px] 2xl:w-[40px]" alt="Instagram" />
+            <Image src="/icon/instagram.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="Instagram" />
           </Link>
           <Link href="https://www.github.com/achmadfauzanhusain">
-            <Image src="/icon/github.png" width={30} height={0} className="w-[25px] 2xl:w-[40px]" alt="GitHub" />
+            <Image src="/icon/github.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="GitHub" />
           </Link>
           <Link href="/">
-            <Image src="/icon/whatsapp.png" width={30} height={0} className="w-[25px] 2xl:w-[40px]" alt="Portfolio" />
+            <Image src="/icon/whatsapp.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="Portfolio" />
           </Link>
           <Link href="https://www.linkedin.com/in/achmadfauzanhusain">
-            <Image src="/icon/linkedin.png" width={30} height={0} className="w-[25px] 2xl:w-[40px]" alt="LinkedIn" />
+            <Image src="/icon/linkedin.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="LinkedIn" />
           </Link>
         </div>
       </div>
@@ -48,7 +48,7 @@ export default function Home() {
       <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-16 md:mt-18">
         {/* Judul */}
         <h1
-          className={`${baloo.className} text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
+          className={`${baloo.className} text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
         >
           {"REAL PROJECTS".split("").map((char, index) => (
             <span
@@ -64,10 +64,10 @@ export default function Home() {
         </p>
 
         {/* Grid Card */}
-        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6 mt-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6 mt-8">
           <Link
             href="https://grants-dao-two.vercel.app/"
-            className="bg-[url('/projects/grants.png')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+            className="bg-[url('/projects/grants.jpg')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
@@ -84,7 +84,7 @@ export default function Home() {
           </Link>
           <Link
             href="https://github.com/achmadfauzanhusain/virgo-app-server"
-            className="bg-[url('/projects/virgo.png')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+            className="bg-[url('/projects/virgo.jpg')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
@@ -101,7 +101,7 @@ export default function Home() {
           </Link>
           <Link
             href="https://kebunmu.vercel.app/"
-            className="bg-[url('/projects/kebunmu.png')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+            className="bg-[url('/projects/kebunmu.jpg')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
@@ -118,7 +118,7 @@ export default function Home() {
           </Link>
           <Link
             href="https://github.com/achmadfauzanhusain/fauzanchenko-smartcontract"
-            className="bg-[url('/projects/nft-marketplace.png')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+            className="bg-[url('/projects/nft-marketplace.jpg')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
@@ -135,7 +135,7 @@ export default function Home() {
           </Link>
           <Link
             href="https://github.com/achmadfauzanhusain/tokenMaster-smartcontract"
-            className="bg-[url('/projects/tokenmaster.png')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+            className="bg-[url('/projects/tokenmaster.jpg')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
@@ -156,7 +156,7 @@ export default function Home() {
       {/* e-certificate */}
       <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-20 md:mt-28">
         <h1
-          className={`${baloo.className} text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
+          className={`${baloo.className} text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
         >
           {"E-Certificate".split("").map((char, index) => (
             <span
@@ -173,11 +173,11 @@ export default function Home() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
           {/* Card 1 */}
-          <div className="flex sm:flex-col gap-2 md:gap-4 bg-[#D9D9D9]/30 p-3 rounded-lg">
+          <div className="flex flex-col sm:flex-row md:flex-col gap-2 md:gap-4 bg-[#D9D9D9]/30 p-3 rounded-lg">
             {/* Gambar */}
             <div className="basis-1/2 md:basis-auto">
               <Image
-                src="/certificate/certificate-1.png"
+                src="/certificate/certificate-1.jpg"
                 width={200}
                 height={0}
                 className="rounded-lg w-full object-cover"
@@ -210,11 +210,11 @@ export default function Home() {
           </div>
 
           {/* Card 2 */}
-          <div className="flex sm:flex-col gap-2 md:gap-4 bg-[#D9D9D9]/30 p-3 rounded-lg">
+          <div className="flex flex-col sm:flex-row md:flex-col gap-2 md:gap-4 bg-[#D9D9D9]/30 p-3 rounded-lg">
             {/* Gambar */}
-            <div className="basis-1/2 md:basis-auto order-2 sm:order-none">
+            <div className="basis-1/2 md:basis-auto order-none sm:order-2 md:order-none">
               <Image
-                src="/certificate/certificate-2.png"
+                src="/certificate/certificate-2.jpg"
                 width={200}
                 height={0}
                 className="rounded-lg w-full object-cover"
@@ -222,7 +222,7 @@ export default function Home() {
             </div>
 
             {/* Teks */}
-            <div className="flex flex-col justify-between basis-1/2 md:basis-auto mt-1 order-1 sm:order-none">
+            <div className="flex flex-col justify-between basis-1/2 md:basis-auto mt-1 order-none sm:order-1 md:order-none">
               <div>
                 <h2 className="text-sm 2xl:text-xl font-semibold">
                   Bootcamp: CSS Introduction
@@ -243,11 +243,11 @@ export default function Home() {
           </div>
 
           {/* Card 3 */}
-          <div className="flex sm:flex-col gap-2 md:gap-4 bg-[#D9D9D9]/30 p-3 rounded-lg">
+          <div className="flex flex-col sm:flex-row md:flex-col gap-2 md:gap-4 bg-[#D9D9D9]/30 p-3 rounded-lg">
             {/* Gambar */}
             <div className="basis-1/2 md:basis-auto">
               <Image
-                src="/certificate/certificate-3.png"
+                src="/certificate/certificate-3.jpg"
                 width={200}
                 height={0}
                 className="rounded-lg w-full object-cover"
@@ -285,9 +285,9 @@ export default function Home() {
       <div className="bg-[url('/fauzanhusain.png')] bg-cover bg-center w-full h-[100px] sm:h-[150px] md:h-[250px] mt-14 md:mt-20"></div>
 
       {/* internship */}
-      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-20 md:mt-28">
+      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-12 md:mt-28">
         <h1
-          className={`${baloo.className} text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
+          className={`${baloo.className} text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
         >
           {"Internship".split("").map((char, index) => (
             <span
@@ -303,13 +303,13 @@ export default function Home() {
         </p>
 
         <div className='grid grid-cols-2 md:grid-cols-3 gap-2 mt-6'>
-          <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-6 rounded-xl'>
-            <h1 className='2xl:text-sm font-bold'>PT TRANS NASIONAL TEKNOLOGI</h1>
+          <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>PT TRANS NASIONAL TEKNOLOGI</h1>
             <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>3 month</p>
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
-          <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-6 rounded-xl'>
-            <h1 className='2xl:text-sm font-bold'>CMLABS</h1>
+          <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CMLABS</h1>
             <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>2 month</p>
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
