@@ -1,231 +1,323 @@
+import { Baloo_2 } from 'next/font/google'
 import Link from 'next/link'
 import Image from 'next/image'
-import Navbar from '@/components/navbar'
-import ParticlesComponent from '@/components/particles'
+
+const baloo = Baloo_2({ 
+  subsets: ['latin'], 
+  weight: ['400', '600', '800']
+})
 
 export default function Home() {
   return (
     <div className="pb-10 md:pb-14">
-      <ParticlesComponent id="particles" />
-      <Navbar />
-      {/* header */}
-      <div className='relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-10 md:mt-14'>
-        <p className="text-white text-sm md:text-base 2xl:text-lg">Hello! I am fauzan husain</p>
-        <h1 className='text-5xl md:text-7xl 2xl:text-8xl mt-2 font-bold text-white'>
-          {`I'm Fullstack Javascript`.split('').map((char, index) => (
-            <span
-              key={index}
-              className='inline-block transition-all hover:bg-[#9694FF] hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer'
-            >
-              {char === ' ' ? '\u00A0' : char}
-            </span>
-          ))}
-          <br />
-          <span className='bg-gradient-to-r from-[#253EE1] to-[#E43581] bg-clip-text text-transparent cursor-pointer'>
-            Developer
-          </span>
-        </h1>
-        <p className='mt-4 2xl:text-xl text-white/50 hover:text-white transition-all duration-150 text-sm md:text-base cursor-pointer'>
-          Create your website with an attractive user interface and <br />
-          complex back end features.
-        </p>
+      {/* Board */}
+      <div className="flex justify-center items-center relative h-screen bg-[url('/doodle.png')] bg-cover bg-left">
+        <div className="absolute inset-0 bg-gradient-to-b z-0" />
 
-        <div className='mt-12 flex gap-4'>
-          <Link href="https://wa.me/6289684053091" className='flex items-center gap-2 text-white text-xs md:text-sm 2xl:text-lg bg-[#D9D9D9]/20 hover:bg-[#D9D9D9]/30 px-5 md:px-6 2xl:px-8 py-3 2xl:py-5 rounded-lg transition-all duration-300'>
-            <Image src="/icon/whatsapp.png" width={20} height={0} />
-            contact me
+        <div className="relative z-10 text-white w-fit mx-auto">
+          <h1 className={`${baloo.className} text-shadow-custom tracking-[-6px] font-extrabold text-7xl md:text-8xl lg:text-9xl 2xl:text-[160px] text-center`}>
+            Fauzan Husain
+          </h1>
+
+          <div className="flex justify-between mt-[-9px] md:-[-12px] leading-3 md:leading-3 2xl:leading-4 w-full text-sm md:text-base 2xl:text-xl font-bold">
+            <p className='text-shadow-custom'>Fullstack Javascript <br /> Developer</p>
+            <p className='text-shadow-custom'>Blockchain <br /> Developer</p>
+          </div>
+        </div>
+      </div>
+
+      {/* social media */}
+      <div>
+        <div className="flex justify-center gap-12 mt-12">
+          <Link href="https://www.instagram.com/_fauzanhusain/">
+            <Image src="/icon/instagram.png" width={30} height={0} className="w-[25px] 2xl:w-[40px]" alt="Instagram" />
           </Link>
-          <Link href="/about" className='flex items-center gap-2 text-white text-xs md:text-sm 2xl:text-lg bg-[#3D3BF3] hover:bg-[#3835d8] px-5 md:px-6 2xl:px-8 py-3 2xl:py-5 rounded-lg transition-all duration-300'>
-            <Image src="/icon/info.png" width={20} height={0} />
-            about me
+          <Link href="https://www.github.com/achmadfauzanhusain">
+            <Image src="/icon/github.png" width={30} height={0} className="w-[25px] 2xl:w-[40px]" alt="GitHub" />
+          </Link>
+          <Link href="/">
+            <Image src="/icon/whatsapp.png" width={30} height={0} className="w-[25px] 2xl:w-[40px]" alt="Portfolio" />
+          </Link>
+          <Link href="https://www.linkedin.com/in/achmadfauzanhusain">
+            <Image src="/icon/linkedin.png" width={30} height={0} className="w-[25px] 2xl:w-[40px]" alt="LinkedIn" />
           </Link>
         </div>
       </div>
 
       {/* projects */}
-      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-20 md:mt-24">
-        <h1 className='text-2xl md:text-4xl 2xl:text-6xl text-white font-bold'>
-          {'REAL PROJECTS'.split('').map((char, index) => (
+      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-16 md:mt-18">
+        {/* Judul */}
+        <h1
+          className={`${baloo.className} text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
+        >
+          {"REAL PROJECTS".split("").map((char, index) => (
             <span
               key={index}
-              className='inline-block transition-all hover:bg-[#9694FF] hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer'
+              className="inline-block transition-all hover:bg-[#9694FF] hover:text-white hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer"
             >
-              {char === ' ' ? '\u00A0' : char}
+              {char === " " ? "\u00A0" : char}
             </span>
           ))}
         </h1>
-        <p className='text-xs md:text-sm 2xl:text-lg text-white/60 mt-2'>Projects that I only want to showcase</p>
+        <p className="text-xs md:text-sm 2xl:text-lg text-gray-600">
+          Projects that I only want to showcase
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
-          <div className='bg-[#D9D9D9]/10 p-2 pt-3 pb-5 rounded-lg mx-auto w-full'>
-            <div className='px-2 md:px-4'>
-              <Image src="/projects/virgo.png" width={500} height={0} className='rounded-lg w-full mx-auto' />
-              <div className='text-white'>
-                <h2 className='text-lg 2xl:text-2xl md:text-xl font-semibold mt-2 2xl:mt-4'>Virgo</h2>
-                <p className='text-xs md:text-sm 2xl:text-lg mt-1 2xl:mt-2 opacity-60'>Virgo is a social media application with features like social media in general</p>
-                <Link href="https://github.com/FauzanHusain13/virgo-app-server" className='flex justify-center bg-[#3D3BF3] hover:bg-[#3734d3] text-xs 2xl:text-base mt-5 md:mt-8 p-3 2xl:p-5 rounded-lg transition-all duration-300'>View Details</Link>
-              </div>
+        {/* Grid Card */}
+        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6 mt-8">
+          <Link
+            href="/"
+            className="bg-[url('/projects/grants.png')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+          >
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
+
+            {/* Text */}
+            <div className="relative z-10">
+              <p className={`${baloo.className} mt-2 font-bold text-lg md:text-2xl opacity-0 group-hover:opacity-100 text-white transition-all duration-300`}>
+                Grants Dao
+              </p>
+              <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
+                Grants DAO adalah organisasi terdesentralisasi yang mengelola dana bersama untuk mendanai proyek atau inisiatif komunitas melalui mekanisme voting anggota.
+              </p>
             </div>
-          </div>
-          <div className='bg-[#D9D9D9]/10 p-2 pt-3 pb-5 rounded-lg mx-auto w-full'>
-            <div className='px-2 md:px-4'>
-              <Image src="/projects/kebunmu.png" width={500} height={0} className='rounded-lg w-full mx-auto' />
-              <div className='text-white'>
-                <h2 className='text-lg 2xl:text-2xl md:text-xl font-semibold mt-2 2xl:mt-4'>Kebunmu</h2>
-                <p className='text-xs md:text-sm 2xl:text-lg mt-1 2xl:mt-2 opacity-60'>Helping farmers to record document about their farm with integrated Artificial Intelligence features</p>
-                <Link href="https://kebunmu.vercel.app" className='flex justify-center bg-[#3D3BF3] hover:bg-[#3734d3] text-xs 2xl:text-base mt-5 md:mt-8 p-3 2xl:p-5 rounded-lg transition-all duration-300'>View Details</Link>
-              </div>
+          </Link>
+          <Link
+            href="/"
+            className="bg-[url('/projects/virgo.png')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+          >
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
+
+            {/* Text */}
+            <div className="relative z-10">
+              <p className={`${baloo.className} mt-2 font-bold text-lg md:text-2xl opacity-0 group-hover:opacity-100 text-white transition-all duration-300`}>
+                Virgo
+              </p>
+              <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
+                Virgo adalah aplikasi sosial media yang memungkinkan pengguna untuk berbagi momen, foto, dan video dengan teman-teman mereka, serta menjelajahi konten dari pengguna lain. tapi ini hanya kode backend.
+              </p>
             </div>
-          </div>
-          <div className='bg-[#D9D9D9]/10 p-2 pt-3 pb-5 rounded-lg mx-auto w-full'>
-            <div className='px-2 md:px-4'>
-              <Image src="/projects/e-commerce.png" width={500} height={0} className='rounded-lg w-full mx-auto' />
-              <div className='text-white'>
-                <h2 className='text-lg 2xl:text-2xl md:text-xl font-semibold mt-2 2xl:mt-4'>E-commerce</h2>
-                <p className='text-xs md:text-sm 2xl:text-lg mt-1 2xl:mt-2 opacity-60'>This application has features like e commerce in general, except that payments are still manual.</p>
-                <Link href="https://github.com/FauzanHusain13/e-commerce-server" className='flex justify-center bg-[#3D3BF3] hover:bg-[#3734d3] text-xs 2xl:text-base mt-5 md:mt-8 p-3 2xl:p-5 rounded-lg transition-all duration-300'>View Details</Link>
-              </div>    
+          </Link>
+          <Link
+            href="https://kebunmu.vercel.app/"
+            className="bg-[url('/projects/kebunmu.png')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+          >
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
+
+            {/* Text */}
+            <div className="relative z-10">
+              <p className={`${baloo.className} mt-2 font-bold text-lg md:text-2xl opacity-0 group-hover:opacity-100 text-white transition-all duration-300`}>
+                Kebunmu
+              </p>
+              <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
+                Kebunmu adalah aplikasi yang memungkinkan pengguna untuk mengelola kebun mereka secara efisien, pemupukan, pemantauan pertumbuhan tanaman dan terintegrasi oleh Gemini AI.
+              </p>
             </div>
-          </div>
-          <div className='bg-[#D9D9D9]/10 p-2 pt-3 pb-5 rounded-lg mx-auto w-full'>
-            <div className='px-2 md:px-4'>
-              <Image src="/projects/realtime-chat.png" width={500} height={0} className='rounded-lg w-full mx-auto' />
-              <div className='text-white'>
-                <h2 className='text-lg 2xl:text-2xl md:text-xl font-semibold mt-2 2xl:mt-4'>Realtime chat app</h2>
-                <p className='text-xs md:text-sm 2xl:text-lg mt-1 2xl:mt-2 opacity-60'>This application is a chat application between users in real time</p>
-                <Link href="https://github.com/FauzanHusain13/server-chat" className='flex justify-center bg-[#3D3BF3] hover:bg-[#3734d3] text-xs 2xl:text-base mt-5 md:mt-8 p-3 2xl:p-5 rounded-lg transition-all duration-300'>View Details</Link>
-              </div>
+          </Link>
+          <Link
+            href="https://github.com/achmadfauzanhusain/fauzanchenko-smartcontract"
+            className="bg-[url('/projects/nft-marketplace.png')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+          >
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
+
+            {/* Text */}
+            <div className="relative z-10">
+              <p className={`${baloo.className} mt-2 font-bold text-lg md:text-2xl opacity-0 group-hover:opacity-100 text-white transition-all duration-300`}>
+                NFT Marketplace
+              </p>
+              <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
+                NFT Marketplace adalah platform yang memungkinkan pengguna untuk membeli & minting NFT fauzanchenko
+              </p>
             </div>
-          </div>
-          <div className='bg-[#D9D9D9]/10 p-2 pt-3 pb-5 rounded-lg mx-auto w-full'>
-            <div className='px-2 md:px-4'>
-              <Image src="/projects/forest-api.png" width={500} height={0} className='rounded-lg w-full mx-auto' />
-              <div className='text-white'>
-                <h2 className='text-lg 2xl:text-2xl md:text-xl font-semibold mt-2 2xl:mt-4'>NPM:forest-api</h2>
-                <p className='text-xs md:text-sm 2xl:text-lg mt-1 2xl:mt-2 opacity-60'>npm project for get data from social media</p>
-                <Link href="https://www.npmjs.com/package/forest-api" className='flex justify-center bg-[#3D3BF3] hover:bg-[#3734d3] text-xs 2xl:text-base mt-5 md:mt-8 p-3 2xl:p-5 rounded-lg transition-all duration-300'>View Details</Link>
-              </div>
+          </Link>
+          <Link
+            href="https://github.com/achmadfauzanhusain/tokenMaster-smartcontract"
+            className="bg-[url('/projects/tokenmaster.png')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+          >
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
+
+            {/* Text */}
+            <div className="relative z-10">
+              <p className={`${baloo.className} mt-2 font-bold text-lg md:text-2xl opacity-0 group-hover:opacity-100 text-white transition-all duration-300`}>
+                TokenMaster Smart Contract
+              </p>
+              <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
+                TokenMaster adalah smart contract untuk membeli tiket event, yang memungkinkan pengguna untuk membeli tiket event dengan menggunakan token ERC721.
+              </p>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
 
       {/* e-certificate */}
-      <div className='relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-20 md:mt-24'>
-        <h1 className='text-2xl md:text-4xl 2xl:text-6xl text-white font-bold'>
-          {'E-CERTIFICATE'.split('').map((char, index) => (
+      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-20 md:mt-28">
+        <h1
+          className={`${baloo.className} text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
+        >
+          {"E-Certificate".split("").map((char, index) => (
             <span
               key={index}
-              className='inline-block transition-all hover:bg-[#9694FF] hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer'
+              className="inline-block transition-all hover:bg-[#9694FF] hover:text-white hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer"
             >
-              {char === ' ' ? '\u00A0' : char}
+              {char === " " ? "\u00A0" : char}
             </span>
           ))}
         </h1>
-        <p className='text-xs md:text-sm 2xl:text-lg text-white/60 mt-2'>Certificate from the training I attended</p>
+        <p className="text-xs md:text-sm 2xl:text-lg text-gray-600">
+          Certificate from the training I attended
+        </p>
 
-        <div className='grid gap-4 mt-10'>
-          <div className='flex flex-col md:flex-row md:gap-4 bg-[#D9D9D9]/10 p-3 rounded-lg'>
-            <Image src="/certificate/certificate-1.png" width={200} height={0} className='rounded-lg w-full flex-1 object-cover' />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
+          {/* Card 1 */}
+          <div className="flex sm:flex-col gap-2 md:gap-4 bg-[#D9D9D9]/30 p-3 rounded-lg">
+            {/* Gambar */}
+            <div className="basis-1/2 md:basis-auto">
+              <Image
+                src="/certificate/certificate-1.png"
+                width={200}
+                height={0}
+                className="rounded-lg w-full object-cover"
+              />
+            </div>
 
-            <div className='text-white flex flex-col justify-between flex-1'>
+            {/* Teks */}
+            <div className="flex flex-col justify-between basis-1/2 md:basis-auto mt-1">
               <div>
-                <h2 className='text-lg md:text-xl 2xl:text-3xl font-semibold mt-4 lg:mt-6 2xl:mt-8'>Bootcamp: Fullstack Javascript Developer</h2>
-                <p className='text-xs md:text-sm 2xl:text-lg mt-4 2xl:mt-6 opacity-60'>In this bootcamp we learn to create and develop <br className='hidden lg:block' /> top up game voucher applications using mongodb,<br className='hidden lg:block' /> expressjs, reactjs, and nodejs.</p>
+                <h2 className="text-sm 2xl:text-xl font-semibold">
+                  Bootcamp: Fullstack Javascript Developer
+                </h2>
+                <p className="text-xs 2xl:text-lg mt-1 2xl:mt-3 opacity-60">
+                  In this bootcamp we learn to create and develop
+                  <br className="hidden lg:block" />
+                  top up game voucher applications using mongodb,
+                  <br className="hidden lg:block" />
+                  expressjs, reactjs, and nodejs.
+                </p>
               </div>
-              <div className='mb-6 mt-6'>
-                <Image src="/tech/tech1.png" width={200} height={0} className='w-[150px] md:w-[200px] 2xl:w-[300px]' />
+              <div className="mt-4">
+                <Image
+                  src="/tech/tech1.png"
+                  width={200}
+                  height={0}
+                  className="w-[140px] md:w-[170px] 2xl:w-[200px]"
+                />
               </div>
             </div>
           </div>
-          <div className='flex flex-col md:flex-row md:gap-4 bg-[#D9D9D9]/10 p-3 rounded-lg'>
-            <Image src="/certificate/certificate-2.png" width={200} height={0} className='rounded-lg w-full flex-1 object-cover md:order-2' />
 
-            <div className='text-white flex flex-col justify-between flex-1 md:order-1'>
+          {/* Card 2 */}
+          <div className="flex sm:flex-col gap-2 md:gap-4 bg-[#D9D9D9]/30 p-3 rounded-lg">
+            {/* Gambar */}
+            <div className="basis-1/2 md:basis-auto order-2 sm:order-none">
+              <Image
+                src="/certificate/certificate-2.png"
+                width={200}
+                height={0}
+                className="rounded-lg w-full object-cover"
+              />
+            </div>
+
+            {/* Teks */}
+            <div className="flex flex-col justify-between basis-1/2 md:basis-auto mt-1 order-1 sm:order-none">
               <div>
-                <h2 className='text-lg md:text-xl 2xl:text-3xl font-semibold mt-4 lg:mt-6 2xl:mt-8'>Bootcamp: CSS Introduction</h2>
-                <p className='text-xs md:text-sm 2xl:text-lg mt-4 2xl:mt-6 opacity-60'>In this bootcamp we just learn html and css</p>
+                <h2 className="text-sm 2xl:text-xl font-semibold">
+                  Bootcamp: CSS Introduction
+                </h2>
+                <p className="text-xs 2xl:text-lg mt-1 2xl:mt-3 opacity-60">
+                  In this bootcamp, we are only taught HTML and CSS.
+                </p>
               </div>
-              <div className='mb-6 mt-6'>
-                <Image src="/tech/tech2.png" width={200} height={0} className='w-[70px] md:w-[80px] 2xl:w-[110px]' />
+              <div className="mt-4">
+                <Image
+                  src="/tech/tech2.png"
+                  width={200}
+                  height={0}
+                  className="w-[60px] md:w-[70px] 2xl:w-[90px]"
+                />
               </div>
             </div>
           </div>
-          <div className='flex flex-col md:flex-row md:gap-4 bg-[#D9D9D9]/10 p-3 rounded-lg'>
-            <Image src="/certificate/certificate-3.png" width={200} height={0} className='rounded-lg w-full flex-1 object-cover' />
 
-            <div className='text-white flex flex-col justify-between flex-1'>
+          {/* Card 3 */}
+          <div className="flex sm:flex-col gap-2 md:gap-4 bg-[#D9D9D9]/30 p-3 rounded-lg">
+            {/* Gambar */}
+            <div className="basis-1/2 md:basis-auto">
+              <Image
+                src="/certificate/certificate-3.png"
+                width={200}
+                height={0}
+                className="rounded-lg w-full object-cover"
+              />
+            </div>
+
+            {/* Teks */}
+            <div className="flex flex-col justify-between basis-1/2 md:basis-auto mt-1">
               <div>
-                <h2 className='text-lg md:text-xl 2xl:text-3xl font-semibold mt-4 lg:mt-6 2xl:mt-8'>Bootcamp: Backend Javascript Developer</h2>
-                <p className='text-xs md:text-sm 2xl:text-lg mt-4 2xl:mt-6 opacity-60'>In this bootcamp I learned by working on several tasks, <br className='hidden lg:block' /> and the final project was to create an API project <br className='hidden lg:block' /> that connects to the database.</p>
+                <h2 className="text-sm 2xl:text-xl font-semibold">
+                  Bootcamp: Backend Javascript Developer
+                </h2>
+                <p className="text-xs 2xl:text-lg mt-1 2xl:mt-3 opacity-60">
+                  In this bootcamp I learned by working on several tasks,
+                  <br className="hidden lg:block" />
+                  and the final project was to create an API project
+                  <br className="hidden lg:block" />
+                  that connects to the database.
+                </p>
               </div>
-              <div className='mb-6 mt-6'>
-                <Image src="/tech/tech1.png" width={200} height={0} className='w-[150px] md:w-[200px] 2xl:w-[300px]' />
+              <div className="mt-4">
+                <Image
+                  src="/tech/tech1.png"
+                  width={200}
+                  height={0}
+                  className="w-[140px] md:w-[170px] 2xl:w-[200px]"
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* technology */}
-      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-20 md:mt-24">
-        <h1 className='text-2xl md:text-4xl 2xl:text-6xl text-center text-white font-bold'>
-          {'TECHNOLOGY'.split('').map((char, index) => (
-            <span
-              key={index}
-              className='inline-block transition-all hover:bg-[#9694FF] hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer'
-            >
-              {char === ' ' ? '\u00A0' : char}
-            </span>
-          ))}
-        </h1>
-        <p className='text-xs md:text-sm 2xl:text-lg text-white/60 mt-2 text-center'>the technology i use</p>
-
-        <div className="mt-10 grid grid-cols-5 gap-y-16 justify-center">
-            <Image src="/icon/mongodb.png" width={40} height={0} className='mx-auto w-[40px] 2xl:w-[60px]' />
-            <Image src="/icon/expressjs.png" width={40} height={0} className='mx-auto w-[40px] 2xl:w-[60px]' />
-            <Image src="/icon/reactjs.png" width={40} height={0} className='mx-auto w-[40px] 2xl:w-[60px]' />
-            <Image src="/icon/nextjs.png" width={40} height={0} className='mx-auto w-[40px] 2xl:w-[60px]' />
-            <Image src="/icon/nodejs.png" width={40} height={0} className='mx-auto w-[40px] 2xl:w-[60px]' />
-            <Image src="/icon/postman.png" width={40} height={0} className='mx-auto w-[40px] 2xl:w-[60px]' />
-            <Image src="/icon/firebase.png" width={40} height={0} className='mx-auto w-[40px] 2xl:w-[60px]' />
-            <Image src="/icon/tailwind.png" width={40} height={0} className='mx-auto w-[40px] 2xl:w-[60px]' />
-            <Image src="/icon/redis.png" width={40} height={0} className='mx-auto w-[40px] 2xl:w-[60px]' />
-            <Image src="/icon/figma.png" width={40} height={0} className='mx-auto w-[40px] 2xl:w-[60px]' />
-        </div>
-
-        <Link href="/investment">
-          <div className='text-white text-center mt-16 rounded-lg mx-auto w-[60%] md:w-[40%] lg:w-[30%] text-sm p-4 bg-[#3D3BF3] hover:bg-[#3835d8] transition-all duration-300'>
-            Portfolio Investment
-          </div>
-        </Link>
-      </div>
+      {/* art */}
+      <div className="bg-[url('/fauzanhusain.png')] bg-cover bg-center w-full h-[100px] sm:h-[150px] md:h-[250px] mt-14 md:mt-20"></div>
 
       {/* internship */}
       <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-20 md:mt-28">
-        <h1 className='text-2xl md:text-4xl 2xl:text-6xl text-white font-bold'>
-          {'INTERNSHIP'.split('').map((char, index) => (
+        <h1
+          className={`${baloo.className} text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
+        >
+          {"Internship".split("").map((char, index) => (
             <span
               key={index}
-              className='inline-block transition-all hover:bg-[#9694FF] hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer'
+              className="inline-block transition-all hover:bg-[#9694FF] hover:text-white hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer"
             >
-              {char === ' ' ? '\u00A0' : char}
+              {char === " " ? "\u00A0" : char}
             </span>
           ))}
         </h1>
-        <p className='text-xs md:text-sm 2xl:text-lg text-white/60 mt-2'>my internship in tech company</p>
+        <p className="text-xs md:text-sm 2xl:text-lg text-gray-600">
+          My internship in tech company
+        </p>
 
-        <div className='grid grid-cols-2 md:grid-cols-3 mt-10'>
-          <div className='bg-[#3D3BF3]/25 hover:bg-[#3D3BF3]/10 hover:border transition-all duration-300 cursor-pointer text-white p-6 rounded-xl'>
-            <h1 className='2xl:text-xl'>PT TRANS NASIONAL TEKNOLOGI</h1>
-            <p className='opacity-60 text-sm 2xl:text-lg mt-1'>3 month</p>
+        <div className='grid grid-cols-2 md:grid-cols-3 gap-2 mt-6'>
+          <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-6 rounded-xl'>
+            <h1 className='2xl:text-sm font-bold'>PT TRANS NASIONAL TEKNOLOGI</h1>
+            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>3 month</p>
+            <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
+          </div>
+          <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-6 rounded-xl'>
+            <h1 className='2xl:text-sm font-bold'>CMLABS</h1>
+            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>2 month</p>
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
         </div>
       </div>
 
       {/* footer */}
-      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-20 md:mt-28">
+      {/* <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-20 md:mt-28">
           <p className='text-center text-sm text-white'>follow my:</p>
 
           <div className='flex justify-center gap-12 mt-10'>
@@ -239,7 +331,7 @@ export default function Home() {
               <Image src="/icon/github.png" width={30} height={0} className='2xl:w-[40px]' />
             </Link>
           </div>
-      </div>
+      </div> */}
     </div>
   )
 }
