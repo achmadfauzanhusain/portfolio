@@ -35,7 +35,7 @@ export default function Home() {
           <Link href="https://www.github.com/achmadfauzanhusain">
             <Image src="/icon/github.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="GitHub" />
           </Link>
-          <Link href="/">
+          <Link href="https://wa.me/6289684053091">
             <Image src="/icon/whatsapp.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="Portfolio" />
           </Link>
           <Link href="https://www.linkedin.com/in/achmadfauzanhusain">
