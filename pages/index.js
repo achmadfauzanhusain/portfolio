@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="pb-10 md:pb-14">
       {/* Board */}
-      <div className="flex justify-center items-center relative h-screen bg-[url('/doodle.jpg')] bg-cover bg-left">
+      <div className="flex justify-center items-center relative h-screen bg-[url('/doodle.webp')] bg-cover bg-left">
         <div className="absolute inset-0 bg-gradient-to-b z-0" />
 
         <div className="relative z-10 text-white w-fit mx-auto">
@@ -67,7 +67,7 @@ export default function Home() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6 mt-8">
           <Link
             href="https://grants-dao-two.vercel.app/"
-            className="bg-[url('/projects/grants.jpg')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+            className="bg-[url('/projects/grants.webp')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
@@ -84,7 +84,7 @@ export default function Home() {
           </Link>
           <Link
             href="https://github.com/achmadfauzanhusain/virgo-app-server"
-            className="bg-[url('/projects/virgo.jpg')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+            className="bg-[url('/projects/virgo.webp')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
@@ -101,7 +101,7 @@ export default function Home() {
           </Link>
           <Link
             href="https://kebunmu.vercel.app/"
-            className="bg-[url('/projects/kebunmu.jpg')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+            className="bg-[url('/projects/kebunmu.webp')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
@@ -118,7 +118,7 @@ export default function Home() {
           </Link>
           <Link
             href="https://github.com/achmadfauzanhusain/fauzanchenko-smartcontract"
-            className="bg-[url('/projects/nft-marketplace.jpg')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+            className="bg-[url('/projects/nft-marketplace.webp')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
@@ -135,7 +135,7 @@ export default function Home() {
           </Link>
           <Link
             href="https://github.com/achmadfauzanhusain/tokenMaster-smartcontract"
-            className="bg-[url('/projects/tokenmaster.jpg')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+            className="bg-[url('/projects/tokenmaster.webp')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
@@ -177,7 +177,7 @@ export default function Home() {
             {/* Gambar */}
             <div className="basis-1/2 md:basis-auto">
               <Image
-                src="/certificate/certificate-1.jpg"
+                src="/certificate/certificate-1.webp"
                 width={200}
                 height={0}
                 className="rounded-lg w-full object-cover"
@@ -214,7 +214,7 @@ export default function Home() {
             {/* Gambar */}
             <div className="basis-1/2 md:basis-auto order-none sm:order-2 md:order-none">
               <Image
-                src="/certificate/certificate-2.jpg"
+                src="/certificate/certificate-2.webp"
                 width={200}
                 height={0}
                 className="rounded-lg w-full object-cover"
@@ -247,7 +247,7 @@ export default function Home() {
             {/* Gambar */}
             <div className="basis-1/2 md:basis-auto">
               <Image
-                src="/certificate/certificate-3.jpg"
+                src="/certificate/certificate-3.webp"
                 width={200}
                 height={0}
                 className="rounded-lg w-full object-cover"
@@ -282,7 +282,7 @@ export default function Home() {
       </div>
 
       {/* art */}
-      <div className="bg-[url('/fauzanhusain.png')] bg-cover bg-center w-full h-[100px] sm:h-[150px] md:h-[250px] mt-14 md:mt-20"></div>
+      <div className="bg-[url('/fauzanhusain.webp')] bg-cover bg-center w-full h-[100px] sm:h-[150px] md:h-[250px] mt-14 md:mt-20"></div>
 
       {/* internship */}
       <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-12 md:mt-28">
