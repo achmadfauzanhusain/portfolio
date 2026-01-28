@@ -78,7 +78,7 @@ export default function Home() {
                 Grants Dao
               </p>
               <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
-                Grants DAO adalah organisasi terdesentralisasi yang mengelola dana bersama untuk mendanai proyek atau inisiatif komunitas melalui mekanisme voting anggota.
+                Grants DAO is a decentralized organization that manages pooled funds to finance community projects or initiatives through a member voting mechanism.
               </p>
             </div>
           </Link>
@@ -112,7 +112,7 @@ export default function Home() {
                 Kebunmu
               </p>
               <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
-                Kebunmu adalah aplikasi yang memungkinkan pengguna untuk mengelola kebun mereka secara efisien, pemupukan, pemantauan pertumbuhan tanaman dan terintegrasi oleh Gemini AI.
+                Kebunmu is an application that allows users to efficiently manage their gardens, fertilize, monitor plant growth, and is integrated with Gemini AI.
               </p>
             </div>
           </Link>
@@ -129,7 +129,7 @@ export default function Home() {
                 NFT Marketplace
               </p>
               <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
-                NFT Marketplace adalah platform yang memungkinkan pengguna untuk membeli & minting NFT fauzanchenko
+                NFT Marketplace is a platform that allows users to buy & mint NFT fauzanchenko
               </p>
             </div>
           </Link>
@@ -146,7 +146,7 @@ export default function Home() {
                 TokenMaster Smart Contract
               </p>
               <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
-                TokenMaster adalah smart contract untuk membeli tiket event, yang memungkinkan pengguna untuk membeli tiket event dengan menggunakan token ERC721.
+                TokenMaster is a smart contract for purchasing event tickets, allowing users to buy event tickets using ERC721 tokens.
               </p>
             </div>
           </Link>
