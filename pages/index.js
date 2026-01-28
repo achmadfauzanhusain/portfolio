@@ -133,8 +133,8 @@ export default function Home() {
             </div>
           </Link>
           <Link
-            href="https://github.com/achmadfauzanhusain/tokenMaster-smartcontract"
-            className="bg-[url('/projects/tokenmaster.webp')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
+            href="https://tblochain.com"
+            className="bg-[url('/projects/tblochain.webp')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
           >
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
@@ -142,10 +142,10 @@ export default function Home() {
             {/* Text */}
             <div className="relative z-10">
               <p className={`${baloo.className} mt-2 font-bold text-lg md:text-2xl opacity-0 group-hover:opacity-100 text-white transition-all duration-300`}>
-                TokenMaster Smart Contract
+                TBLO CHAIN
               </p>
               <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
-                TokenMaster is a smart contract for purchasing event tickets, allowing users to buy event tickets using ERC721 tokens.
+                Decentralized Supply Chain is a blockchain-based system that ensures transparency, data authenticity, and secure supply chain tracking without a central authority.
               </p>
             </div>
           </Link>
