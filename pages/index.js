@@ -95,8 +95,7 @@ export default function Home() {
                 Virgo
               </p>
               <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
-                Virgo adalah aplikasi sosial media yang memungkinkan pengguna untuk berbagi momen, foto, dan video dengan teman-teman mereka, serta menjelajahi konten dari pengguna lain. tapi ini hanya kode backend.
-              </p>
+                Virgo is a social media application that allows users to share moments, photos, and videos with their friends, as well as explore content from other users. However, this is only the backend code.              </p>
             </div>
           </Link>
           <Link
