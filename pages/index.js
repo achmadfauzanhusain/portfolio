@@ -15,7 +15,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b z-0" />
 
         <div className="relative z-10 text-white w-fit mx-auto">
-          <h1 className={`${baloo.className} text-shadow-custom tracking-[-6px] font-extrabold text-5xl sm:text-7xl md:text-8xl lg:text-9xl 2xl:text-[160px] text-center`}>
+          <h1 className={`${baloo.className} text-shadow-custom tracking-[-6px] font-extrabold text-5xl sm:text-7xl md:text-8xl 2xl:text-[160px] text-center`}>
             Fauzan Husain
           </h1>
 
