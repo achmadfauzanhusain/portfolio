@@ -308,6 +308,11 @@ export default function Home() {
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
           <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>HARISENIN (Bootcamp)</h1>
+            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>7 month</p>
+            <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
+          </div>
+          <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CMLABS</h1>
             <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>2 month</p>
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
@@ -315,22 +320,39 @@ export default function Home() {
         </div>
       </div>
 
-      {/* footer */}
-      {/* <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-20 md:mt-28">
-          <p className='text-center text-sm text-white'>follow my:</p>
+      {/* organization */}
+      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-12 md:mt-28">
+        <h1
+          className={`${baloo.className} text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
+        >
+          {"Organization".split("").map((char, index) => (
+            <span
+              key={index}
+              className="inline-block transition-all hover:bg-[#9694FF] hover:text-white hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer"
+            >
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
+        </h1>
+        <p className="text-xs md:text-sm 2xl:text-lg text-gray-600">
+          My organization experience in college
+        </p>
 
-          <div className='flex justify-center gap-12 mt-10'>
-            <Link href="https://www.instagram.com/_fauzanhusain/">
-              <Image src="/icon/instagram.png" width={30} height={0} className='2xl:w-[40px]' />
-            </Link>
-            <Link href="https://www.linkedin.com/in/achmadfauzanhusain">
-              <Image src="/icon/linkedin.png" width={30} height={0} className='2xl:w-[40px]' />
-            </Link>
-            <Link href="https://github.com/achmadfauzanhusain">
-              <Image src="/icon/github.png" width={30} height={0} className='2xl:w-[40px]' />
-            </Link>
+        <div className='grid grid-cols-2 gap-2 mt-6'>
+          <div className='bg-[#FF6B35] hover:bg-[#EA580C] shadow-xl text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CHEVALLIER LABORATORY</h1>
+            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>7 month</p>
+            <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
-      </div> */}
+
+          <div className='bg-green-500 hover:bg-green-600 shadow-xl text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CHESS TELKOM</h1>
+            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>24 month</p>
+
+            <p className='text-xs 2xl:text-lg mt-4 font-bold'>Not Using Tech</p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
