@@ -347,9 +347,40 @@ export default function Home() {
 
           <div className='bg-green-500 hover:bg-green-600 shadow-xl text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CHESS TELKOM</h1>
-            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>24 month</p>
+            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>2 year</p>
 
-            <p className='text-xs 2xl:text-lg mt-4 font-bold'>Not Using Tech</p>
+            <p className='text-xs 2xl:text-lg mt-4 font-bold opacity-60'>Not Using Tech</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Math */}
+      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-12 md:mt-28">
+        <h1
+          className={`${baloo.className} text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
+        >
+          {"Math".split("").map((char, index) => (
+            <span
+              key={index}
+              className="inline-block transition-all hover:bg-[#9694FF] hover:text-white hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer"
+            >
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
+        </h1>
+        <p className="text-xs md:text-sm 2xl:text-lg text-gray-600">
+          the math I’ve mastered
+        </p>
+
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-6'>
+          <div className='bg-sky-500 shadow-xl text-white border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>Math Basic</h1>
+          </div>
+          <div className='bg-sky-500 shadow-xl text-white border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>Geometry</h1>
+          </div>
+          <div className='bg-sky-500 shadow-xl text-white border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>Intermediate Algebra</h1>
           </div>
         </div>
       </div>
