@@ -338,7 +338,7 @@ export default function Home() {
           My organization experience in college
         </p>
 
-        <div className='grid grid-cols-2 gap-2 mt-6'>
+        <div className='grid grid-cols-2 md:grid-cols-3 gap-2 mt-6'>
           <div className='bg-[#FF6B35] hover:bg-[#EA580C] shadow-xl text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CHEVALLIER SOFTWARE LABORATORY</h1>
             <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>7 month</p>
