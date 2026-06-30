@@ -304,17 +304,17 @@ export default function Home() {
         <div className='grid grid-cols-2 md:grid-cols-3 gap-2 mt-6'>
           <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>PT TRANS NASIONAL TEKNOLOGI</h1>
-            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>3 month</p>
+            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>3 month - Makassar</p>
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
           <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>HARISENIN (Bootcamp)</h1>
-            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>7 month</p>
+            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>7 month - Jakarta Pusat</p>
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
           <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CMLABS</h1>
-            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>2 month</p>
+            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>2 month - Jakarta Selatan</p>
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
         </div>
@@ -341,13 +341,13 @@ export default function Home() {
         <div className='grid grid-cols-2 md:grid-cols-3 gap-2 mt-6'>
           <div className='bg-[#FF6B35] hover:bg-[#EA580C] shadow-xl text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CHEVALLIER SOFTWARE LABORATORY</h1>
-            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>7 month</p>
+            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>7 month - Telkom University</p>
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
 
           <div className='bg-green-500 hover:bg-green-600 shadow-xl text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CHESS TELKOM</h1>
-            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>2 year</p>
+            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>2 year - Telkom University</p>
 
             <p className='text-xs 2xl:text-lg mt-4 font-bold opacity-60'>Not Using Tech</p>
           </div>
