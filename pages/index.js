@@ -305,16 +305,19 @@ export default function Home() {
           <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>PT TRANS NASIONAL TEKNOLOGI</h1>
             <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>3 month - Makassar</p>
+            <p className='opacity-60 text-xs 2xl:text-lg font-semibold'>Front End Developer</p>
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
           <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>HARISENIN (Bootcamp)</h1>
             <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>7 month - Jakarta Pusat</p>
+            <p className='opacity-60 text-xs 2xl:text-lg font-semibold'>Full Stack Developer</p>
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
           <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CMLABS</h1>
             <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>2 month - Jakarta Selatan</p>
+            <p className='opacity-60 text-xs 2xl:text-lg font-semibold'>Backend Developer</p>
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
         </div>
@@ -342,6 +345,7 @@ export default function Home() {
           <div className='bg-[#FF6B35] hover:bg-[#EA580C] shadow-xl text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CHEVALLIER SOFTWARE LABORATORY</h1>
             <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>7 month - Telkom University</p>
+            <p className='opacity-60 text-xs 2xl:text-lg font-semibold'>Backend Developer</p>
             <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
           </div>
 
@@ -382,6 +386,36 @@ export default function Home() {
           <div className='bg-sky-500 shadow-xl text-white border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>Intermediate Algebra</h1>
           </div>
+        </div>
+      </div>
+
+      {/* Investment Research */}
+      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-12 md:mt-28">
+        <h1
+          className={`${baloo.className} text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
+        >
+          {"Investment Research".split("").map((char, index) => (
+            <span
+              key={index}
+              className="inline-block transition-all hover:bg-[#9694FF] hover:text-white hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer"
+            >
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
+        </h1>
+        <p className="text-xs md:text-sm 2xl:text-lg text-gray-600">
+          the investment and trading research I’ve done
+        </p>
+
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-6'>
+          <Link href="/investment-research/bitcoin" className='shadow-xl hover:bg-black flex hover:text-white font-bold border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+            <Image src="/icon/bitcoin.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px] mr-2" alt="Bitcoin" />
+            Bitcoin
+          </Link>
+          <Link href="/investment-research/tempus-ai" className='shadow-xl hover:bg-black flex hover:text-white font-bold border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+            <Image src="/icon/tempus.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px] mr-2" alt="Tempus AI" />
+            Tempus AI
+          </Link>
         </div>
       </div>
     </div>
