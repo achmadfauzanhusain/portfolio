@@ -408,11 +408,11 @@ export default function Home() {
         </p>
 
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-6'>
-          <Link href="/investment-research/bitcoin" className='shadow-xl hover:bg-black flex items-center text-xs sm:text-sm md:text-base hover:text-white font-bold border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+          <Link href="/investment-research/bitcoin" className='shadow-xl hover:bg-black flex items-center text-xs sm:text-sm 2xl:text-sm font-bold hover:text-white font-bold border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <Image src="/icon/bitcoin.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px] mr-2" alt="Bitcoin" />
             Bitcoin
           </Link>
-          <Link href="/investment-research/tempus-ai" className='shadow-xl hover:bg-black flex items-center text-xs sm:text-sm md:text-base hover:text-white font-bold border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+          <Link href="/investment-research/tempus-ai" className='shadow-xl hover:bg-black flex items-center text-xs sm:text-sm 2xl:text-sm font-bold hover:text-white font-bold border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <Image src="/icon/tempus.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px] mr-2" alt="Tempus AI" />
             Tempus AI
           </Link>
