@@ -8,7 +8,7 @@ const Bitcoin = () => {
             </Link>
 
             <div className="mt-16">
-                <h1 className="font-bold text-4xl">Bitcoin</h1>
+                <h1 className="font-bold text-3xl md:text-4xl">Bitcoin</h1>
                 <p className="text-lg opacity-50">My thoughts about bitcoin</p>
 
                 <p className="mt-8 text-sm md:text-lg">

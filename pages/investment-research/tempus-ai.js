@@ -8,8 +8,8 @@ const TempusAI = () => {
             </Link>
 
             <div className="mt-16">
-                <h1 className="font-bold text-4xl">Tempus AI</h1>
-                <p className="text-lg opacity-50">My thoughts about Tempus AI</p>
+                <h1 className="font-bold text-3xl md:text-4xl">Tempus AI</h1>
+                <p className="text-sm md:text-lg opacity-50">My thoughts about Tempus AI</p>
 
                 <p className="mt-8 text-sm md:text-lg">
                     i think tempus ai is good company because he integrating ai into healthcare.
