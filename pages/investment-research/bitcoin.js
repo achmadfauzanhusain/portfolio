@@ -11,7 +11,7 @@ const Bitcoin = () => {
                 <h1 className="font-bold text-4xl">Bitcoin</h1>
                 <p className="text-lg opacity-50">My thoughts about bitcoin</p>
 
-                <p className="mt-8 text-lg">
+                <p className="mt-8 text-sm md:text-lg">
                     am not gonna explain bitcoin from finance perspective, 
                     because am from tech people and i think bitcoin is more about tech than finance.
                     am more interested on bitcoin after know bitcoin is built by math.
@@ -21,7 +21,7 @@ const Bitcoin = () => {
                 </p>
             </div>
 
-            <p className="text-lg mt-8">- fauzanhusain</p>
+            <p className="text-sm md:text-lg mt-8">- fauzanhusain</p>
         </div>
     )
 }
