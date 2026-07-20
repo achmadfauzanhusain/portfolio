@@ -386,6 +386,9 @@ export default function Home() {
           <div className='bg-sky-500 shadow-xl text-white border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
             <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>Intermediate Algebra</h1>
           </div>
+          <div className='bg-sky-500 shadow-xl text-white border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
+            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>Math Logic</h1>
+          </div>
         </div>
       </div>
 
