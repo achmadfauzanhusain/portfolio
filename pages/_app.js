@@ -7,6 +7,7 @@ export default function App({ Component, pageProps }) {
     <>
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="google" content="notranslate" />
     </Head>
     <Layout>
       <Component {...pageProps} />
