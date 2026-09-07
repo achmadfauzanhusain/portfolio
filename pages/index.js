@@ -425,7 +425,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-28">
+      <div className="mt-32 md:mt-44">
         <h1 className="text-center text-base sm:text-lg md:text-2xl font-bold">"Dream to Building Superholding Company in Tech Industry <br /> & Building Finance Company."</h1>
         <p className="text-xs sm:text-sm md:text-base text-center mt-2">Contact Me, if you have idea in <b>Startup</b> and u need <b>Partner</b></p>
         <div className="flex justify-center gap-6 sm:gap-12 mt-12">
