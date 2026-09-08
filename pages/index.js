@@ -424,25 +424,6 @@ export default function Home() {
           </Link>
         </div>
       </div>
-
-      <div className="mt-32 md:mt-44">
-        <h1 className="text-center text-base sm:text-lg md:text-2xl font-bold">"Dream to Building Superholding Company in Tech Industry <br /> & Building Finance Company."</h1>
-        <p className="text-xs sm:text-sm md:text-base text-center mt-2">Contact Me, if you have idea in <b>Startup</b> and u need <b>Partner</b></p>
-        <div className="flex justify-center gap-6 sm:gap-12 mt-12">
-          <Link href="https://www.instagram.com/_fauzanhusain/">
-            <Image src="/icon/instagram.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="Instagram" />
-          </Link>
-          <Link href="https://www.github.com/achmadfauzanhusain">
-            <Image src="/icon/github.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="GitHub" />
-          </Link>
-          <Link href="https://wa.me/6289684053091">
-            <Image src="/icon/whatsapp.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="Portfolio" />
-          </Link>
-          <Link href="https://www.linkedin.com/in/achmadfauzanhusain">
-            <Image src="/icon/linkedin.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="LinkedIn" />
-          </Link>
-        </div>
-      </div>
     </div>
   )
 }
