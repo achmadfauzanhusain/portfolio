@@ -18,7 +18,7 @@ const floaters = [
     {
         src: '/developers/founders.jpeg',
         alt: 'Founder Tblo Networks',
-        caption: 'Fauzan, Founder',
+        caption: 'FH, Founder',
         pos: 'left-4 top-6 w-20 -rotate-6 sm:left-[6%] sm:w-24 lg:left-[1%] lg:top-[10%] lg:w-32 xl:left-[3%] xl:w-44 2xl:w-56',
     },
     {
