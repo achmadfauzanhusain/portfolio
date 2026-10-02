@@ -14,6 +14,21 @@ const navLinks = [
     { label: 'About', href: '#join' },
 ]
 
+const floaters = [
+    {
+        src: '/developers/founders.jpeg',
+        alt: 'Founder Tblo Networks',
+        caption: 'Fauzan, Founder',
+        pos: 'left-4 top-6 w-20 -rotate-6 sm:left-[6%] sm:w-24 lg:left-[1%] lg:top-[10%] lg:w-32 xl:left-[3%] xl:w-44 2xl:w-56',
+    },
+    {
+        src: '/developers/founders2.jpeg',
+        alt: 'Founder Tblo Networks',
+        caption: 'Komdigi Pusat, Jakarta',
+        pos: 'right-4 bottom-6 w-20 rotate-6 sm:right-[6%] sm:w-24 lg:right-[1%] lg:bottom-[10%] lg:w-32 xl:right-[3%] xl:w-40 2xl:w-52',
+    },
+]
+
 const steps = [
     {
         n: '1',
@@ -47,7 +62,6 @@ const TbloNetworks = () => {
 
     const [open, setOpen] = useState(false)
 
-    // Tutup menu dengan tombol Escape
     useEffect(() => {
         const onKey = (e) => e.key === 'Escape' && setOpen(false)
         window.addEventListener('keydown', onKey)
@@ -66,6 +80,19 @@ const TbloNetworks = () => {
                     .from('.hero-sub', { opacity: 0, y: 12, duration: 0.8 }, '-=0.5')
                     .from('.hero-footnote', { opacity: 0, y: 12, duration: 0.8 }, '-=0.5')
                     .from('.hero-cta', { opacity: 0, y: 12, duration: 0.8 }, '-=0.6')
+                    .from('.float-card', { opacity: 0, scale: 0.9, duration: 1, stagger: 0.2 }, '-=0.9')
+
+                // Foto melayang terus-menerus, tiap foto beda tempo
+                gsap.utils.toArray('.float-bob').forEach((el, i) => {
+                    gsap.to(el, {
+                        y: i % 2 ? 16 : -16,
+                        rotation: i % 2 ? -1.5 : 1.5,
+                        duration: 3 + i * 0.7,
+                        ease: 'sine.inOut',
+                        repeat: -1,
+                        yoyo: true,
+                    })
+                })
 
                 // Kata demi kata menyala saat di-scroll
                 gsap.fromTo(
@@ -128,7 +155,7 @@ const TbloNetworks = () => {
                         </ul>
 
                         <div>
-                            <p className="text-xl bg-[#ff6600] px-4 text-white font-bold">TBLONETWORKS</p>
+                            <p className="text-xl bg-[#ff6600] px-2 md:px-4 text-white font-bold">TBLONETWORKS</p>
                         </div>
 
                         <ul className="hidden items-center gap-10 text-[15px] md:flex">
@@ -181,44 +208,65 @@ const TbloNetworks = () => {
                 </header>
 
                 {/* HERO */}
-                <section className="mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl flex-col items-center justify-center px-6 py-20 text-center">
-                    <h1
-                        className="text-[clamp(2.5rem,7vw,6rem)] font-light leading-[1.02] tracking-[-0.02em]"
-                        style={serif}
-                    >
-                        <span className="block overflow-hidden pb-[0.12em]">
-                            <span className="hero-line block">Social media without</span>
-                        </span>
-                        <span className="block overflow-hidden pb-[0.18em]">
-                            <span className="hero-line block">
-                                handing over your <em className="italic">identity</em>
-                                <sup className="ml-1 align-super text-[0.22em] font-normal not-italic">[1]</sup>
-                            </span>
-                        </span>
-                    </h1>
+                <section className="relative mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl flex-col items-center justify-center px-6 pb-40 pt-36 text-center lg:py-20">
+                    {/* Foto melayang: di sudut hero, di belakang teks */}
+                    <div className="pointer-events-none absolute inset-0">
+                        {floaters.map((f) => (
+                            <div key={f.src} className={`float-card absolute ${f.pos}`}>
+                                <figure className="float-bob bg-white p-1.5 pb-2 shadow-[0_14px_28px_-10px_rgba(26,26,23,0.35)] lg:p-2 lg:pb-3 lg:shadow-[0_20px_40px_-12px_rgba(26,26,23,0.35)]">
+                                    <img
+                                        src={f.src}
+                                        alt={f.alt}
+                                        loading="eager"
+                                        className="aspect-[4/5] w-full object-cover"
+                                    />
+                                    <figcaption className="mt-2 hidden text-center text-sm italic text-[#1a1a17]/70 lg:block" style={serif}>
+                                        {f.caption}
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        ))}
+                    </div>
 
-                    <p className="hero-sub mt-6 max-w-2xl text-xl leading-9 text-[#1a1a17]/80 md:text-2xl" style={serif}>
-                        All you need is an Ethereum wallet. Connect, sign one message, and you’re in, in 30 seconds.
-                    </p>
-
-                    <p
-                        className="hero-footnote mt-8 max-w-xl text-left text-lg italic leading-8 md:text-xl"
-                        style={serif}
-                    >
-                        [1] “Data is the new oil. It’s valuable, but if unrefined it cannot really be used.”
-                        <span className="mt-2 block text-right">— Clive Humby</span>
-                    </p>
-
-                    <div className="hero-cta mt-12 flex flex-col items-center gap-4 sm:flex-row" style={sans}>
-                        <a
-                            href="#join"
-                            className="rounded-full bg-[#ff6600] px-7 py-3.5 text-base font-medium text-white transition-colors hover:bg-black"
+                    <div className="relative z-10 flex flex-col items-center">
+                        <h1
+                            className="text-[clamp(2.5rem,7vw,6rem)] font-light leading-[1.02] tracking-[-0.02em]"
+                            style={serif}
                         >
-                            Get Started
-                        </a>
-                        <a href="#how" className="px-4 py-3.5 text-base underline underline-offset-4 hover:text-[#ff6600]">
-                            See how it works
-                        </a>
+                            <span className="block overflow-hidden pb-[0.12em]">
+                                <span className="hero-line block">Social media without</span>
+                            </span>
+                            <span className="block overflow-hidden pb-[0.18em]">
+                                <span className="hero-line block">
+                                    handing over your <em className="italic">identity</em>
+                                    <sup className="ml-1 align-super text-[0.22em] font-normal not-italic">[1]</sup>
+                                </span>
+                            </span>
+                        </h1>
+
+                        <p className="hero-sub mt-6 max-w-2xl text-xl leading-9 text-[#1a1a17]/80 md:text-2xl" style={serif}>
+                            All you need is an Ethereum wallet. Connect, sign one message, and you’re in, in 30 seconds.
+                        </p>
+
+                        <p
+                            className="hero-footnote mt-8 max-w-xl text-left text-lg italic leading-8 md:text-xl"
+                            style={serif}
+                        >
+                            [1] “Data is the new oil. It’s valuable, but if unrefined it cannot really be used.”
+                            <span className="mt-2 block text-right">— Clive Humby</span>
+                        </p>
+
+                        <div className="hero-cta mt-12 flex flex-col items-center gap-4 sm:flex-row" style={sans}>
+                            <a
+                                href="#join"
+                                className="rounded-full bg-[#ff6600] px-7 py-3.5 text-base font-medium text-white transition-colors hover:bg-black"
+                            >
+                                Get Started
+                            </a>
+                            <a href="#how" className="px-4 py-3.5 text-base underline underline-offset-4 hover:text-[#ff6600]">
+                                See how it works
+                            </a>
+                        </div>
                     </div>
                 </section>
 
@@ -304,7 +352,7 @@ const TbloNetworks = () => {
                         Your identity is your wallet. <em className="italic">It’s the only thing the world needs to know.</em>
                     </h2>
                     <a
-                        href="/"
+                        href="/startups/tblonetworks"
                         className="mt-8 inline-block rounded-full bg-black px-8 py-4 text-xl italic text-white transition-colors hover:bg-white hover:text-black"
                         style={serif}
                     >
