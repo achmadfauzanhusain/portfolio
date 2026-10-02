@@ -29,17 +29,11 @@ export default function Home() {
       {/* social media */}
       <div>
         <div className="flex justify-center gap-6 sm:gap-12 mt-12">
-          <Link href="https://www.instagram.com/_fauzanhusain/">
-            <Image src="/icon/instagram.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="Instagram" />
-          </Link>
           <Link href="https://www.github.com/achmadfauzanhusain">
             <Image src="/icon/github.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="GitHub" />
           </Link>
           <Link href="https://wa.me/6289684053091">
             <Image src="/icon/whatsapp.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="Portfolio" />
-          </Link>
-          <Link href="https://www.linkedin.com/in/achmadfauzanhusain">
-            <Image src="/icon/linkedin.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="LinkedIn" />
           </Link>
         </div>
       </div>
