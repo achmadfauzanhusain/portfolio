@@ -24,7 +24,7 @@ const floaters = [
     {
         src: '/developers/founders2.jpeg',
         alt: 'Founder Tblo Networks',
-        caption: 'Komdigi Pusat, Jakarta',
+        caption: 'Komdigi, Jakarta',
         pos: 'right-4 bottom-6 w-20 rotate-6 sm:right-[6%] sm:w-24 lg:right-[1%] lg:bottom-[10%] lg:w-32 xl:right-[3%] xl:w-40 2xl:w-52',
     },
 ]
@@ -220,7 +220,7 @@ const TbloNetworks = () => {
                                         loading="eager"
                                         className="aspect-[4/5] w-full object-cover"
                                     />
-                                    <figcaption className="mt-2 hidden text-center text-sm italic text-[#1a1a17]/70 lg:block" style={serif}>
+                                    <figcaption className="mt-2 text-center text-xs md:text-sm italic text-[#1a1a17]/70 lg:block" style={serif}>
                                         {f.caption}
                                     </figcaption>
                                 </figure>
