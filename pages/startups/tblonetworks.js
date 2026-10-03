@@ -137,7 +137,7 @@ const TbloNetworks = () => {
                 }}
             />
 
-            <div ref={root} className="min-h-screen bg-[#f6f5ee] text-[#1a1a17] antialiased">
+            <div ref={root} className="min-h-screen bg-[#f6f5ee] text-[#1a1a17] antialiased selection:bg-blue-500 selection:text-white">
                 {/* NAV */}
                 <header className="sticky top-0 z-20 bg-[#f6f5ee]/90 backdrop-blur">
                     <nav
@@ -213,7 +213,7 @@ const TbloNetworks = () => {
                     <div className="pointer-events-none absolute inset-0">
                         {floaters.map((f) => (
                             <div key={f.src} className={`float-card absolute ${f.pos}`}>
-                                <figure className="float-bob bg-white p-1.5 pb-2 shadow-[0_14px_28px_-10px_rgba(26,26,23,0.35)] lg:p-2 lg:pb-3 lg:shadow-[0_20px_40px_-12px_rgba(26,26,23,0.35)]">
+                                <figure className="float-bob border-b-4 border-blue-500 bg-white p-1.5 pb-2 shadow-[0_14px_28px_-10px_rgba(26,26,23,0.35)] lg:p-2 lg:pb-3 lg:shadow-[0_20px_40px_-12px_rgba(26,26,23,0.35)]">
                                     <img
                                         src={f.src}
                                         alt={f.alt}
@@ -238,7 +238,7 @@ const TbloNetworks = () => {
                             </span>
                             <span className="block overflow-hidden pb-[0.18em]">
                                 <span className="hero-line block">
-                                    handing over your <em className="italic">identity</em>
+                                    handing over your <em className="italic text-blue-500">identity</em>
                                     <sup className="ml-1 align-super text-[0.22em] font-normal not-italic">🥇</sup>
                                 </span>
                             </span>
@@ -263,7 +263,10 @@ const TbloNetworks = () => {
                             >
                                 Get Started
                             </a>
-                            <a href="#how" className="px-4 py-3.5 text-base underline underline-offset-4 hover:text-[#ff6600]">
+                            <a
+                                href="#how"
+                                className="px-4 py-3.5 text-base underline decoration-blue-500 decoration-2 underline-offset-4 hover:text-blue-500"
+                            >
                                 See how it works
                             </a>
                         </div>
@@ -286,7 +289,7 @@ const TbloNetworks = () => {
 
                 {/* HOW IT WORKS */}
                 <section id="how" className="mx-auto max-w-6xl px-6 pb-32">
-                    <div className="rule h-px w-full bg-[#1a1a17]/80" />
+                    <div className="rule h-1 w-full bg-blue-500" />
                     <div className="grid gap-12 pt-14 md:grid-cols-[1fr_2fr] md:gap-20">
                         <h2 className="text-4xl font-light leading-tight md:text-5xl" style={serif}>
                             Your wallet is your <em className="italic">only</em> identity
