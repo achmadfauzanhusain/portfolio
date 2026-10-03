@@ -239,7 +239,7 @@ const TbloNetworks = () => {
                             <span className="block overflow-hidden pb-[0.18em]">
                                 <span className="hero-line block">
                                     handing over your <em className="italic">identity</em>
-                                    <sup className="ml-1 align-super text-[0.22em] font-normal not-italic">[1]</sup>
+                                    <sup className="ml-1 align-super text-[0.22em] font-normal not-italic">🥇</sup>
                                 </span>
                             </span>
                         </h1>
@@ -252,7 +252,7 @@ const TbloNetworks = () => {
                             className="hero-footnote mt-8 max-w-xl text-left text-lg italic leading-8 md:text-xl"
                             style={serif}
                         >
-                            [1] “Data is the new oil. It’s valuable, but if unrefined it cannot really be used.”
+                            🥇 “Data is the new oil. It’s valuable, but if unrefined it cannot really be used.”
                             <span className="mt-2 block text-right">— Clive Humby</span>
                         </p>
 
