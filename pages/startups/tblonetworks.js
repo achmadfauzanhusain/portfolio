@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -354,13 +355,13 @@ const TbloNetworks = () => {
                     <h2 className="mx-auto max-w-3xl text-[clamp(2.25rem,5.5vw,4.5rem)] font-light leading-[1.05]" style={serif}>
                         Your identity is your wallet. <em className="italic">It’s the only thing the world needs to know.</em>
                     </h2>
-                    <a
+                    <Link
                         href="https://wa.me/6289684053091?text=hey%2C%20bro,%20its%20very%20cool%20cool%20idea"
                         className="mt-8 inline-block rounded-full bg-black px-8 py-4 text-xl italic text-white transition-colors hover:bg-white hover:text-black"
                         style={serif}
                     >
                         Join Early Access
-                    </a>
+                    </Link>
                 </section>
 
                 {/* FOOTER */}
