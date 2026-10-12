@@ -155,7 +155,7 @@ const TbloNetworks = () => {
                         </ul>
 
                         <div>
-                            <p className="text-xl bg-[#ff6600] px-2 md:px-4 text-white font-bold">TBLONETWORKS</p>
+                            <p className="text-xl bg-[#ff6600] px-1 text-white font-bold">TBLONETWORKS</p>
                         </div>
 
                         <ul className="hidden items-center gap-10 text-[15px] md:flex">
@@ -355,7 +355,7 @@ const TbloNetworks = () => {
                         Your identity is your wallet. <em className="italic">It’s the only thing the world needs to know.</em>
                     </h2>
                     <a
-                        href="/startups/tblonetworks"
+                        href="https://wa.me/6289684053091?text=hey%2C%20bro,%20its%20very%20cool%20cool%20idea"
                         className="mt-8 inline-block rounded-full bg-black px-8 py-4 text-xl italic text-white transition-colors hover:bg-white hover:text-black"
                         style={serif}
                     >
