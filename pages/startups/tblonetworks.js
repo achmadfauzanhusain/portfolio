@@ -56,7 +56,7 @@ const stored = [
 ]
 
 const quoteText =
-    'Every day, billions of people hand over their names, photos, phone numbers, and locations just to post a photo or chat with a friend. That data gets sold, hacked, or used to watch them.'
+    'Every day, billions of people hand over their names, photos, phone numbers, and locations just to post a photo or chat with a friend. That data gets sold, hacked, or used to watch them by data broker, government, and other evil company.'
 
 const TbloNetworks = () => {
     const root = useRef(null)
