@@ -5,8 +5,9 @@ import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const serif = { fontFamily: "'Newsreader', 'Source Serif 4', Georgia, serif" }
-const sans = { fontFamily: "'DM Sans', system-ui, sans-serif" }
+// Gaya tipografi ala Starcloud: grotesk bersih, tipis, tracking rapat
+const serif = { fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }
+const sans = { fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }
 
 const navLinks = [
     { label: 'Developers', href: 'https://fauzanhusain.com' },
@@ -57,6 +58,28 @@ const stored = [
 
 const quoteText =
     'Every day, billions of people hand over their names, photos, phone numbers, and locations just to post a photo or chat with a friend. That data gets sold, hacked, or used to watch them by data broker, government, and other evil company.'
+
+const cssText = `
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
+html{scroll-behavior:smooth;background:#000;}
+.stars{
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,.9), transparent),
+    radial-gradient(1px 1px at 90px 140px, rgba(255,255,255,.6), transparent),
+    radial-gradient(1.5px 1.5px at 160px 70px, rgba(255,255,255,.8), transparent),
+    radial-gradient(1px 1px at 230px 190px, rgba(255,255,255,.5), transparent),
+    radial-gradient(1px 1px at 300px 40px, rgba(255,255,255,.7), transparent),
+    radial-gradient(1.5px 1.5px at 340px 230px, rgba(255,255,255,.6), transparent);
+  background-size: 360px 260px;
+}
+.card-glow{position:relative;overflow:hidden;}
+.card-glow::after{
+  content:"";position:absolute;inset:auto -20% -60% -20%;height:70%;
+  background:radial-gradient(ellipse at center, rgba(59,130,246,.22), transparent 70%);
+  opacity:0;transition:opacity .5s ease;pointer-events:none;
+}
+.card-glow:hover::after{opacity:1;}
+`
 
 const TbloNetworks = () => {
     const root = useRef(null)
@@ -122,6 +145,18 @@ const TbloNetworks = () => {
                         scrollTrigger: { trigger: el, start: 'top 90%' },
                     })
                 })
+
+                // Kartu muncul pelan dari bawah
+                gsap.utils.toArray('.reveal').forEach((el, i) => {
+                    gsap.from(el, {
+                        y: 40,
+                        opacity: 0,
+                        duration: 0.9,
+                        delay: (i % 3) * 0.08,
+                        ease: 'power3.out',
+                        scrollTrigger: { trigger: el, start: 'top 90%' },
+                    })
+                })
             }, root)
 
             return () => ctx.revert()
@@ -132,47 +167,39 @@ const TbloNetworks = () => {
 
     return (
         <>
-            <style
-                dangerouslySetInnerHTML={{
-                    __html: `@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap");html{scroll-behavior:smooth;}`,
-                }}
-            />
+            <style dangerouslySetInnerHTML={{ __html: cssText }} />
 
-            <div ref={root} className="min-h-screen bg-[#f6f5ee] text-[#1a1a17] antialiased selection:bg-blue-500 selection:text-white">
+            <div ref={root} className="min-h-screen bg-black text-white antialiased selection:bg-blue-500 selection:text-white" style={sans}>
                 {/* NAV */}
-                <header className="sticky top-0 z-20 bg-[#f6f5ee]/90 backdrop-blur">
-                    <nav
-                        className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4"
-                        style={sans}
-                    >
-                        <ul className="hidden items-center gap-10 text-[15px] md:flex">
-                            {navLinks.slice(0, 2).map((l) => (
-                                <li key={l.label} className="nav-item">
-                                    <a href={l.href} className="hover:text-[#ff6600] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ff6600]">
-                                        {l.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-
-                        <div>
-                            <p className="text-xl bg-[#ff6600] px-1 text-white font-bold">TBLONETWORKS</p>
+                <header className="sticky top-0 z-20 border-b border-white/10 bg-black/60 backdrop-blur-xl">
+                    <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+                        <div className="nav-item">
+                            <p className="text-lg font-semibold tracking-[0.22em]">TBLONETWORKS</p>
                         </div>
 
-                        <ul className="hidden items-center gap-10 text-[15px] md:flex">
-                            {navLinks.slice(2).map((l) => (
+                        <ul className="hidden items-center gap-10 text-[14px] text-white/70 md:flex">
+                            {navLinks.slice(0, 3).map((l) => (
                                 <li key={l.label} className="nav-item">
-                                    <a href={l.href} className="hover:text-[#ff6600] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ff6600]">
+                                    <a href={l.href} className="transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500">
                                         {l.label}
                                     </a>
                                 </li>
                             ))}
                         </ul>
+
+                        <div className="hidden md:block nav-item">
+                            <a
+                                href={navLinks[3].href}
+                                className="rounded-full border border-white/25 px-5 py-2 text-[14px] text-white transition-colors hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
+                            >
+                                {navLinks[3].label}
+                            </a>
+                        </div>
 
                         {/* Hamburger (hanya mobile) */}
                         <button
                             type="button"
-                            className="nav-item -mr-2 p-2 md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#ff6600]"
+                            className="nav-item -mr-2 p-2 md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
                             aria-label={open ? 'Close menu' : 'Open menu'}
                             aria-expanded={open}
                             aria-controls="mobile-menu"
@@ -190,14 +217,14 @@ const TbloNetworks = () => {
 
                     {/* Menu mobile */}
                     {open && (
-                        <div id="mobile-menu" className="border-t border-[#1a1a17]/15 bg-[#f6f5ee] md:hidden" style={sans}>
+                        <div id="mobile-menu" className="border-t border-white/10 bg-black md:hidden">
                             <ul className="mx-auto flex max-w-7xl flex-col px-6 py-2">
                                 {navLinks.map((l) => (
-                                    <li key={l.label} className="border-b border-[#1a1a17]/10 last:border-b-0">
+                                    <li key={l.label} className="border-b border-white/10 last:border-b-0">
                                         <a
                                             href={l.href}
                                             onClick={() => setOpen(false)}
-                                            className="block py-4 text-lg hover:text-[#ff6600]"
+                                            className="block py-4 text-lg text-white/80 hover:text-white"
                                         >
                                             {l.label}
                                         </a>
@@ -209,170 +236,182 @@ const TbloNetworks = () => {
                 </header>
 
                 {/* HERO */}
-                <section className="relative mx-auto flex min-h-[calc(100vh-80px)] max-w-6xl flex-col items-center justify-center px-6 pb-40 pt-36 text-center lg:py-20">
-                    {/* Foto melayang: di sudut hero, di belakang teks */}
-                    <div className="pointer-events-none absolute inset-0">
-                        {floaters.map((f) => (
-                            <div key={f.src} className={`float-card absolute ${f.pos}`}>
-                                <figure className="float-bob border-b-4 border-blue-500 bg-white p-1.5 pb-2 shadow-[0_14px_28px_-10px_rgba(26,26,23,0.35)] lg:p-2 lg:pb-3 lg:shadow-[0_20px_40px_-12px_rgba(26,26,23,0.35)]">
-                                    <img
-                                        src={f.src}
-                                        alt={f.alt}
-                                        loading="eager"
-                                        className="aspect-[4/5] w-full object-cover"
-                                    />
-                                    <figcaption className="mt-2 text-center text-xs md:text-sm italic text-[#1a1a17]/70 lg:block" style={serif}>
-                                        {f.caption}
-                                    </figcaption>
-                                </figure>
-                            </div>
-                        ))}
-                    </div>
+                <section className="relative overflow-hidden">
+                    {/* Latar luar angkasa: bintang + cakrawala biru bercahaya */}
+                    <div className="stars pointer-events-none absolute inset-0 opacity-50" />
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-[radial-gradient(ellipse_80%_100%_at_50%_100%,rgba(37,99,235,0.45),rgba(37,99,235,0.12)_45%,transparent_75%)]" />
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-400/60 to-transparent" />
 
-                    <div className="relative z-10 flex flex-col items-center">
-                        <h1
-                            className="text-[clamp(2.5rem,7vw,6rem)] font-light leading-[1.02] tracking-[-0.02em]"
-                            style={serif}
-                        >
-                            <span className="block overflow-hidden pb-[0.12em]">
-                                <span className="hero-line block">Social media without</span>
-                            </span>
-                            <span className="block overflow-hidden pb-[0.18em]">
-                                <span className="hero-line block">
-                                    handing over your <em className="italic text-blue-500">identity</em>
-                                    <sup className="ml-1 align-super text-[0.22em] font-normal not-italic">🥇</sup>
+                    <div className="relative mx-auto flex min-h-[calc(100vh-72px)] max-w-6xl flex-col items-center justify-center px-6 pb-40 pt-36 text-center lg:py-20">
+                        {/* Foto melayang: di sudut hero, di belakang teks */}
+                        <div className="pointer-events-none absolute inset-0">
+                            {floaters.map((f) => (
+                                <div key={f.src} className={`float-card absolute ${f.pos}`}>
+                                    <figure className="float-bob overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-1 shadow-[0_0_60px_-10px_rgba(59,130,246,0.45)] backdrop-blur">
+                                        <img
+                                            src={f.src}
+                                            alt={f.alt}
+                                            loading="eager"
+                                            className="aspect-[4/5] w-full rounded-xl object-cover"
+                                        />
+                                        <figcaption className="mt-2 pb-1 text-center text-[11px] md:text-xs text-white/70 md:text-sm">
+                                            {f.caption}
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="relative z-10 flex flex-col items-center">
+                            <h1
+                                className="text-[clamp(2.5rem,7vw,6rem)] font-light leading-[1.05] tracking-[-0.035em]"
+                                style={serif}
+                            >
+                                <span className="block overflow-hidden pb-[0.14em]">
+                                    <span className="hero-line block">Social media without</span>
                                 </span>
-                            </span>
-                        </h1>
+                                <span className="block overflow-hidden pb-[0.2em]">
+                                    <span className="hero-line block">
+                                        handing over your{' '}
+                                        <em className="bg-gradient-to-r from-blue-400 via-sky-300 to-blue-500 bg-clip-text font-light not-italic text-transparent">identity</em>
+                                        <sup className="ml-1 align-super text-[0.22em] font-normal not-italic">🥇</sup>
+                                    </span>
+                                </span>
+                            </h1>
 
-                        <p className="hero-sub mt-6 max-w-2xl text-xl leading-9 text-[#1a1a17]/80 md:text-2xl" style={serif}>
-                            All you need is an Ethereum wallet. Connect, sign one message, and you’re in, in 30 seconds.
-                        </p>
+                            <p className="hero-sub mt-6 max-w-2xl text-lg font-light leading-8 text-white/70 md:text-xl md:leading-9" style={serif}>
+                                All you need is an Ethereum wallet. Connect, sign one message, and you’re in, in 30 seconds.
+                            </p>
 
-                        <p
-                            className="hero-footnote mt-8 max-w-xl text-left text-lg italic leading-8 md:text-xl"
-                            style={serif}
-                        >
-                            🥇 “Data is the new oil. It’s valuable, but if unrefined it cannot really be used.”
-                            <span className="mt-2 block text-right">— Clive Humby</span>
-                        </p>
-
-                        <div className="hero-cta mt-12 flex flex-col items-center gap-4 sm:flex-row" style={sans}>
-                            <a
-                                href="#join"
-                                className="rounded-full bg-[#ff6600] px-7 py-3.5 text-base font-medium text-white transition-colors hover:bg-black"
+                            <p
+                                className="hero-footnote mt-8 max-w-xl text-left text-base font-light italic leading-7 text-white/55 md:text-lg"
+                                style={serif}
                             >
-                                Get Started
-                            </a>
-                            <a
-                                href="#how"
-                                className="px-4 py-3.5 text-base underline decoration-blue-500 decoration-2 underline-offset-4 hover:text-blue-500"
-                            >
-                                See how it works
-                            </a>
+                                🥇 “Data is the new oil. It’s valuable, but if unrefined it cannot really be used.”
+                                <span className="mt-2 block text-right">— Clive Humby</span>
+                            </p>
+
+                            <div className="hero-cta mt-12 flex flex-col items-center gap-4 sm:flex-row" style={sans}>
+                                <a
+                                    href="#join"
+                                    className="rounded-full bg-white px-8 py-3.5 text-base font-medium text-black transition-colors hover:bg-blue-500 hover:text-white"
+                                >
+                                    Get Started
+                                </a>
+                                <a
+                                    href="#how"
+                                    className="rounded-full border border-white/25 px-8 py-3.5 text-base text-white transition-colors hover:bg-white/10"
+                                >
+                                    See how it works
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </section>
 
                 {/* PROBLEM */}
                 <section className="quote-section mx-auto max-w-4xl px-6 py-32 md:py-48">
-                    <p className="text-[clamp(1.75rem,4.2vw,3.25rem)] font-light leading-[1.22] tracking-[-0.01em]" style={serif}>
+                    <p className="text-[clamp(1.75rem,4.2vw,3.25rem)] font-light leading-[1.2] tracking-[-0.025em]" style={serif}>
                         {quoteText.split(' ').map((w, i) => (
                             <span key={i} className="q-word inline-block pr-[0.28em]">
                                 {w}
                             </span>
                         ))}
                     </p>
-                    <p className="mt-10 text-2xl italic text-[#1a1a17]/70" style={serif}>
+                    <p className="mt-10 text-2xl font-light text-blue-400" style={serif}>
                         We’re building the alternative.
                     </p>
                 </section>
 
                 {/* HOW IT WORKS */}
                 <section id="how" className="mx-auto max-w-6xl px-6 pb-32">
-                    <div className="rule h-1 w-full bg-blue-500" />
-                    <div className="grid gap-12 pt-14 md:grid-cols-[1fr_2fr] md:gap-20">
-                        <h2 className="text-4xl font-light leading-tight md:text-5xl" style={serif}>
-                            Your wallet is your <em className="italic">only</em> identity
-                        </h2>
-                        <ol className="space-y-12">
-                            {steps.map((s) => (
-                                <li key={s.n} className="grid grid-cols-[2.5rem_1fr] gap-4">
-                                    <span className="text-3xl text-[#ff6600]" style={serif}>
-                                        {s.n}
-                                    </span>
-                                    <div>
-                                        <h3 className="text-3xl" style={serif}>
-                                            {s.title}
-                                        </h3>
-                                        <p className="mt-3 max-w-xl text-lg leading-8 text-[#1a1a17]/75" style={serif}>
-                                            {s.body}
-                                        </p>
-                                    </div>
-                                </li>
-                            ))}
-                        </ol>
-                    </div>
+                    <div className="rule h-px w-full bg-gradient-to-r from-blue-500 via-blue-400/40 to-transparent" />
+                    <h2 className="mx-auto mt-14 max-w-3xl text-center text-4xl font-light leading-tight tracking-[-0.03em] md:text-6xl" style={serif}>
+                        Your wallet is your <em className="font-light not-italic text-blue-400">only</em> identity
+                    </h2>
+                    <ol className="mt-16 grid gap-5 md:grid-cols-3">
+                        {steps.map((s) => (
+                            <li
+                                key={s.n}
+                                className="reveal card-glow rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-colors hover:border-white/25 md:p-10"
+                            >
+                                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-base text-blue-400">
+                                    {s.n}
+                                </span>
+                                <h3 className="mt-16 text-2xl font-normal tracking-[-0.02em] md:text-3xl" style={serif}>
+                                    {s.title}
+                                </h3>
+                                <p className="mt-4 text-base font-light leading-7 text-white/60" style={serif}>
+                                    {s.body}
+                                </p>
+                            </li>
+                        ))}
+                    </ol>
                 </section>
 
                 {/* WHAT WE STORE */}
                 <section className="mx-auto max-w-6xl px-6 pb-32">
-                    <h2 className="mb-12 max-w-2xl text-4xl font-light leading-tight md:text-5xl" style={serif}>
+                    <h2 className="mb-14 max-w-3xl text-4xl font-light leading-tight tracking-[-0.03em] md:text-6xl" style={serif}>
                         We store no data. We can’t sell anything. Nothing can leak.
                     </h2>
-                    <ul>
+                    <ul className="grid gap-5 md:grid-cols-2">
                         {stored.map(([title, body]) => (
-                            <li key={title}>
-                                <div className="rule h-px w-full bg-[#1a1a17]/25" />
-                                <div className="grid gap-2 py-8 md:grid-cols-[1fr_2fr] md:gap-20">
-                                    <h3 className="text-2xl" style={serif}>
-                                        {title}
-                                    </h3>
-                                    <p className="max-w-xl text-lg leading-8 text-[#1a1a17]/75" style={serif}>
-                                        {body}
-                                    </p>
-                                </div>
+                            <li
+                                key={title}
+                                className="reveal card-glow rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-8 transition-colors hover:border-white/25 md:p-10"
+                            >
+                                <h3 className="text-2xl font-normal tracking-[-0.02em]" style={serif}>
+                                    {title}
+                                </h3>
+                                <p className="mt-4 max-w-xl text-base font-light leading-7 text-white/60" style={serif}>
+                                    {body}
+                                </p>
                             </li>
                         ))}
-                        <li>
-                            <div className="rule h-px w-full bg-[#1a1a17]/25" />
-                        </li>
                     </ul>
                 </section>
 
                 {/* COMMUNITY & DIGITAL RIGHTS */}
-                <section className="mx-auto max-w-4xl px-6 pb-36">
-                    <p className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-light leading-[1.3]" style={serif}>
+                <section id="community" className="mx-auto max-w-4xl px-6 pb-36">
+                    <p className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-light leading-[1.3] tracking-[-0.02em] text-white" style={serif}>
                         We’re starting with active crypto users in Southeast Asia: people who already know wallets, care about privacy, and are fed up with data-hungry mainstream platforms.
                     </p>
-                    <p className="mt-12 text-[clamp(1.5rem,3.2vw,2.4rem)] font-light italic leading-[1.3]" style={serif}>
+                    <p className="mt-12 text-[clamp(1.5rem,3.2vw,2.4rem)] font-light leading-[1.3] tracking-[-0.02em] text-white/50" style={serif}>
                         This isn’t only about technology. It’s about digital rights: anyone should be able to speak online without sacrificing their real identity.
                     </p>
                 </section>
 
                 {/* CTA */}
-                <section id="join" className="bg-[#ff6600] px-6 py-14 text-center text-white">
-                    <h2 className="mx-auto max-w-3xl text-[clamp(2.25rem,5.5vw,4.5rem)] font-light leading-[1.05]" style={serif}>
-                        Your identity is your wallet. <em className="italic">It’s the only thing the world needs to know.</em>
-                    </h2>
-                    <Link
-                        href="https://wa.me/6289684053091?text=hey%2C%20bro,%20its%20very%20cool%20cool%20idea"
-                        className="mt-8 inline-block rounded-full bg-black px-8 py-4 text-xl italic text-white transition-colors hover:bg-white hover:text-black"
-                        style={serif}
-                    >
-                        Join Early Access
-                    </Link>
+                <section id="join" className="px-6 pb-24">
+                    <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#04060d] px-6 py-20 text-center md:py-28">
+                        <div className="stars pointer-events-none absolute inset-0 opacity-40" />
+                        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_80%_at_50%_120%,rgba(37,99,235,0.6),transparent_70%)]" />
+                        <div className="relative">
+                            <h2 className="mx-auto max-w-3xl text-[clamp(2.25rem,5.5vw,4.5rem)] font-light leading-[1.05] tracking-[-0.035em]" style={serif}>
+                                Your identity is your wallet. <em className="font-light not-italic text-blue-400">It’s the only thing the world needs to know.</em>
+                            </h2>
+                            <Link
+                                href="https://wa.me/6289684053091?text=hey%2C%20bro,%20its%20very%20cool%20cool%20idea"
+                                className="mt-10 inline-block rounded-full bg-white px-9 py-4 text-lg font-medium text-black transition-colors hover:bg-blue-500 hover:text-white"
+                                style={sans}
+                            >
+                                Join Early Access
+                            </Link>
+                        </div>
+                    </div>
                 </section>
 
                 {/* FOOTER */}
-                <footer className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-[#1a1a17]/70 md:flex-row md:justify-between" style={sans}>
-                    <span>© {new Date().getFullYear()} Tblo Networks</span>
-                    <span className="flex gap-6">
-                        <a href="#" className="hover:text-[#ff6600]">Docs</a>
-                        <a href="https://github.com/achmadfauzanhusain" className="hover:text-[#ff6600]">GitHub</a>
-                        <a href="#" className="hover:text-[#ff6600]">X</a>
-                        <a href="#" className="hover:text-[#ff6600]">Privacy</a>
-                    </span>
+                <footer className="border-t border-white/10">
+                    <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-white/50 md:flex-row md:justify-between" style={sans}>
+                        <span>© {new Date().getFullYear()} Tblo Networks</span>
+                        <span className="flex gap-6">
+                            <a href="#" className="transition-colors hover:text-white">Docs</a>
+                            <a href="https://github.com/achmadfauzanhusain" className="transition-colors hover:text-white">GitHub</a>
+                            <a href="#" className="transition-colors hover:text-white">X</a>
+                            <a href="#" className="transition-colors hover:text-white">Privacy</a>
+                        </span>
+                    </div>
                 </footer>
             </div>
         </>
