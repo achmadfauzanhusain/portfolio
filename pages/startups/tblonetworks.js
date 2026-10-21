@@ -620,7 +620,7 @@ const TbloNetworks = () => {
                 <section id="how" className="mx-auto max-w-6xl px-6 pb-32">
                     <div className="rule h-px w-full bg-gradient-to-r from-blue-500 via-blue-400/40 to-transparent" />
                     <div className="how-pin">
-                        <h2 className="split-heading mx-auto mt-4 md:mt-10 max-w-3xl text-center text-4xl font-light leading-tight tracking-[-0.03em] md:mt-14 md:text-6xl" style={serif}>
+                        <h2 className="split-heading mx-auto mt-12 max-w-3xl text-center text-4xl font-light leading-tight tracking-[-0.03em] md:mt-14 md:text-6xl" style={serif}>
                             <Words text="Your wallet is your" wordClass="h-word" mask />
                             <Words text="only" wordClass="h-word" mask color="text-blue-400" />
                             <Words text="identity" wordClass="h-word" mask />
