@@ -13,6 +13,7 @@ const sans = { fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }
 const navLinks = [
     { label: 'Developers', href: 'https://fauzanhusain.com' },
     { label: 'How it works', href: '#how' },
+    { label: 'Rewards', href: '#reward' },
     { label: 'Community', href: '#community' },
     { label: 'About', href: '#join' },
 ]
@@ -69,6 +70,18 @@ const e2eePoints = [
     ['Nothing useful to hand over', 'If someone demands your chats, all we have is unreadable ciphertext. There is nothing to give.'],
 ]
 
+// Reward: fee platform 5%, kreator 95%
+const FEE_RATE = 0.05
+const rewardAmounts = [1, 10, 100]
+
+const rewardFlow = [
+    ['Reward a post', 'Love what someone wrote? Send them a reward straight from your wallet, in one tap.'],
+    ['95% goes to the creator', 'Almost everything lands directly in the creator’s wallet.'],
+    ['5% keeps the network alive', 'A small, transparent fee pays for servers and development. Never your data.'],
+]
+
+const fmt = (n) => n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+
 const quoteText =
     'Every day, billions of people hand over their names, photos, phone numbers, and locations just to post a photo or chat with a friend. That data gets sold, hacked, or used to watch them by data broker, government, and other evil company.'
 
@@ -123,11 +136,41 @@ const TbloNetworks = () => {
 
     const [open, setOpen] = useState(false)
 
+    // Reward: nominal yang dipilih pengunjung
+    const [amount, setAmount] = useState(10)
+    const creatorRef = useRef(null)
+    const feeRef = useRef(null)
+    // Angka yang sedang ditampilkan (di-tween saat nominal berubah)
+    const shown = useRef({ c: 10 * (1 - FEE_RATE), f: 10 * FEE_RATE })
+
     useEffect(() => {
         const onKey = (e) => e.key === 'Escape' && setOpen(false)
         window.addEventListener('keydown', onKey)
         return () => window.removeEventListener('keydown', onKey)
     }, [])
+
+    // Angka creator & fee berhitung ke nilai baru setiap nominal diganti
+    useEffect(() => {
+        const target = { c: amount * (1 - FEE_RATE), f: amount * FEE_RATE }
+        const write = () => {
+            if (creatorRef.current) creatorRef.current.textContent = fmt(shown.current.c)
+            if (feeRef.current) feeRef.current.textContent = fmt(shown.current.f)
+        }
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        if (reduce) {
+            shown.current = target
+            write()
+            return
+        }
+        const tw = gsap.to(shown.current, {
+            ...target,
+            duration: 0.6,
+            ease: 'power2.out',
+            onUpdate: write,
+            onComplete: write,
+        })
+        return () => tw.kill()
+    }, [amount])
 
     useEffect(() => {
         const mm = gsap.matchMedia(root.current)
@@ -312,6 +355,32 @@ const TbloNetworks = () => {
                 }
             })
 
+            /* ---------- Reward: bar 95/5 terisi mengikuti scroll ---------- */
+            gsap.fromTo(
+                '.reward-fill',
+                { scaleX: 0 },
+                {
+                    scaleX: 1,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.reward-card',
+                        start: 'top 75%',
+                        end: 'center 55%',
+                        scrub: 0.6,
+                    },
+                }
+            )
+            gsap.from('.reward-fee', {
+                opacity: 0,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.reward-card',
+                    start: 'center 65%',
+                    end: 'center 50%',
+                    scrub: true,
+                },
+            })
+
             /* ---------- CTA: kartu membesar seperti "zoom in" ---------- */
             gsap.fromTo(
                 '.join-card',
@@ -473,7 +542,7 @@ const TbloNetworks = () => {
                         </div>
 
                         <ul className="hidden items-center gap-10 text-[14px] text-white/70 md:flex">
-                            {navLinks.slice(0, 3).map((l) => (
+                            {navLinks.slice(0, 4).map((l) => (
                                 <li key={l.label} className="nav-item">
                                     <a href={l.href} className="transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500">
                                         {l.label}
@@ -484,10 +553,10 @@ const TbloNetworks = () => {
 
                         <div className="hidden md:block nav-item">
                             <a
-                                href={navLinks[3].href}
+                                href={navLinks[4].href}
                                 className="rounded-full border border-white/25 px-5 py-2 text-[14px] text-white transition-colors hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
                             >
-                                {navLinks[3].label}
+                                {navLinks[4].label}
                             </a>
                         </div>
 
@@ -719,6 +788,92 @@ const TbloNetworks = () => {
                                 className="reveal card-glow rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-8 transition-colors hover:border-white/25"
                             >
                                 <h3 className="text-xl font-normal tracking-[-0.02em]" style={serif}>
+                                    {title}
+                                </h3>
+                                <p className="mt-3 text-base font-light leading-7 text-white/60" style={serif}>
+                                    {body}
+                                </p>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+
+                <section id="reward" className="mx-auto max-w-6xl px-6 pb-32">
+                    <div className="rule h-px w-full bg-gradient-to-r from-blue-500 via-blue-400/40 to-transparent" />
+                    <h2 className="split-heading mt-14 max-w-3xl text-4xl font-light leading-tight tracking-[-0.03em] md:text-6xl" style={serif}>
+                        <Words text="Reward great posts." wordClass="h-word" mask />
+                        <Words text="Creators keep" wordClass="h-word" mask />
+                        <Words text="95%." wordClass="h-word" mask color="text-blue-400" />
+                    </h2>
+                    <p className="reveal mt-6 max-w-2xl text-lg font-light leading-8 text-white/70 md:text-xl md:leading-9" style={serif}>
+                        Anyone can reward any post. We take a flat 5% fee on each reward. That’s how we earn, so we never need to sell your data.
+                    </p>
+
+                    {/* Kalkulator reward interaktif */}
+                    <div className="reward-card card-glow mt-14 rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-8 md:p-12">
+                        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+                            <div>
+                                <p className="text-sm text-white/40" id="reward-label">
+                                    Try a reward
+                                </p>
+                                <div
+                                    role="group"
+                                    aria-labelledby="reward-label"
+                                    className="mt-3 inline-flex gap-1 rounded-full border border-white/15 bg-black/40 p-1"
+                                >
+                                    {rewardAmounts.map((a) => (
+                                        <button
+                                            key={a}
+                                            type="button"
+                                            aria-pressed={amount === a}
+                                            onClick={() => setAmount(a)}
+                                            className={`rounded-full px-5 py-2 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500 md:px-6 ${
+                                                amount === a ? 'bg-white text-black' : 'text-white/60 hover:text-white'
+                                            }`}
+                                            style={sans}
+                                        >
+                                            ${a}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="flex gap-10 md:gap-14">
+                                <div>
+                                    <p className="text-sm text-white/50">Creator receives</p>
+                                    <p className="mt-2 text-4xl font-light tabular-nums text-blue-400 md:text-6xl" style={serif} aria-live="polite">
+                                        $<span ref={creatorRef}>9.50</span>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-white/50">Network fee (5%)</p>
+                                    <p className="mt-2 text-4xl font-light tabular-nums text-white/80 md:text-6xl" style={serif} aria-live="polite">
+                                        $<span ref={feeRef}>0.50</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Bar pembagian 95 / 5 */}
+                        <div className="mt-10 flex h-3 w-full overflow-hidden rounded-full bg-white/10" aria-hidden="true">
+                            <div className="reward-fill h-full w-[95%] origin-left rounded-full bg-gradient-to-r from-blue-600 via-blue-400 to-sky-300" />
+                            <div className="reward-fee h-full w-[5%] bg-white/70" />
+                        </div>
+                        <div className="mt-3 flex justify-between text-xs text-white/40">
+                            <span>95% creator</span>
+                            <span>5% network</span>
+                        </div>
+                    </div>
+
+                    <ul className="mt-5 grid gap-5 md:grid-cols-3">
+                        {rewardFlow.map(([title, body], i) => (
+                            <li
+                                key={title}
+                                className="reveal card-glow rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-8 transition-colors hover:border-white/25"
+                            >
+                                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-sm text-blue-400">
+                                    {i + 1}
+                                </span>
+                                <h3 className="mt-8 text-xl font-normal tracking-[-0.02em]" style={serif}>
                                     {title}
                                 </h3>
                                 <p className="mt-3 text-base font-light leading-7 text-white/60" style={serif}>
