@@ -658,12 +658,12 @@ const TbloNetworks = () => {
                             </p>
 
                             <div className="hero-cta mt-12 flex flex-col items-center gap-4 sm:flex-row" style={sans}>
-                                <a
-                                    href="#join"
+                                <Link
+                                    href="https://tblonetworks.vercel.app/"
                                     className="rounded-full bg-white px-8 py-3.5 text-base font-medium text-black transition-colors hover:bg-blue-500 hover:text-white"
                                 >
-                                    Get Started
-                                </a>
+                                    Try App
+                                </Link>
                                 <a
                                     href="#how"
                                     className="rounded-full border border-white/25 px-8 py-3.5 text-base text-white transition-colors hover:bg-white/10"
@@ -903,7 +903,7 @@ const TbloNetworks = () => {
                                 <Words text="It’s the only thing the world needs to know." wordClass="h-word" mask color="text-blue-400" />
                             </h2>
                             <Link
-                                href="https://wa.me/6289684053091?text=hey%2C%20bro,%20its%20very%20cool%20cool%20idea"
+                                href="https://tblonetworks.vercel.app/"
                                 className="mt-10 inline-block text-sm md:text-base rounded-full bg-white px-6 md:px-9 py-3 md:py-4 text-lg font-medium text-black transition-colors hover:bg-blue-500 hover:text-white"
                                 style={sans}
                             >
