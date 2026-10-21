@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// Gaya tipografi ala Starcloud: grotesk bersih, tipis, tracking rapat
 const serif = { fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }
 const sans = { fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }
 
@@ -56,6 +55,18 @@ const stored = [
     ['Photos and location', 'Not collected to sign up, and never used to watch you.'],
 ]
 
+const e2eeFlow = [
+    ['You', 'Your message is encrypted on your device before it leaves.'],
+    ['Our servers', 'They only carry scrambled ciphertext. Nothing readable.'],
+    ['Your friend', 'Only their device holds the key to unlock it.'],
+]
+
+const e2eePoints = [
+    ['Keys never leave your device', 'Your encryption keys are generated and kept on your device. We never see them, so we can’t decrypt anything.'],
+    ['Only the two of you can read it', 'Not us, not a hacker who breaks into our servers, not anyone watching the network in between.'],
+    ['Nothing useful to hand over', 'If someone demands your chats, all we have is unreadable ciphertext. There is nothing to give.'],
+]
+
 const quoteText =
     'Every day, billions of people hand over their names, photos, phone numbers, and locations just to post a photo or chat with a friend. That data gets sold, hacked, or used to watch them by data broker, government, and other evil company.'
 
@@ -97,7 +108,6 @@ const TbloNetworks = () => {
 
         mm.add('(prefers-reduced-motion: no-preference)', () => {
             const ctx = gsap.context(() => {
-                // Satu momen utama: urutan load di hero
                 const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
                 tl.from('.nav-item', { y: -16, opacity: 0, duration: 0.7, stagger: 0.06 })
                     .from('.hero-line', { yPercent: 110, duration: 1.2, stagger: 0.14 }, '-=0.4')
@@ -106,7 +116,6 @@ const TbloNetworks = () => {
                     .from('.hero-cta', { opacity: 0, y: 12, duration: 0.8 }, '-=0.6')
                     .from('.float-card', { opacity: 0, scale: 0.9, duration: 1, stagger: 0.2 }, '-=0.9')
 
-                // Foto melayang terus-menerus, tiap foto beda tempo
                 gsap.utils.toArray('.float-bob').forEach((el, i) => {
                     gsap.to(el, {
                         y: i % 2 ? 16 : -16,
@@ -118,7 +127,6 @@ const TbloNetworks = () => {
                     })
                 })
 
-                // Kata demi kata menyala saat di-scroll
                 gsap.fromTo(
                     '.q-word',
                     { opacity: 0.15 },
@@ -135,7 +143,6 @@ const TbloNetworks = () => {
                     }
                 )
 
-                // Garis pemisah tergambar saat masuk viewport
                 gsap.utils.toArray('.rule').forEach((el) => {
                     gsap.from(el, {
                         scaleX: 0,
@@ -146,7 +153,6 @@ const TbloNetworks = () => {
                     })
                 })
 
-                // Kartu muncul pelan dari bawah
                 gsap.utils.toArray('.reveal').forEach((el, i) => {
                     gsap.from(el, {
                         y: 40,
@@ -170,7 +176,6 @@ const TbloNetworks = () => {
             <style dangerouslySetInnerHTML={{ __html: cssText }} />
 
             <div ref={root} className="min-h-screen bg-black text-white antialiased selection:bg-blue-500 selection:text-white" style={sans}>
-                {/* NAV */}
                 <header className="sticky top-0 z-20 border-b border-white/10 bg-black/60 backdrop-blur-xl">
                     <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
                         <div className="nav-item">
@@ -196,7 +201,6 @@ const TbloNetworks = () => {
                             </a>
                         </div>
 
-                        {/* Hamburger (hanya mobile) */}
                         <button
                             type="button"
                             className="nav-item -mr-2 p-2 md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
@@ -215,7 +219,6 @@ const TbloNetworks = () => {
                         </button>
                     </nav>
 
-                    {/* Menu mobile */}
                     {open && (
                         <div id="mobile-menu" className="border-t border-white/10 bg-black md:hidden">
                             <ul className="mx-auto flex max-w-7xl flex-col px-6 py-2">
@@ -235,15 +238,12 @@ const TbloNetworks = () => {
                     )}
                 </header>
 
-                {/* HERO */}
                 <section className="relative overflow-hidden">
-                    {/* Latar luar angkasa: bintang + cakrawala biru bercahaya */}
                     <div className="stars pointer-events-none absolute inset-0 opacity-50" />
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-[radial-gradient(ellipse_80%_100%_at_50%_100%,rgba(37,99,235,0.45),rgba(37,99,235,0.12)_45%,transparent_75%)]" />
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-400/60 to-transparent" />
 
                     <div className="relative mx-auto flex min-h-[calc(100vh-72px)] max-w-6xl flex-col items-center justify-center px-6 pb-40 pt-36 text-center lg:py-20">
-                        {/* Foto melayang: di sudut hero, di belakang teks */}
                         <div className="pointer-events-none absolute inset-0">
                             {floaters.map((f) => (
                                 <div key={f.src} className={`float-card absolute ${f.pos}`}>
@@ -309,7 +309,6 @@ const TbloNetworks = () => {
                     </div>
                 </section>
 
-                {/* PROBLEM */}
                 <section className="quote-section mx-auto max-w-4xl px-6 py-32 md:py-48">
                     <p className="text-[clamp(1.75rem,4.2vw,3.25rem)] font-light leading-[1.2] tracking-[-0.025em]" style={serif}>
                         {quoteText.split(' ').map((w, i) => (
@@ -323,7 +322,6 @@ const TbloNetworks = () => {
                     </p>
                 </section>
 
-                {/* HOW IT WORKS */}
                 <section id="how" className="mx-auto max-w-6xl px-6 pb-32">
                     <div className="rule h-px w-full bg-gradient-to-r from-blue-500 via-blue-400/40 to-transparent" />
                     <h2 className="mx-auto mt-14 max-w-3xl text-center text-4xl font-light leading-tight tracking-[-0.03em] md:text-6xl" style={serif}>
@@ -349,7 +347,6 @@ const TbloNetworks = () => {
                     </ol>
                 </section>
 
-                {/* WHAT WE STORE */}
                 <section className="mx-auto max-w-6xl px-6 pb-32">
                     <h2 className="mb-14 max-w-3xl text-4xl font-light leading-tight tracking-[-0.03em] md:text-6xl" style={serif}>
                         We store no data. We can’t sell anything. Nothing can leak.
@@ -371,7 +368,54 @@ const TbloNetworks = () => {
                     </ul>
                 </section>
 
-                {/* COMMUNITY & DIGITAL RIGHTS */}
+                <section id="chat" className="mx-auto max-w-6xl px-6 pb-32">
+                    <div className="rule h-px w-full bg-gradient-to-r from-blue-500 via-blue-400/40 to-transparent" />
+                    <h2 className="mt-14 max-w-3xl text-4xl font-light leading-tight tracking-[-0.03em] md:text-6xl" style={serif}>
+                        Chats only <em className="font-light not-italic text-blue-400">you two</em> can read
+                    </h2>
+                    <p className="mt-6 max-w-2xl text-lg font-light leading-8 text-white/70 md:text-xl md:leading-9" style={serif}>
+                        Every message is end-to-end encrypted (E2EE). It’s locked on your device and only unlocked on your friend’s device. Nobody in the middle can open it, including us.
+                    </p>
+
+                    <ol className="mt-14 grid items-stretch gap-5 md:grid-cols-[1fr_auto_1fr_auto_1fr]">
+                        {e2eeFlow.map(([title, body], i) => (
+                            <Fragment key={title}>
+                                <li className="reveal card-glow rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-colors hover:border-white/25">
+                                    <h3 className="text-2xl font-normal tracking-[-0.02em]" style={serif}>
+                                        {title}
+                                    </h3>
+                                    <p className="mt-3 text-base font-light leading-7 text-white/60" style={serif}>
+                                        {body}
+                                    </p>
+                                </li>
+                                {i < e2eeFlow.length - 1 && (
+                                    <li aria-hidden="true" className="hidden items-center justify-center text-blue-400 md:flex">
+                                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M5 12h14M13 6l6 6-6 6" />
+                                        </svg>
+                                    </li>
+                                )}
+                            </Fragment>
+                        ))}
+                    </ol>
+
+                    <ul className="mt-5 grid gap-5 md:grid-cols-3">
+                        {e2eePoints.map(([title, body]) => (
+                            <li
+                                key={title}
+                                className="reveal card-glow rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.01] p-8 transition-colors hover:border-white/25"
+                            >
+                                <h3 className="text-xl font-normal tracking-[-0.02em]" style={serif}>
+                                    {title}
+                                </h3>
+                                <p className="mt-3 text-base font-light leading-7 text-white/60" style={serif}>
+                                    {body}
+                                </p>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+
                 <section id="community" className="mx-auto max-w-4xl px-6 pb-36">
                     <p className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-light leading-[1.3] tracking-[-0.02em] text-white" style={serif}>
                         We’re starting with active crypto users in Southeast Asia: people who already know wallets, care about privacy, and are fed up with data-hungry mainstream platforms.
@@ -381,7 +425,6 @@ const TbloNetworks = () => {
                     </p>
                 </section>
 
-                {/* CTA */}
                 <section id="join" className="px-6 pb-24">
                     <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#04060d] px-6 py-20 text-center md:py-28">
                         <div className="stars pointer-events-none absolute inset-0 opacity-40" />
@@ -392,7 +435,7 @@ const TbloNetworks = () => {
                             </h2>
                             <Link
                                 href="https://wa.me/6289684053091?text=hey%2C%20bro,%20its%20very%20cool%20cool%20idea"
-                                className="mt-10 inline-block rounded-full bg-white px-9 py-4 text-lg font-medium text-black transition-colors hover:bg-blue-500 hover:text-white"
+                                className="mt-10 inline-block text-sm md:text-base rounded-full bg-white px-6 md:px-9 py-3 md:py-4 text-lg font-medium text-black transition-colors hover:bg-blue-500 hover:text-white"
                                 style={sans}
                             >
                                 Join Early Access
@@ -401,7 +444,6 @@ const TbloNetworks = () => {
                     </div>
                 </section>
 
-                {/* FOOTER */}
                 <footer className="border-t border-white/10">
                     <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 text-sm text-white/50 md:flex-row md:justify-between" style={sans}>
                         <span>© {new Date().getFullYear()} Tblo Networks</span>
