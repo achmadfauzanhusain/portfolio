@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
+// Mencegah pin "loncat" saat address bar browser mobile naik/turun
+ScrollTrigger.config({ ignoreMobileResize: true })
 
 const serif = { fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }
 const sans = { fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }
@@ -70,6 +72,11 @@ const e2eePoints = [
 const quoteText =
     'Every day, billions of people hand over their names, photos, phone numbers, and locations just to post a photo or chat with a friend. That data gets sold, hacked, or used to watch them by data broker, government, and other evil company.'
 
+const communityA =
+    'We’re starting with active crypto users in Southeast Asia: people who already know wallets, care about privacy, and are fed up with data-hungry mainstream platforms.'
+const communityB =
+    'This isn’t only about technology. It’s about digital rights: anyone should be able to speak online without sacrificing their real identity.'
+
 const cssText = `
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
 html{scroll-behavior:smooth;background:#000;}
@@ -90,7 +97,26 @@ html{scroll-behavior:smooth;background:#000;}
   opacity:0;transition:opacity .5s ease;pointer-events:none;
 }
 .card-glow:hover::after{opacity:1;}
+.how-stacked > li{grid-column:1;grid-row:1;}
 `
+
+/*
+ * Memecah teks jadi per kata.
+ * - mask=true  : tiap kata dibungkus overflow-hidden (efek "naik dari bawah", dipakai di heading)
+ * - mask=false : kata biasa, dipakai untuk efek opacity yang di-scrub
+ */
+const Words = ({ text, wordClass, mask = false, color = '' }) =>
+    text.split(' ').map((w, i) =>
+        mask ? (
+            <span key={i} className="mr-[0.25em] -mb-[0.14em] inline-block overflow-hidden pb-[0.14em] align-bottom">
+                <span className={`${wordClass} ${color} inline-block will-change-transform`}>{w}</span>
+            </span>
+        ) : (
+            <span key={i} className={`${wordClass} inline-block pr-[0.28em]`}>
+                {w}
+            </span>
+        )
+    )
 
 const TbloNetworks = () => {
     const root = useRef(null)
@@ -104,71 +130,335 @@ const TbloNetworks = () => {
     }, [])
 
     useEffect(() => {
-        const mm = gsap.matchMedia()
+        const mm = gsap.matchMedia(root.current)
+        const refresh = () => ScrollTrigger.refresh()
+        window.addEventListener('load', refresh)
 
+        /* ------------------------------------------------------------------
+         * Semua ukuran layar (selama user tidak memilih reduced motion)
+         * ------------------------------------------------------------------ */
         mm.add('(prefers-reduced-motion: no-preference)', () => {
-            const ctx = gsap.context(() => {
-                const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
-                tl.from('.nav-item', { y: -16, opacity: 0, duration: 0.7, stagger: 0.06 })
-                    .from('.hero-line', { yPercent: 110, duration: 1.2, stagger: 0.14 }, '-=0.4')
-                    .from('.hero-sub', { opacity: 0, y: 12, duration: 0.8 }, '-=0.5')
-                    .from('.hero-footnote', { opacity: 0, y: 12, duration: 0.8 }, '-=0.5')
-                    .from('.hero-cta', { opacity: 0, y: 12, duration: 0.8 }, '-=0.6')
-                    .from('.float-card', { opacity: 0, scale: 0.9, duration: 1, stagger: 0.2 }, '-=0.9')
+            /* ---------- Intro hero (load) ---------- */
+            const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
+            tl.from('.nav-item', { y: -16, opacity: 0, duration: 0.7, stagger: 0.06 })
+                .from('.hero-line', { yPercent: 110, duration: 1.2, stagger: 0.14 }, '-=0.4')
+                .from('.hero-sub', { opacity: 0, y: 12, duration: 0.8 }, '-=0.5')
+                .from('.hero-footnote', { opacity: 0, y: 12, duration: 0.8 }, '-=0.5')
+                .from('.hero-cta', { opacity: 0, y: 12, duration: 0.8 }, '-=0.6')
+                .from('.float-card', { opacity: 0, scale: 0.9, duration: 1, stagger: 0.2 }, '-=0.9')
 
-                gsap.utils.toArray('.float-bob').forEach((el, i) => {
-                    gsap.to(el, {
-                        y: i % 2 ? 16 : -16,
-                        rotation: i % 2 ? -1.5 : 1.5,
-                        duration: 3 + i * 0.7,
-                        ease: 'sine.inOut',
-                        repeat: -1,
-                        yoyo: true,
-                    })
+            gsap.utils.toArray('.float-bob').forEach((el, i) => {
+                gsap.to(el, {
+                    y: i % 2 ? 16 : -16,
+                    rotation: i % 2 ? -1.5 : 1.5,
+                    duration: 3 + i * 0.7,
+                    ease: 'sine.inOut',
+                    repeat: -1,
+                    yoyo: true,
                 })
+            })
 
+            /* ---------- Progress bar scroll di header ---------- */
+            gsap.to('.scroll-progress', {
+                scaleX: 1,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: document.documentElement,
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 0.3,
+                },
+            })
+
+            /* ---------- Hero: konten mengecil + memudar saat di-scroll ---------- */
+            const heroScroll = {
+                trigger: '.hero-section',
+                start: 'top top',
+                end: 'bottom top+=80',
+                scrub: true,
+            }
+            gsap.to('.hero-content', {
+                scale: 0.88,
+                opacity: 0,
+                yPercent: -10,
+                ease: 'none',
+                scrollTrigger: heroScroll,
+            })
+            // Foto melayang dengan kecepatan berbeda (parallax)
+            gsap.utils.toArray('.float-card').forEach((el, i) => {
+                gsap.to(el, {
+                    y: i % 2 ? -220 : -140,
+                    ease: 'none',
+                    scrollTrigger: heroScroll,
+                })
+            })
+            gsap.to('.hero-glow', {
+                opacity: 0.15,
+                yPercent: 25,
+                ease: 'none',
+                scrollTrigger: heroScroll,
+            })
+
+            /* ---------- Bintang: parallax background ---------- */
+            gsap.utils.toArray('.stars').forEach((el) => {
                 gsap.fromTo(
-                    '.q-word',
-                    { opacity: 0.15 },
+                    el,
+                    { backgroundPosition: '0px 0px' },
+                    {
+                        backgroundPosition: '0px -260px',
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: el.parentElement,
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: true,
+                        },
+                    }
+                )
+            })
+
+            /* ---------- Quote: section di-pin, kata menyala satu per satu ---------- */
+            const qtl = gsap.timeline({
+                defaults: { ease: 'none' },
+                scrollTrigger: {
+                    trigger: '.quote-pin',
+                    start: 'top top',
+                    end: () => '+=' + window.innerHeight * 1.6,
+                    pin: true,
+                    scrub: true,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                },
+            })
+            qtl.fromTo('.q-word', { opacity: 0.15 }, { opacity: 1, stagger: 0.1, duration: 1 })
+                .from('.q-tag', { opacity: 0, y: 24, duration: 1.2 }, '>-0.3')
+                .to({}, { duration: 1 })
+
+            /* ---------- Teks komunitas: kata menyala mengikuti scroll ---------- */
+            gsap.utils.toArray('.scrub-text').forEach((p) => {
+                gsap.fromTo(
+                    p.querySelectorAll('.s-word'),
+                    { opacity: 0.12 },
                     {
                         opacity: 1,
                         ease: 'none',
                         stagger: 0.1,
                         scrollTrigger: {
-                            trigger: '.quote-section',
-                            start: 'top 65%',
-                            end: 'bottom 70%',
+                            trigger: p,
+                            start: 'top 80%',
+                            end: 'bottom 55%',
                             scrub: true,
                         },
                     }
                 )
+            })
 
-                gsap.utils.toArray('.rule').forEach((el) => {
-                    gsap.from(el, {
-                        scaleX: 0,
-                        transformOrigin: 'left center',
-                        duration: 1.1,
-                        ease: 'power3.out',
-                        scrollTrigger: { trigger: el, start: 'top 90%' },
-                    })
+            /* ---------- Heading: kata naik dari balik mask ---------- */
+            gsap.utils.toArray('.split-heading').forEach((h) => {
+                gsap.from(h.querySelectorAll('.h-word'), {
+                    yPercent: 115,
+                    rotate: 3,
+                    duration: 1.1,
+                    stagger: 0.06,
+                    ease: 'power4.out',
+                    scrollTrigger: { trigger: h, start: 'top 88%' },
                 })
+            })
 
-                gsap.utils.toArray('.reveal').forEach((el, i) => {
-                    gsap.from(el, {
-                        y: 40,
-                        opacity: 0,
+            /* ---------- Garis pemisah ---------- */
+            gsap.utils.toArray('.rule').forEach((el) => {
+                gsap.from(el, {
+                    scaleX: 0,
+                    transformOrigin: 'left center',
+                    duration: 1.1,
+                    ease: 'power3.out',
+                    scrollTrigger: { trigger: el, start: 'top 90%' },
+                })
+            })
+
+            /* ---------- Kartu: muncul bergelombang (batch) ---------- */
+            const reveals = gsap.utils.toArray('.reveal')
+            gsap.set(reveals, { opacity: 0, y: 50 })
+            ScrollTrigger.batch(reveals, {
+                start: 'top 90%',
+                once: true,
+                onEnter: (batch) =>
+                    gsap.to(batch, {
+                        opacity: 1,
+                        y: 0,
                         duration: 0.9,
-                        delay: (i % 3) * 0.08,
+                        stagger: 0.12,
                         ease: 'power3.out',
-                        scrollTrigger: { trigger: el, start: 'top 90%' },
-                    })
-                })
-            }, root)
+                        overwrite: true,
+                    }),
+            })
 
-            return () => ctx.revert()
+            /* ---------- E2EE flow: kartu & panah menyala berurutan saat scroll ---------- */
+            const cards = gsap.utils.toArray('.e2ee-card')
+            const arrows = gsap.utils.toArray('.e2ee-arrow')
+            const etl = gsap.timeline({
+                defaults: { ease: 'none' },
+                scrollTrigger: {
+                    trigger: '.e2ee-flow',
+                    start: 'top 78%',
+                    end: 'bottom 52%',
+                    scrub: 0.6,
+                },
+            })
+            cards.forEach((c, i) => {
+                etl.from(c, { opacity: 0.12, y: 60, scale: 0.94, duration: 1 }, i)
+                if (arrows[i]) {
+                    etl.from(arrows[i], { opacity: 0, x: -16, scale: 0.4, duration: 0.6 }, i + 0.7)
+                }
+            })
+
+            /* ---------- CTA: kartu membesar seperti "zoom in" ---------- */
+            gsap.fromTo(
+                '.join-card',
+                { scale: 0.86, y: 80 },
+                {
+                    scale: 1,
+                    y: 0,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.join-card',
+                        start: 'top bottom',
+                        end: 'top 35%',
+                        scrub: true,
+                    },
+                }
+            )
+            gsap.fromTo(
+                '.join-glow',
+                { opacity: 0, yPercent: 30 },
+                {
+                    opacity: 1,
+                    yPercent: 0,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.join-card',
+                        start: 'top 85%',
+                        end: 'bottom 70%',
+                        scrub: true,
+                    },
+                }
+            )
         })
 
-        return () => mm.revert()
+        /* ------------------------------------------------------------------
+         * Desktop: "How it works" di-pin, langkah menyala satu per satu
+         * ------------------------------------------------------------------ */
+        mm.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
+            const cards = gsap.utils.toArray('.how-card')
+            const badges = gsap.utils.toArray('.how-badge')
+            gsap.set(cards, { opacity: 0.18, y: 40, scale: 0.96 })
+
+            const tl = gsap.timeline({
+                defaults: { ease: 'none' },
+                scrollTrigger: {
+                    trigger: '.how-pin',
+                    start: 'top 72px',
+                    end: () => '+=' + window.innerHeight * 1.5,
+                    pin: true,
+                    scrub: 0.6,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                },
+            })
+            cards.forEach((c, i) => {
+                tl.to(c, { opacity: 1, y: 0, scale: 1, duration: 1 }, i).to(
+                    badges[i],
+                    { backgroundColor: '#2563eb', borderColor: '#2563eb', color: '#ffffff', duration: 0.4 },
+                    i + 0.3
+                )
+            })
+            tl.to('.how-progress', { scaleX: 1, duration: cards.length }, 0).to({}, { duration: 0.6 })
+        })
+
+        /* ------------------------------------------------------------------
+         * Mobile: "How it works" jadi tumpukan kartu (card stack) yang di-pin.
+         * Tiap scroll, kartu baru terbang masuk dengan efek 3D dari bawah,
+         * kartu sebelumnya menyusut & mengintip di belakang, ada glow biru
+         * di kartu aktif, dot indikator yang memanjang, dan garis progress.
+         * ------------------------------------------------------------------ */
+        mm.add('(max-width: 767px) and (prefers-reduced-motion: no-preference)', () => {
+            const stack = root.current.querySelector('.how-stack')
+            const cards = gsap.utils.toArray('.how-card')
+            const badges = gsap.utils.toArray('.how-badge')
+            const dots = gsap.utils.toArray('.how-dot')
+            const n = cards.length
+            const STEP = 1.2 // durasi per langkah di timeline
+
+            // Semua kartu ditumpuk di satu sel grid
+            stack.classList.add('how-stacked')
+            gsap.set('.how-track', { display: 'block' })
+            gsap.set('.how-dots', { display: 'flex' })
+
+            const GLOW_ON = { borderColor: 'rgba(59,130,246,0.7)', boxShadow: '0 0 50px -10px rgba(59,130,246,0.55)' }
+            const GLOW_OFF = { borderColor: 'rgba(255,255,255,0.1)', boxShadow: '0 0 0px 0px rgba(59,130,246,0)' }
+            const BADGE_ON = { backgroundColor: '#2563eb', borderColor: '#2563eb', color: '#ffffff' }
+            // Level kedalaman di tumpukan: 0 = depan, makin besar makin ke belakang
+            const depth = (k) => ({
+                y: -k * 24,
+                scale: 1 - k * 0.06,
+                opacity: Math.max(0, 1 - k * 0.45),
+            })
+
+            gsap.set(cards, { transformPerspective: 900, transformOrigin: '50% 100%', ...GLOW_OFF })
+            gsap.set(cards.slice(1), { yPercent: 115, rotationX: -25, opacity: 0 })
+            gsap.set(cards[0], GLOW_ON)
+            gsap.set(badges[0], BADGE_ON)
+            gsap.set(dots[0], { width: 28, backgroundColor: '#3b82f6' })
+
+            const total = (n - 1) * STEP + 1
+            const tl = gsap.timeline({
+                defaults: { ease: 'none' },
+                scrollTrigger: {
+                    trigger: '.how-pin',
+                    start: 'top 80px',
+                    end: () => '+=' + window.innerHeight * 1.8,
+                    pin: true,
+                    scrub: 0.6,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                },
+            })
+
+            for (let i = 1; i < n; i++) {
+                const t = (i - 1) * STEP + 0.2
+
+                // Kartu-kartu sebelumnya mundur satu level ke belakang
+                for (let j = 0; j < i; j++) {
+                    tl.fromTo(cards[j], depth(i - 1 - j), { ...depth(i - j), duration: 0.9, immediateRender: false }, t)
+                }
+                // Glow kartu sebelumnya padam
+                tl.to(cards[i - 1], { ...GLOW_OFF, duration: 0.5 }, t)
+
+                // Kartu baru terbang masuk dengan rotasi 3D
+                tl.fromTo(
+                    cards[i],
+                    { yPercent: 115, rotationX: -25, opacity: 0 },
+                    { yPercent: 0, rotationX: 0, opacity: 1, duration: 1, immediateRender: false },
+                    t
+                )
+                tl.to(cards[i], { ...GLOW_ON, duration: 0.5 }, t + 0.6)
+                tl.to(badges[i], { ...BADGE_ON, duration: 0.4 }, t + 0.5)
+
+                // Dot indikator: yang lama menyusut, yang baru memanjang
+                tl.to(dots[i - 1], { width: 8, backgroundColor: 'rgba(255,255,255,0.25)', duration: 0.4 }, t)
+                tl.to(dots[i], { width: 28, backgroundColor: '#3b82f6', duration: 0.4 }, t + 0.4)
+            }
+
+            tl.to('.how-progress', { scaleX: 1, duration: total }, 0).to({}, { duration: 0.6 })
+
+            // Kembalikan DOM ke kondisi awal saat media query tidak cocok lagi
+            return () => stack.classList.remove('how-stacked')
+        })
+
+        return () => {
+            window.removeEventListener('load', refresh)
+            mm.revert()
+        }
     }, [])
 
     return (
@@ -236,11 +526,18 @@ const TbloNetworks = () => {
                             </ul>
                         </div>
                     )}
+
+                    {/* Progress bar scroll */}
+                    <div
+                        aria-hidden="true"
+                        className="scroll-progress pointer-events-none absolute -bottom-px left-0 h-[2px] w-full origin-left bg-gradient-to-r from-blue-500 via-sky-300 to-blue-500"
+                        style={{ transform: 'scaleX(0)' }}
+                    />
                 </header>
 
-                <section className="relative overflow-hidden">
+                <section className="hero-section relative overflow-hidden">
                     <div className="stars pointer-events-none absolute inset-0 opacity-50" />
-                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-[radial-gradient(ellipse_80%_100%_at_50%_100%,rgba(37,99,235,0.45),rgba(37,99,235,0.12)_45%,transparent_75%)]" />
+                    <div className="hero-glow pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-[radial-gradient(ellipse_80%_100%_at_50%_100%,rgba(37,99,235,0.45),rgba(37,99,235,0.12)_45%,transparent_75%)]" />
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-400/60 to-transparent" />
 
                     <div className="relative mx-auto flex min-h-[calc(100vh-72px)] max-w-6xl flex-col items-center justify-center px-6 pb-40 pt-36 text-center lg:py-20">
@@ -262,7 +559,7 @@ const TbloNetworks = () => {
                             ))}
                         </div>
 
-                        <div className="relative z-10 flex flex-col items-center">
+                        <div className="hero-content relative z-10 flex flex-col items-center will-change-transform">
                             <h1
                                 className="text-[clamp(2.5rem,7vw,6rem)] font-light leading-[1.05] tracking-[-0.035em]"
                                 style={serif}
@@ -309,47 +606,61 @@ const TbloNetworks = () => {
                     </div>
                 </section>
 
-                <section className="quote-section mx-auto max-w-4xl px-6 py-32 md:py-48">
-                    <p className="text-[clamp(1.75rem,4.2vw,3.25rem)] font-light leading-[1.2] tracking-[-0.025em]" style={serif}>
-                        {quoteText.split(' ').map((w, i) => (
-                            <span key={i} className="q-word inline-block pr-[0.28em]">
-                                {w}
-                            </span>
-                        ))}
-                    </p>
-                    <p className="mt-10 text-2xl font-light text-blue-400" style={serif}>
-                        We’re building the alternative.
-                    </p>
+                <section className="quote-section px-6">
+                    <div className="quote-pin mx-auto flex min-h-screen max-w-4xl flex-col justify-center py-24">
+                        <p className="text-[clamp(1.75rem,4.2vw,3.25rem)] font-light leading-[1.2] tracking-[-0.025em]" style={serif}>
+                            <Words text={quoteText} wordClass="q-word" />
+                        </p>
+                        <p className="q-tag mt-10 text-2xl font-light text-blue-400" style={serif}>
+                            We’re building the alternative.
+                        </p>
+                    </div>
                 </section>
 
                 <section id="how" className="mx-auto max-w-6xl px-6 pb-32">
                     <div className="rule h-px w-full bg-gradient-to-r from-blue-500 via-blue-400/40 to-transparent" />
-                    <h2 className="mx-auto mt-14 max-w-3xl text-center text-4xl font-light leading-tight tracking-[-0.03em] md:text-6xl" style={serif}>
-                        Your wallet is your <em className="font-light not-italic text-blue-400">only</em> identity
-                    </h2>
-                    <ol className="mt-16 grid gap-5 md:grid-cols-3">
-                        {steps.map((s) => (
-                            <li
-                                key={s.n}
-                                className="reveal card-glow rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-colors hover:border-white/25 md:p-10"
-                            >
-                                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-base text-blue-400">
-                                    {s.n}
-                                </span>
-                                <h3 className="mt-16 text-2xl font-normal tracking-[-0.02em] md:text-3xl" style={serif}>
-                                    {s.title}
-                                </h3>
-                                <p className="mt-4 text-base font-light leading-7 text-white/60" style={serif}>
-                                    {s.body}
-                                </p>
-                            </li>
-                        ))}
-                    </ol>
+                    <div className="how-pin">
+                        <h2 className="split-heading mx-auto mt-4 md:mt-10 max-w-3xl text-center text-4xl font-light leading-tight tracking-[-0.03em] md:mt-14 md:text-6xl" style={serif}>
+                            <Words text="Your wallet is your" wordClass="h-word" mask />
+                            <Words text="only" wordClass="h-word" mask color="text-blue-400" />
+                            <Words text="identity" wordClass="h-word" mask />
+                        </h2>
+
+                        <div className="how-track mx-auto mt-8 hidden h-px max-w-xs bg-white/10 md:mt-10 md:block" aria-hidden="true">
+                            <div className="how-progress h-full origin-left bg-blue-400" style={{ transform: 'scaleX(0)' }} />
+                        </div>
+
+                        <ol className="how-stack mt-10 grid gap-5 md:mt-12 md:grid-cols-3">
+                            {steps.map((s) => (
+                                <li
+                                    key={s.n}
+                                    className="how-card card-glow rounded-3xl border border-white/10 bg-[#080808] p-8 transition-colors hover:border-white/25 md:p-10"
+                                >
+                                    <span className="how-badge flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-base text-blue-400">
+                                        {s.n}
+                                    </span>
+                                    <h3 className="mt-12 text-2xl font-normal tracking-[-0.02em] md:text-3xl" style={serif}>
+                                        {s.title}
+                                    </h3>
+                                    <p className="mt-4 text-base font-light leading-7 text-white/60" style={serif}>
+                                        {s.body}
+                                    </p>
+                                </li>
+                            ))}
+                        </ol>
+
+                        {/* Dot indikator langkah (hanya aktif di mobile lewat GSAP) */}
+                        <div className="how-dots mt-8 hidden items-center justify-center gap-2" aria-hidden="true">
+                            {steps.map((s) => (
+                                <span key={s.n} className="how-dot h-2 w-2 rounded-full bg-white/25" />
+                            ))}
+                        </div>
+                    </div>
                 </section>
 
                 <section className="mx-auto max-w-6xl px-6 pb-32">
-                    <h2 className="mb-14 max-w-3xl text-4xl font-light leading-tight tracking-[-0.03em] md:text-6xl" style={serif}>
-                        We store no data. We can’t sell anything. Nothing can leak.
+                    <h2 className="split-heading mb-14 max-w-3xl text-4xl font-light leading-tight tracking-[-0.03em] md:text-6xl" style={serif}>
+                        <Words text="We store no data. We can’t sell anything. Nothing can leak." wordClass="h-word" mask />
                     </h2>
                     <ul className="grid gap-5 md:grid-cols-2">
                         {stored.map(([title, body]) => (
@@ -370,17 +681,19 @@ const TbloNetworks = () => {
 
                 <section id="chat" className="mx-auto max-w-6xl px-6 pb-32">
                     <div className="rule h-px w-full bg-gradient-to-r from-blue-500 via-blue-400/40 to-transparent" />
-                    <h2 className="mt-14 max-w-3xl text-4xl font-light leading-tight tracking-[-0.03em] md:text-6xl" style={serif}>
-                        Chats only <em className="font-light not-italic text-blue-400">you two</em> can read
+                    <h2 className="split-heading mt-14 max-w-3xl text-4xl font-light leading-tight tracking-[-0.03em] md:text-6xl" style={serif}>
+                        <Words text="Chats only" wordClass="h-word" mask />
+                        <Words text="you two" wordClass="h-word" mask color="text-blue-400" />
+                        <Words text="can read" wordClass="h-word" mask />
                     </h2>
-                    <p className="mt-6 max-w-2xl text-lg font-light leading-8 text-white/70 md:text-xl md:leading-9" style={serif}>
+                    <p className="reveal mt-6 max-w-2xl text-lg font-light leading-8 text-white/70 md:text-xl md:leading-9" style={serif}>
                         Every message is end-to-end encrypted (E2EE). It’s locked on your device and only unlocked on your friend’s device. Nobody in the middle can open it, including us.
                     </p>
 
-                    <ol className="mt-14 grid items-stretch gap-5 md:grid-cols-[1fr_auto_1fr_auto_1fr]">
+                    <ol className="e2ee-flow mt-14 grid items-stretch gap-5 md:grid-cols-[1fr_auto_1fr_auto_1fr]">
                         {e2eeFlow.map(([title, body], i) => (
                             <Fragment key={title}>
-                                <li className="reveal card-glow rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-colors hover:border-white/25">
+                                <li className="e2ee-card card-glow rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition-colors hover:border-white/25">
                                     <h3 className="text-2xl font-normal tracking-[-0.02em]" style={serif}>
                                         {title}
                                     </h3>
@@ -389,7 +702,7 @@ const TbloNetworks = () => {
                                     </p>
                                 </li>
                                 {i < e2eeFlow.length - 1 && (
-                                    <li aria-hidden="true" className="hidden items-center justify-center text-blue-400 md:flex">
+                                    <li aria-hidden="true" className="e2ee-arrow hidden items-center justify-center text-blue-400 md:flex">
                                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                             <path d="M5 12h14M13 6l6 6-6 6" />
                                         </svg>
@@ -417,21 +730,22 @@ const TbloNetworks = () => {
                 </section>
 
                 <section id="community" className="mx-auto max-w-4xl px-6 pb-36">
-                    <p className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-light leading-[1.3] tracking-[-0.02em] text-white" style={serif}>
-                        We’re starting with active crypto users in Southeast Asia: people who already know wallets, care about privacy, and are fed up with data-hungry mainstream platforms.
+                    <p className="scrub-text text-[clamp(1.5rem,3.2vw,2.4rem)] font-light leading-[1.3] tracking-[-0.02em] text-white" style={serif}>
+                        <Words text={communityA} wordClass="s-word" />
                     </p>
-                    <p className="mt-12 text-[clamp(1.5rem,3.2vw,2.4rem)] font-light leading-[1.3] tracking-[-0.02em] text-white/50" style={serif}>
-                        This isn’t only about technology. It’s about digital rights: anyone should be able to speak online without sacrificing their real identity.
+                    <p className="scrub-text mt-12 text-[clamp(1.5rem,3.2vw,2.4rem)] font-light leading-[1.3] tracking-[-0.02em] text-white/50" style={serif}>
+                        <Words text={communityB} wordClass="s-word" />
                     </p>
                 </section>
 
                 <section id="join" className="px-6 pb-24">
-                    <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#04060d] px-6 py-20 text-center md:py-28">
+                    <div className="join-card relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#04060d] px-6 py-20 text-center will-change-transform md:py-28">
                         <div className="stars pointer-events-none absolute inset-0 opacity-40" />
-                        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_80%_at_50%_120%,rgba(37,99,235,0.6),transparent_70%)]" />
+                        <div className="join-glow pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_80%_at_50%_120%,rgba(37,99,235,0.6),transparent_70%)]" />
                         <div className="relative">
-                            <h2 className="mx-auto max-w-3xl text-[clamp(2.25rem,5.5vw,4.5rem)] font-light leading-[1.05] tracking-[-0.035em]" style={serif}>
-                                Your identity is your wallet. <em className="font-light not-italic text-blue-400">It’s the only thing the world needs to know.</em>
+                            <h2 className="split-heading mx-auto max-w-3xl text-[clamp(2.25rem,5.5vw,4.5rem)] font-light leading-[1.05] tracking-[-0.035em]" style={serif}>
+                                <Words text="Your identity is your wallet." wordClass="h-word" mask />
+                                <Words text="It’s the only thing the world needs to know." wordClass="h-word" mask color="text-blue-400" />
                             </h2>
                             <Link
                                 href="https://wa.me/6289684053091?text=hey%2C%20bro,%20its%20very%20cool%20cool%20idea"
