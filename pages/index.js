@@ -21,7 +21,7 @@ export default function Home() {
 
           <div className="flex justify-between mt-[-9px] md:-[-12px] leading-3 md:leading-3 2xl:leading-4 w-full text-xs sm:text-sm md:text-base 2xl:text-xl font-bold">
             <p className='text-shadow-custom'>Fullstack Javascript <br /> Developer</p>
-            <p className='text-shadow-custom'>Blockchain <br /> Developer</p>
+            <p className='text-shadow-custom'>Cryptography <br /> Engineer</p>
           </div>
         </div>
       </div>
