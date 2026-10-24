@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Lenis from 'lenis'
 import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -92,7 +93,10 @@ const communityB =
 
 const cssText = `
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
-html{scroll-behavior:smooth;background:#000;}
+html{background:#000;}
+html.lenis, html.lenis body{height:auto;}
+.lenis.lenis-smooth{scroll-behavior:auto !important;}
+.lenis.lenis-stopped{overflow:hidden;}
 .stars{
   background-image:
     radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,.9), transparent),
@@ -149,6 +153,27 @@ const TbloNetworks = () => {
         return () => window.removeEventListener('keydown', onKey)
     }, [])
 
+    // Smooth scroll (Lenis) yang disinkronkan dengan GSAP ScrollTrigger.
+    // Harus dipasang SEBELUM effect GSAP utama.
+    useEffect(() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+        const lenis = new Lenis({
+            duration: 1.1,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            anchors: true, // link #how, #reward, dst tetap berfungsi
+        })
+        lenis.on('scroll', ScrollTrigger.update)
+        const tick = (time) => lenis.raf(time * 1000)
+        gsap.ticker.add(tick)
+        gsap.ticker.lagSmoothing(0)
+
+        return () => {
+            gsap.ticker.remove(tick)
+            lenis.destroy()
+        }
+    }, [])
+
     // Angka creator & fee berhitung ke nilai baru setiap nominal diganti
     useEffect(() => {
         const target = { c: amount * (1 - FEE_RATE), f: amount * FEE_RATE }
@@ -176,6 +201,8 @@ const TbloNetworks = () => {
         const mm = gsap.matchMedia(root.current)
         const refresh = () => ScrollTrigger.refresh()
         window.addEventListener('load', refresh)
+        // Font Inter yang terlambat dimuat bisa menggeser layout, jadi hitung ulang
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh)
 
         /* ------------------------------------------------------------------
          * Semua ukuran layar (selama user tidak memilih reduced motion)
@@ -190,7 +217,8 @@ const TbloNetworks = () => {
                 .from('.hero-cta', { opacity: 0, y: 12, duration: 0.8 }, '-=0.6')
                 .from('.float-card', { opacity: 0, scale: 0.9, duration: 1, stagger: 0.2 }, '-=0.9')
 
-            gsap.utils.toArray('.float-bob').forEach((el, i) => {
+            // Foto melayang: dijeda otomatis saat hero sudah keluar layar
+            const bobs = gsap.utils.toArray('.float-bob').map((el, i) =>
                 gsap.to(el, {
                     y: i % 2 ? 16 : -16,
                     rotation: i % 2 ? -1.5 : 1.5,
@@ -198,7 +226,14 @@ const TbloNetworks = () => {
                     ease: 'sine.inOut',
                     repeat: -1,
                     yoyo: true,
+                    force3D: true,
                 })
+            )
+            ScrollTrigger.create({
+                trigger: '.hero-section',
+                start: 'top top',
+                end: 'bottom top',
+                onToggle: (self) => bobs.forEach((b) => (self.isActive ? b.play() : b.pause())),
             })
 
             /* ---------- Progress bar scroll di header ---------- */
@@ -218,13 +253,14 @@ const TbloNetworks = () => {
                 trigger: '.hero-section',
                 start: 'top top',
                 end: 'bottom top+=80',
-                scrub: true,
+                scrub: 0.5,
             }
             gsap.to('.hero-content', {
                 scale: 0.88,
                 opacity: 0,
                 yPercent: -10,
                 ease: 'none',
+                force3D: true,
                 scrollTrigger: heroScroll,
             })
             // Foto melayang dengan kecepatan berbeda (parallax)
@@ -232,6 +268,7 @@ const TbloNetworks = () => {
                 gsap.to(el, {
                     y: i % 2 ? -220 : -140,
                     ease: 'none',
+                    force3D: true,
                     scrollTrigger: heroScroll,
                 })
             })
@@ -239,22 +276,24 @@ const TbloNetworks = () => {
                 opacity: 0.15,
                 yPercent: 25,
                 ease: 'none',
+                force3D: true,
                 scrollTrigger: heroScroll,
             })
 
-            /* ---------- Bintang: parallax background ---------- */
+            /* ---------- Bintang: parallax pakai transform (GPU), bukan backgroundPosition ---------- */
             gsap.utils.toArray('.stars').forEach((el) => {
                 gsap.fromTo(
                     el,
-                    { backgroundPosition: '0px 0px' },
+                    { y: 0 },
                     {
-                        backgroundPosition: '0px -260px',
+                        y: -260,
                         ease: 'none',
+                        force3D: true,
                         scrollTrigger: {
                             trigger: el.parentElement,
                             start: 'top bottom',
                             end: 'bottom top',
-                            scrub: true,
+                            scrub: 0.5,
                         },
                     }
                 )
@@ -268,7 +307,7 @@ const TbloNetworks = () => {
                     start: 'top top',
                     end: () => '+=' + window.innerHeight * 1.6,
                     pin: true,
-                    scrub: true,
+                    scrub: 0.5,
                     anticipatePin: 1,
                     invalidateOnRefresh: true,
                 },
@@ -290,7 +329,7 @@ const TbloNetworks = () => {
                             trigger: p,
                             start: 'top 80%',
                             end: 'bottom 55%',
-                            scrub: true,
+                            scrub: 0.5,
                         },
                     }
                 )
@@ -377,7 +416,7 @@ const TbloNetworks = () => {
                     trigger: '.reward-card',
                     start: 'center 65%',
                     end: 'center 50%',
-                    scrub: true,
+                    scrub: 0.5,
                 },
             })
 
@@ -389,11 +428,12 @@ const TbloNetworks = () => {
                     scale: 1,
                     y: 0,
                     ease: 'none',
+                    force3D: true,
                     scrollTrigger: {
                         trigger: '.join-card',
                         start: 'top bottom',
                         end: 'top 35%',
-                        scrub: true,
+                        scrub: 0.5,
                     },
                 }
             )
@@ -404,11 +444,12 @@ const TbloNetworks = () => {
                     opacity: 1,
                     yPercent: 0,
                     ease: 'none',
+                    force3D: true,
                     scrollTrigger: {
                         trigger: '.join-card',
                         start: 'top 85%',
                         end: 'bottom 70%',
-                        scrub: true,
+                        scrub: 0.5,
                     },
                 }
             )
@@ -446,14 +487,14 @@ const TbloNetworks = () => {
 
         /* ------------------------------------------------------------------
          * Mobile: "How it works" jadi tumpukan kartu (card stack) yang di-pin.
-         * Tiap scroll, kartu baru terbang masuk dengan efek 3D dari bawah,
-         * kartu sebelumnya menyusut & mengintip di belakang, ada glow biru
-         * di kartu aktif, dot indikator yang memanjang, dan garis progress.
+         * Glow kartu aktif memakai overlay yang hanya di-animate opacity-nya
+         * (bukan boxShadow) supaya tidak memicu repaint berat.
          * ------------------------------------------------------------------ */
         mm.add('(max-width: 767px) and (prefers-reduced-motion: no-preference)', () => {
             const stack = root.current.querySelector('.how-stack')
             const cards = gsap.utils.toArray('.how-card')
             const badges = gsap.utils.toArray('.how-badge')
+            const glows = gsap.utils.toArray('.how-glow')
             const dots = gsap.utils.toArray('.how-dot')
             const n = cards.length
             const STEP = 1.2 // durasi per langkah di timeline
@@ -463,8 +504,8 @@ const TbloNetworks = () => {
             gsap.set('.how-track', { display: 'block' })
             gsap.set('.how-dots', { display: 'flex' })
 
-            const GLOW_ON = { borderColor: 'rgba(59,130,246,0.7)', boxShadow: '0 0 50px -10px rgba(59,130,246,0.55)' }
-            const GLOW_OFF = { borderColor: 'rgba(255,255,255,0.1)', boxShadow: '0 0 0px 0px rgba(59,130,246,0)' }
+            const GLOW_ON = { borderColor: 'rgba(59,130,246,0.7)' }
+            const GLOW_OFF = { borderColor: 'rgba(255,255,255,0.1)' }
             const BADGE_ON = { backgroundColor: '#2563eb', borderColor: '#2563eb', color: '#ffffff' }
             // Level kedalaman di tumpukan: 0 = depan, makin besar makin ke belakang
             const depth = (k) => ({
@@ -473,9 +514,11 @@ const TbloNetworks = () => {
                 opacity: Math.max(0, 1 - k * 0.45),
             })
 
-            gsap.set(cards, { transformPerspective: 900, transformOrigin: '50% 100%', ...GLOW_OFF })
+            gsap.set(cards, { transformPerspective: 900, transformOrigin: '50% 100%', force3D: true, ...GLOW_OFF })
             gsap.set(cards.slice(1), { yPercent: 115, rotationX: -25, opacity: 0 })
             gsap.set(cards[0], GLOW_ON)
+            gsap.set(glows, { opacity: 0 })
+            gsap.set(glows[0], { opacity: 1 })
             gsap.set(badges[0], BADGE_ON)
             gsap.set(dots[0], { width: 28, backgroundColor: '#3b82f6' })
 
@@ -502,6 +545,7 @@ const TbloNetworks = () => {
                 }
                 // Glow kartu sebelumnya padam
                 tl.to(cards[i - 1], { ...GLOW_OFF, duration: 0.5 }, t)
+                tl.to(glows[i - 1], { opacity: 0, duration: 0.5 }, t)
 
                 // Kartu baru terbang masuk dengan rotasi 3D
                 tl.fromTo(
@@ -511,6 +555,7 @@ const TbloNetworks = () => {
                     t
                 )
                 tl.to(cards[i], { ...GLOW_ON, duration: 0.5 }, t + 0.6)
+                tl.to(glows[i], { opacity: 1, duration: 0.5 }, t + 0.6)
                 tl.to(badges[i], { ...BADGE_ON, duration: 0.4 }, t + 0.5)
 
                 // Dot indikator: yang lama menyusut, yang baru memanjang
@@ -535,7 +580,7 @@ const TbloNetworks = () => {
             <style dangerouslySetInnerHTML={{ __html: cssText }} />
 
             <div ref={root} className="min-h-screen bg-black text-white antialiased selection:bg-blue-500 selection:text-white" style={sans}>
-                <header className="sticky top-0 z-20 border-b border-white/10 bg-black/60 backdrop-blur-xl">
+                <header className="sticky top-0 z-20 border-b border-white/10 bg-black/85 backdrop-blur-md">
                     <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
                         <div className="nav-item">
                             <p className="text-lg font-semibold tracking-[0.22em]">TBLONETWORKS</p>
@@ -599,25 +644,27 @@ const TbloNetworks = () => {
                     {/* Progress bar scroll */}
                     <div
                         aria-hidden="true"
-                        className="scroll-progress pointer-events-none absolute -bottom-px left-0 h-[2px] w-full origin-left bg-gradient-to-r from-blue-500 via-sky-300 to-blue-500"
+                        className="scroll-progress pointer-events-none absolute -bottom-px left-0 h-[2px] w-full origin-left bg-gradient-to-r from-blue-500 via-sky-300 to-blue-500 will-change-transform"
                         style={{ transform: 'scaleX(0)' }}
                     />
                 </header>
 
                 <section className="hero-section relative overflow-hidden">
-                    <div className="stars pointer-events-none absolute inset-0 opacity-50" />
-                    <div className="hero-glow pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-[radial-gradient(ellipse_80%_100%_at_50%_100%,rgba(37,99,235,0.45),rgba(37,99,235,0.12)_45%,transparent_75%)]" />
+                    {/* Dibuat 260px lebih tinggi supaya parallax transform tidak menyisakan celah */}
+                    <div className="stars pointer-events-none absolute inset-x-0 top-0 -bottom-[260px] opacity-50 will-change-transform" />
+                    <div className="hero-glow pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-[radial-gradient(ellipse_80%_100%_at_50%_100%,rgba(37,99,235,0.45),rgba(37,99,235,0.12)_45%,transparent_75%)] will-change-transform" />
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-400/60 to-transparent" />
 
                     <div className="relative mx-auto flex min-h-[calc(100vh-72px)] max-w-6xl flex-col items-center justify-center px-6 pb-40 pt-36 text-center lg:py-20">
                         <div className="pointer-events-none absolute inset-0">
                             {floaters.map((f) => (
-                                <div key={f.src} className={`float-card absolute ${f.pos}`}>
-                                    <figure className="float-bob overflow-hidden rounded-2xl border border-white/15 bg-white/5 p-1 shadow-[0_0_60px_-10px_rgba(59,130,246,0.45)] backdrop-blur">
+                                <div key={f.src} className={`float-card absolute will-change-transform ${f.pos}`}>
+                                    <figure className="float-bob overflow-hidden rounded-2xl border border-white/15 bg-white/10 p-1 shadow-[0_0_30px_-10px_rgba(59,130,246,0.4)] will-change-transform">
                                         <img
                                             src={f.src}
                                             alt={f.alt}
                                             loading="eager"
+                                            decoding="async"
                                             className="aspect-[4/5] w-full rounded-xl object-cover"
                                         />
                                         <figcaption className="mt-2 pb-1 text-center text-[11px] md:text-xs text-white/70 md:text-sm">
@@ -705,13 +752,18 @@ const TbloNetworks = () => {
                                     key={s.n}
                                     className="how-card card-glow rounded-3xl border border-white/10 bg-[#080808] p-8 transition-colors hover:border-white/25 md:p-10"
                                 >
-                                    <span className="how-badge flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-base text-blue-400">
+                                    {/* Glow aktif (mobile): hanya opacity yang di-animate, bukan boxShadow */}
+                                    <span
+                                        aria-hidden="true"
+                                        className="how-glow pointer-events-none absolute inset-0 rounded-3xl opacity-0 shadow-[inset_0_0_40px_-10px_rgba(59,130,246,0.55)]"
+                                    />
+                                    <span className="how-badge relative flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-base text-blue-400">
                                         {s.n}
                                     </span>
-                                    <h3 className="mt-12 text-2xl font-normal tracking-[-0.02em] md:text-3xl" style={serif}>
+                                    <h3 className="relative mt-12 text-2xl font-normal tracking-[-0.02em] md:text-3xl" style={serif}>
                                         {s.title}
                                     </h3>
-                                    <p className="mt-4 text-base font-light leading-7 text-white/60" style={serif}>
+                                    <p className="relative mt-4 text-base font-light leading-7 text-white/60" style={serif}>
                                         {s.body}
                                     </p>
                                 </li>
@@ -855,7 +907,7 @@ const TbloNetworks = () => {
 
                         {/* Bar pembagian 95 / 5 */}
                         <div className="mt-10 flex h-3 w-full overflow-hidden rounded-full bg-white/10" aria-hidden="true">
-                            <div className="reward-fill h-full w-[95%] origin-left rounded-full bg-gradient-to-r from-blue-600 via-blue-400 to-sky-300" />
+                            <div className="reward-fill h-full w-[95%] origin-left rounded-full bg-gradient-to-r from-blue-600 via-blue-400 to-sky-300 will-change-transform" />
                             <div className="reward-fee h-full w-[5%] bg-white/70" />
                         </div>
                         <div className="mt-3 flex justify-between text-xs text-white/40">
@@ -895,8 +947,8 @@ const TbloNetworks = () => {
 
                 <section id="join" className="px-6 pb-24">
                     <div className="join-card relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#04060d] px-6 py-20 text-center will-change-transform md:py-28">
-                        <div className="stars pointer-events-none absolute inset-0 opacity-40" />
-                        <div className="join-glow pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_80%_at_50%_120%,rgba(37,99,235,0.6),transparent_70%)]" />
+                        <div className="stars pointer-events-none absolute inset-x-0 top-0 -bottom-[260px] opacity-40 will-change-transform" />
+                        <div className="join-glow pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_80%_at_50%_120%,rgba(37,99,235,0.6),transparent_70%)] will-change-transform" />
                         <div className="relative">
                             <h2 className="split-heading mx-auto max-w-3xl text-[clamp(2.25rem,5.5vw,4.5rem)] font-light leading-[1.05] tracking-[-0.035em]" style={serif}>
                                 <Words text="Your identity is your wallet." wordClass="h-word" mask />
