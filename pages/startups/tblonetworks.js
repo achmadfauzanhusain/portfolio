@@ -5,7 +5,6 @@ import Lenis from 'lenis'
 import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
-// Mencegah pin "loncat" saat address bar browser mobile naik/turun
 ScrollTrigger.config({ ignoreMobileResize: true })
 
 const serif = { fontFamily: "'Inter', system-ui, -apple-system, sans-serif" }
@@ -27,7 +26,7 @@ const floaters = [
         pos: 'left-4 top-6 w-20 -rotate-6 sm:left-[6%] sm:w-24 lg:left-[1%] lg:top-[10%] lg:w-32 xl:left-[3%] xl:w-44 2xl:w-56',
     },
     {
-        src: '/developers/founders2.jpeg',
+        src: '/developers/founders3.jpeg',
         alt: 'Founder Tblo Networks',
         caption: 'Komdigi, Jakarta',
         pos: 'right-4 bottom-6 w-20 rotate-6 sm:right-[6%] sm:w-24 lg:right-[1%] lg:bottom-[10%] lg:w-32 xl:right-[3%] xl:w-40 2xl:w-52',
