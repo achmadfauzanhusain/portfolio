@@ -555,7 +555,7 @@ const DropCaps = () => {
                                 ))}
                             </ul>
                             <a
-                                href="#start"
+                                href="https://wa.me/6289684053091"
                                 className={`mt-8 rounded-full px-5 py-2.5 text-center text-sm font-medium transition md:mt-10 ${
                                     i === 1 ? "bg-white text-[#1A6DE0] hover:bg-sky-100" : "border border-white/40 hover:bg-white/10"
                                 }`}
@@ -599,7 +599,7 @@ const DropCaps = () => {
                     <p className="mx-auto mt-4 max-w-md text-base text-[#D4E4FC] md:mt-5 md:text-lg">
                         Tell us about your next release and we will set it up with you.
                     </p>
-                    <a href="mailto:hello@dropcaps.app" className="mt-8 inline-block rounded-full bg-white px-7 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:mt-10 md:px-8">
+                    <a href="https://wa.me/6289684053091" className="mt-8 inline-block rounded-full bg-white px-7 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:mt-10 md:px-8">
                         Run a drop
                     </a>
                 </div>
