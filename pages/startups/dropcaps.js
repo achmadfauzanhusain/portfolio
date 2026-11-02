@@ -81,22 +81,22 @@ const PLANS = [
     {
         name: "Single drop",
         blurb: "For makers trying fair drops for the first time.",
-        price: "$9",
+        price: "$3",
         unit: "/ drop",
-        items: ["Up to 500 entries", "Locked list with public hash", "Verifiable draw page", "Ranked waitlist"],
+        items: ["Up to 500 entries", "Locked list with public hash", "Duplicate-account checks", "Verifiable draw page", "Ranked waitlist"],
     },
     {
         name: "Studio",
         blurb: "For makers who release on a regular schedule.",
-        price: "$29",
+        price: "$18",
         unit: "/ month",
-        items: ["Unlimited drops", "Up to 5,000 entries per drop", "Duplicate-account checks", "Payment and shipping status tracking"],
+        items: ["Unlimited drops", "Up to 5,000 entries per drop", "Payment and shipping status tracking", "All package features from Single drop"],
     },
     {
         name: "Community",
         blurb: "For shops and groups with custom requirements.",
-        price: "Custom",
-        unit: "",
+        price: "$29",
+        unit: "/ month",
         items: ["Multiple makers on one account", "Custom entry rules", "Priority support", "Branded draw pages"],
     },
 ]
@@ -428,7 +428,7 @@ const DropCaps = () => {
                         Open signup, a locked list, and a draw anyone can verify. Bots lose their speed advantage, and collectors stop refreshing the page.
                     </p>
                     <div data-hero className="mt-8 flex flex-col items-center gap-3 md:mt-10">
-                        <a href="#start" className="rounded-full bg-white px-6 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:px-7">
+                        <a href="#start" className="rounded-full bg-pink-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-sky-100 md:px-7">
                             Run your first drop
                         </a>
                         <span className="text-xs text-[#A9C8F6]">No wallet needed · Works with any storefront</span>
@@ -530,7 +530,7 @@ const DropCaps = () => {
             {/* Pricing */}
             <section id="pricing" className="mx-auto max-w-6xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
                 <h2 data-heading className="text-3xl font-serif-display font-normal sm:text-4xl md:text-5xl">Simple Pricing</h2>
-                <p className="mt-4 max-w-xl text-base text-[#D4E4FC] md:mt-5 md:text-lg">
+                <p className="mt-4 max-w-xl text-sm text-[#D4E4FC] md:mt-5 md:text-lg">
                     Pay per drop, or subscribe if you release often. Prices in USD.
                 </p>
                 <div className="mt-10 grid gap-4 md:mt-14 md:grid-cols-3 md:gap-5">
@@ -560,7 +560,7 @@ const DropCaps = () => {
                                     i === 1 ? "bg-white text-[#1A6DE0] hover:bg-sky-100" : "border border-white/40 hover:bg-white/10"
                                 }`}
                             >
-                                {plan.price === "Custom" ? "Contact us" : "Get started"}
+                                {plan.price === "Custom" ? "Contact us" : "Book A Demo"}
                             </a>
                         </div>
                     ))}
