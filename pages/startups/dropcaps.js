@@ -89,14 +89,14 @@ const PLANS = [
         name: "Studio",
         blurb: "For makers who release on a regular schedule.",
         price: "$18",
-        unit: "/ month",
-        items: ["Unlimited drops", "Up to 5,000 entries per drop", "Payment and shipping status tracking", "All package features from Single drop"],
+        unit: "/ year",
+        items: ["Unlimited drops", "Up to 10,000 entries per year", "Payment and shipping status tracking", "Everything in Single drop"],
     },
     {
         name: "Community",
         blurb: "For shops and groups with custom requirements.",
         price: "$29",
-        unit: "/ month",
+        unit: "/ year",
         items: ["Multiple makers on one account", "Custom entry rules", "Priority support", "Branded draw pages"],
     },
 ]
