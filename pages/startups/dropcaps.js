@@ -74,7 +74,7 @@ const PLANS = [
         blurb: "For makers trying fair drops for the first time.",
         price: "$3",
         unit: "/ drop",
-        items: ["Up to 500 entries", "Locked list with public hash", "Draw from a future blockchain block", "Public verification page", "Duplicate account checks"],
+        items: ["Up to 750 entries", "Locked list with public hash", "Draw from a future blockchain block", "Public verification page", "Duplicate account checks"],
     },
 ]
 
