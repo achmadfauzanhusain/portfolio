@@ -35,6 +35,16 @@ const STARS_BG = [
     "radial-gradient(1.5px 1.5px at 340px 230px, rgba(255,255,255,.6), transparent)",
 ].join(",")
 
+/*
+ * Awan latar belakang
+ * top    posisi vertikal (% tinggi layar)
+ * w      lebar awan (vw)
+ * o      opacity (jaga rendah supaya teks putih tetap terbaca)
+ * dur    detik untuk melintasi layar (makin besar = makin pelan)
+ * blur   px blur; awan "jauh" lebih kabur
+ * depth  kekuatan parallax saat scroll
+ * flip   cerminkan bentuk awan
+ */
 const CLOUDS = [
     { top: 4, w: 38, o: 0.1, dur: 170, blur: 3, depth: 0.1, flip: false },
     { top: 16, w: 26, o: 0.14, dur: 120, blur: 2, depth: 0.2, flip: true },
@@ -71,8 +81,8 @@ const REASONS = [
 const PLANS = [
     {
         name: "Single drop",
-        blurb: "For makers trying fair drops for the first time.",
-        price: "$3",
+        blurb: "For makers running fair drops. Paid in USDT.",
+        price: "3 USDT",
         unit: "/ drop",
         items: ["Up to 750 entries", "Locked list with public hash", "Draw from a future blockchain block", "Public verification page", "Duplicate account checks"],
     },
@@ -83,7 +93,8 @@ const FAQS = [
     ["Why use a blockchain?", "Only for one thing: a random number that nobody can set, not you and not us. The hash of a future block cannot be predicted when the list is locked, and anyone can look it up. That is all the blockchain does here."],
     ["Do my buyers need a crypto wallet?", "No. Buyers sign up and pay with normal methods. The blockchain block is a technical detail they can inspect if they want to."],
     ["Does this stop scalpers completely?", "No, and we do not claim it does. It removes the speed advantage of bots, so being fastest no longer wins. Winners can still resell, so you can set your own resale rules."],
-    ["Do you hold the money?", "No. Payments go straight to you through your own payment provider. Dropcaps only runs the signup and the draw."],
+    ["Do you hold the money?", "No. Your buyers' payments go straight to you through your own payment provider. The only money Dropcaps receives is the drop fee, paid in USDT."],
+    ["How do I pay for a drop?", "Makers pay Dropcaps in USDT, 3 USDT per drop. We send the wallet address and network when you book, so you can pay before your drop opens. Only you, the maker, need USDT. Your buyers still pay the usual way."],
     ["What proves the draw was fair?", "The hash of the locked list is published before the random block exists. After the draw, anyone can recompute the winners from the published list and block hash."],
 ]
 
@@ -509,14 +520,14 @@ const DropCaps = () => {
             <section id="pricing" className="mx-auto max-w-4xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
                 <h2 data-heading className="text-3xl font-serif-display font-normal sm:text-4xl md:text-5xl">Simple Pricing</h2>
                 <p className="mt-4 max-w-xl text-sm text-[#D4E4FC] md:mt-5 md:text-lg">
-                    Pay per drop, or subscribe if you release often. Prices in USD.
+                    Pay per drop, in USDT. No subscription, no hidden fees.
                 </p>
-                <div className="mt-10 grid gap-4 md:mt-14 md:grid-cols-2 md:gap-5">
+                <div className="mt-10 grid max-w-md gap-4 md:mt-14">
                     {PLANS.map((plan, i) => (
                         <div
                             key={plan.name}
                             data-reveal
-                            className={`flex flex-col rounded-2xl border p-6 md:p-8 ${i === 1 ? "border-white/60 bg-white/[0.14]" : "border-white/25"}`}
+                            className={`flex flex-col rounded-2xl border p-6 md:p-8 ${i === 0 ? "border-white/60 bg-white/[0.14]" : "border-white/25"}`}
                         >
                             <h3 className="text-lg font-medium">{plan.name}</h3>
                             <p className="mt-2 text-sm text-[#D4E4FC] md:min-h-[48px]">{plan.blurb}</p>
@@ -535,7 +546,7 @@ const DropCaps = () => {
                             <a
                                 href="https://wa.me/6289684053091"
                                 className={`mt-8 rounded-full px-5 py-2.5 text-center text-sm font-medium transition md:mt-10 ${
-                                    i === 1 ? "bg-white text-[#1A6DE0] hover:bg-sky-100" : "border border-white/40 hover:bg-white/10"
+                                    i === 0 ? "bg-white text-[#1A6DE0] hover:bg-sky-100" : "border border-white/40 hover:bg-white/10"
                                 }`}
                             >
                                 Book A Demo
