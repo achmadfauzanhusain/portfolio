@@ -81,11 +81,25 @@ const REASONS = [
 const PLANS = [
     {
         name: "Single drop",
-        blurb: "For makers running fair drops. Paid in USDT.",
+        blurb: "For makers running fair drops. You pay in USDT (crypto). Your buyers pay the usual way.",
         price: "3 USDT",
         unit: "/ drop",
-        items: ["Up to 750 entries", "Locked list with public hash", "Draw from a future blockchain block", "Public verification page", "Duplicate account checks"],
+        items: [
+            "Pay with USDT, a crypto stablecoin",
+            "Up to 750 entries",
+            "Locked list with public hash",
+            "Draw from a future blockchain block",
+            "Public verification page",
+            "Duplicate account checks",
+        ],
     },
+]
+
+// Langkah pembayaran untuk maker (USDT)
+const PAY_STEPS = [
+    ["Book your drop", "Message us on WhatsApp with your release details."],
+    ["Get the wallet address", "We send the USDT wallet address and the network to use."],
+    ["Pay 3 USDT", "Send the payment from any wallet or exchange. Your drop is confirmed once it arrives."],
 ]
 
 const FAQS = [
@@ -94,7 +108,8 @@ const FAQS = [
     ["Do my buyers need a crypto wallet?", "No. Buyers sign up and pay with normal methods. The blockchain block is a technical detail they can inspect if they want to."],
     ["Does this stop scalpers completely?", "No, and we do not claim it does. It removes the speed advantage of bots, so being fastest no longer wins. Winners can still resell, so you can set your own resale rules."],
     ["Do you hold the money?", "No. Your buyers' payments go straight to you through your own payment provider. The only money Dropcaps receives is the drop fee, paid in USDT."],
-    ["How do I pay for a drop?", "Makers pay Dropcaps in USDT, 3 USDT per drop. We send the wallet address and network when you book, so you can pay before your drop opens. Only you, the maker, need USDT. Your buyers still pay the usual way."],
+    ["How do I pay for a drop?", "Makers pay Dropcaps in USDT (a crypto stablecoin), 3 USDT per drop. When you book, we send the wallet address and the network to use, so you can pay before your drop opens. Only you, the maker, need USDT. Your buyers still pay the usual way."],
+    ["I don't have any crypto. Can I still use Dropcaps?", "Yes. Buy USDT on any major exchange, send it to the address we give you, and you're set. If you get stuck, message us on WhatsApp and we'll walk you through it."],
     ["What proves the draw was fair?", "The hash of the locked list is published before the random block exists. After the draw, anyone can recompute the winners from the published list and block hash."],
 ]
 
@@ -420,7 +435,7 @@ const DropCaps = () => {
                         <a href="#start" className="rounded-full bg-pink-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-sky-100 md:px-7">
                             Run your first drop
                         </a>
-                        <span className="text-xs text-[#A9C8F6]">Buyers need no wallet · Works with any storefront</span>
+                        <span className="text-xs text-[#A9C8F6]">Buyers need no wallet · Makers pay per drop in USDT</span>
                     </div>
                     <div data-hero className="mx-auto mt-6 h-[300px] w-full max-w-xl sm:h-[380px] md:mt-8 md:h-[460px]">
                         <Keycap3D />
@@ -475,6 +490,10 @@ const DropCaps = () => {
                                     <p className="text-[#A9C8F6]">Signup window</p>
                                     <p className="mt-1 text-[#F2F7FF]">Closed Oct 30, 20:00</p>
                                 </div>
+                                <div>
+                                    <p className="text-[#A9C8F6]">Drop fee (paid by maker)</p>
+                                    <p className="mt-1 text-[#F2F7FF]">3 USDT</p>
+                                </div>
                                 <div className="rounded-lg border border-white/20 p-3 text-[#D4E4FC]">
                                     Rerun the formula yourself and get the same four winners.
                                 </div>
@@ -516,13 +535,40 @@ const DropCaps = () => {
                 </div>
             </section>
 
+            {/* Cara maker membayar */}
+            <section id="how-it-works" className="mx-auto max-w-4xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
+                <div data-reveal className="mx-auto mt-8 max-w-2xl rounded-2xl scroll-mt-16 border border-white/25 bg-white/10 p-5 md:mt-10 md:p-7">
+                    <p className="text-sm font-medium md:text-base">How makers pay</p>
+                    <p className="mt-1 text-sm text-[#D4E4FC]">
+                        The drop fee is paid in USDT, a crypto stablecoin pegged to the US dollar. Only you, the maker, need it.
+                    </p>
+                    <ol className="mt-4 space-y-3 text-sm">
+                        {PAY_STEPS.map(([title, body], i) => (
+                            <li key={title} className="flex gap-3">
+                                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white text-xs font-semibold text-[#1A6DE0]">
+                                    {i + 1}
+                                </span>
+                                <span>
+                                    <span className="font-medium">{title}.</span>{" "}
+                                    <span className="text-[#D4E4FC]">{body}</span>
+                                </span>
+                            </li>
+                        ))}
+                    </ol>
+                    <p className="mt-4 border-t border-white/20 pt-4 text-xs text-[#A9C8F6]">
+                        Your buyers never touch crypto. They pay you directly through your own payment provider.
+                    </p>
+                </div>
+            </section>
+            
             {/* Pricing */}
             <section id="pricing" className="mx-auto max-w-4xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
                 <h2 data-heading className="text-3xl font-serif-display font-normal sm:text-4xl md:text-5xl">Simple Pricing</h2>
                 <p className="mt-4 max-w-xl text-sm text-[#D4E4FC] md:mt-5 md:text-lg">
                     Pay per drop, in USDT. No subscription, no hidden fees.
                 </p>
-                <div className="mt-10 grid max-w-md gap-4 md:mt-14">
+
+                <div className="mt-8 grid max-w-md gap-4 md:mt-10">
                     {PLANS.map((plan, i) => (
                         <div
                             key={plan.name}
@@ -586,7 +632,7 @@ const DropCaps = () => {
                 <div data-cta className="mx-auto max-w-3xl rounded-3xl border border-white/25 bg-[radial-gradient(70%_100%_at_50%_0%,rgba(255,255,255,0.18),transparent)] px-5 py-14 md:px-6 md:py-24">
                     <h2 data-heading className="text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">Ready for Your First Fair Drop?</h2>
                     <p className="mx-auto mt-4 max-w-md text-base text-[#D4E4FC] md:mt-5 md:text-lg">
-                        Tell us about your next release and we will set it up with you.
+                        Tell us about your next release and we will set it up with you. The drop fee is 3 USDT.
                     </p>
                     <a href="https://wa.me/6289684053091" className="mt-8 inline-block rounded-full bg-white px-7 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:mt-10 md:px-8">
                         Run a drop
