@@ -290,7 +290,7 @@ const Home = () => {
                             See my projects
                         </a>
                         <a href="/blog" className={`rounded-full border border-white/40 px-6 py-3 text-sm font-medium text-white transition hover:bg-white hover:text-[#1A6DE0] md:px-7 ${focus}`}>
-                            Read my blog
+                            Read my bio
                         </a>
                     </div>
                 </div>
