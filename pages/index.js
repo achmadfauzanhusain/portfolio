@@ -372,7 +372,7 @@ const Home = () => {
             <section id="experience" className="mx-auto max-w-6xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
                 <div className="grid gap-14 md:grid-cols-2 md:gap-16">
                     {[
-                        ["Internship", "My internship in tech company", INTERNSHIPS],
+                        ["Experience", "My expereience in tech company", INTERNSHIPS],
                         ["Organization", "My organization experience in college", ORGS],
                     ].map(([title, sub, list]) => (
                         <div key={title}>
