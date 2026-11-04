@@ -18,7 +18,7 @@ const NAV_LINKS = [
     { label: "Projects", href: "#projects" },
     { label: "Certificates", href: "#certificates" },
     { label: "Experience", href: "#experience" },
-    { label: "Research", href: "#research" },
+    { label: "Research", href: "#research" }
 ]
 
 const STARS_BG = [
@@ -214,7 +214,7 @@ const Home = () => {
             <header className="fixed inset-x-0 top-0 z-50 border-b border-white/20 bg-[#1A6DE0]/85 backdrop-blur-md">
                 <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-6 md:py-4">
                     <div data-nav>
-                        <a href="#top" className="text-base font-semibold tracking-[0.2em] md:text-lg md:tracking-[0.22em]">FAUZAN</a>
+                        <a href="#top" className="text-base font-semibold tracking-[0.2em] md:text-lg md:tracking-[0.22em]">FAUZANHUSAIN</a>
                     </div>
 
                     <ul className="hidden items-center gap-10 text-[14px] text-white/80 md:flex">
@@ -283,9 +283,12 @@ const Home = () => {
                     <p data-hero className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-[#D4E4FC] md:mt-6 md:text-lg">
                         Fullstack Web3 Javascript Developer and Cryptography Engineer.
                     </p>
-                    <div data-hero className="mt-8 flex flex-col items-center gap-3 md:mt-10">
-                        <a href="#projects" className="rounded-full bg-white px-6 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:px-7">
+                    <div data-hero className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row md:mt-10">
+                        <a href="#projects" className={`rounded-full bg-white px-6 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:px-7 ${focus}`}>
                             See my projects
+                        </a>
+                        <a href="/blog" className={`rounded-full border border-white/40 px-6 py-3 text-sm font-medium text-white transition hover:bg-white hover:text-[#1A6DE0] md:px-7 ${focus}`}>
+                            Read my blog
                         </a>
                     </div>
                 </div>
