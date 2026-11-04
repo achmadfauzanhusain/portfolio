@@ -6,16 +6,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 gsap.registerPlugin(ScrollTrigger)
 
-/*
- * Palet (sama dengan Dropcaps)
- * BLUE #1A6DE0 latar | BLUE-DEEP #1559B8 panel | WHITE teks
- * TINT #F2F7FF / #E6EFFD / #D4E4FC (paragraf) / #A9C8F6 (label) / #8FB8F3
- */
-
 const LINKEDIN_URL = "https://linkedin.com/in/achmadfauzanhusain/"
 
 const NAV_LINKS = [
     { label: "Projects", href: "#projects" },
+    { label: "Open Source", href: "#open-source" },
     { label: "Certificates", href: "#certificates" },
     { label: "Experience", href: "#experience" },
     { label: "Research", href: "#research" }
@@ -43,6 +38,22 @@ const PROJECTS = [
   ["NFT Marketplace", "NFT Marketplace is a platform that allows users to buy & mint NFT fauzanchenko.", "https://github.com/achmadfauzanhusain/fauzanchenko-smartcontract"],
   ["Grants DAO", "Grants DAO is a decentralized organization that manages pooled funds to finance community projects or initiatives through a member voting mechanism.", "https://grants-dao-two.vercel.app/"],
   ["Kebunmu", "Kebunmu is an application that allows users to efficiently manage their gardens, fertilize, monitor plant growth, and is integrated with Gemini AI.", "https://kebunmu.vercel.app/"],
+]
+
+const OPEN_SOURCE = [
+    {
+        name: "one-time-pad-encryption",
+        body: "A simple one-time pad cipher written in Node.js.",
+        label: "Fork",
+        href: "https://github.com/achmadfauzanhusain/one-time-pad-encryption",
+        upstream: { name: "joshterrill/one-time-pad", href: "https://github.com/joshterrill/one-time-pad" },
+    },
+    {
+        name: "RSA-encryption-concept",
+        body: "Learning the math & concept behind RSA encryption.",
+        label: "Original",
+        href: "https://github.com/achmadfauzanhusain/RSA-encryption-concept",
+    },
 ]
 
 const CERTS = [
@@ -283,7 +294,7 @@ const Home = () => {
                         Fauzan Husain
                     </h1>
                     <p data-hero className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-[#D4E4FC] md:mt-6 md:text-lg">
-                        Fullstack Web3 Javascript Developer and Smart Contract Development.
+                        Fullstack Web3 Javascript Developer and Interested About Cryptography Mathematics.
                     </p>
                     <div data-hero className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row md:mt-10">
                         <a href="#projects" className={`rounded-full bg-white px-6 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:px-7 ${focus}`}>
@@ -339,6 +350,52 @@ const Home = () => {
                 </ul>
             </section>
 
+            {/* Open Source */}
+            <section id="open-source" className="mx-auto max-w-6xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
+                <h2 data-heading className="max-w-xl text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">Open Source</h2>
+                <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">Open source projects I’ve contributed to and built.</p>
+                <div className="mt-10 grid gap-4 md:mt-16 md:grid-cols-2 md:gap-6">
+                    {OPEN_SOURCE.map(({ name, body, label, href, upstream }) => (
+                        <div
+                            key={name}
+                            data-reveal
+                            className="group relative flex flex-col rounded-2xl border border-white/25 bg-white/10 p-6 transition hover:border-white/60 hover:bg-white/[0.16] md:p-8"
+                        >
+                            <div className="flex items-center justify-between">
+                                <span className="rounded-full border border-white/30 px-3 py-1 text-xs text-[#E6EFFD]">{label}</span>
+                                <span aria-hidden="true" className="text-xl text-[#A9C8F6] transition-transform group-hover:translate-x-1 group-hover:text-white">↗</span>
+                            </div>
+
+                            <h3 className="mt-5 text-lg font-medium md:text-xl">
+                                <a
+                                    href={href}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className={`break-words after:absolute after:inset-0 after:rounded-2xl ${focus}`}
+                                >
+                                    {name}
+                                </a>
+                            </h3>
+                            <p className="mt-2 text-[15px] leading-relaxed text-[#D4E4FC] md:text-base">{body}</p>
+
+                            {upstream && (
+                                <p className="relative z-10 mt-4 text-sm text-[#A9C8F6]">
+                                    Forked from{" "}
+                                    <a
+                                        href={upstream.href}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className={`underline underline-offset-4 transition-colors hover:text-white ${focus}`}
+                                    >
+                                        {upstream.name}
+                                    </a>
+                                </p>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </section>
+
             {/* Certificates */}
             <section id="certificates" className="mx-auto max-w-6xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
                 <h2 data-heading className="max-w-xl text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">E-Certificate</h2>
@@ -372,7 +429,7 @@ const Home = () => {
             <section id="experience" className="mx-auto max-w-6xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
                 <div className="grid gap-14 md:grid-cols-2 md:gap-16">
                     {[
-                        ["Experience", "My expereience in tech company", INTERNSHIPS],
+                        ["Experience", "My experience in tech company", INTERNSHIPS],
                         ["Organization", "My organization experience in college", ORGS],
                     ].map(([title, sub, list]) => (
                         <div key={title}>
