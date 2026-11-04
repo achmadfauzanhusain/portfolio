@@ -54,6 +54,8 @@ const INTERNSHIPS = [
     ["PT Trans Nasional Teknologi", "Front End Developer", "3 months · Makassar"],
     ["Harisenin (Bootcamp)", "Full Stack Developer", "7 months · Jakarta Pusat"],
     ["CMLabs", "Backend Developer", "2 months · Jakarta Selatan"],
+    ["Ministry Digital of Communication and Informatics", "Fullstack Developer", "Oct - Now · Jakarta Pusat"],
+    ["Reksa Karya", "Front End Developer", "Oct - Now · Jakarta Pusat"],
 ]
 
 const ORGS = [
