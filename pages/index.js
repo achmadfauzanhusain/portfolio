@@ -596,7 +596,7 @@ const Home = () => {
                     I manage my own funds and actively trade them in US tech stocks.
                 </p>
                 <div data-reveal className="mt-8 rounded-2xl border border-white/25 bg-white/10 p-6 md:p-10">
-                    <p className="text-xs text-[#A9C8F6] md:text-sm">Capital under management</p>
+                    <p className="text-xs text-[#A9C8F6] md:text-sm">Capital under management - Fauzan Husain</p>
                     <p className="mt-2 text-4xl font-serif-display font-normal sm:text-5xl md:text-6xl">
                         ${fmt(FUND_USD, "USD")}+
                     </p>
