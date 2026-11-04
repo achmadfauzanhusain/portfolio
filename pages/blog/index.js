@@ -27,6 +27,29 @@ const CLOUDS = [
     { top: 76, w: 36, o: 0.11, dur: 160, blur: 3, depth: 0.15, flip: false },
 ]
 
+const IDOLS = [
+    {
+        name: "Peter Thiel",
+        img: "/idols/peter-thiel.webp",
+        desc: "Co-founder of PayPal and Palantir, early investor in Facebook, and author of Zero to One. Known for his libertarian views.",
+    },
+    {
+        name: "Mark Zuckerberg",
+        img: "/idols/mark-zuckerberg.webp",
+        desc: "Co-founder and CEO of Meta. He started coding as a teenager and built Facebook at Harvard in 2004.",
+    },
+    {
+        name: "Jared Kushner",
+        img: "/idols/jared-kushner.webp",
+        desc: "Investor and founder of Affinity Partners. Previously served as a senior adviser to US President Donald Trump.",
+    },
+    {
+        name: "Ted Kaczynski",
+        img: "/idols/ted-kaczynski.webp",
+        desc: "Math prodigy who became a UC Berkeley professor. Later carried out the Unabomber attacks, which killed three people, and wrote an anti-technology manifesto.",
+    },
+]
+
 const CloudShape = () => (
     <svg viewBox="0 0 240 100" className="block h-auto w-full" fill="#ffffff" aria-hidden="true">
         <circle cx="62" cy="64" r="26" />
@@ -216,6 +239,34 @@ const Blog = () => {
 
                 <p className="mt-16">my interesting field :</p>
                 <p className="mt-2">technology, art, finance, libertarian philosophy</p>
+
+                <p className="mt-16">my idol :</p>
+                <div className="mt-6 space-y-6">
+                    {IDOLS.map((idol, i) => (
+                        <div
+                            key={idol.name}
+                            data-reveal
+                            className={`group flex flex-col overflow-hidden rounded-2xl border border-white/25 bg-white/10 transition duration-300 hover:border-white/60 hover:bg-white/[0.16] md:items-stretch ${
+                                i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                            }`}
+                        >
+                            <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-[#1559B8] md:aspect-auto md:min-h-[220px] md:w-2/5 md:shrink-0">
+                                <span aria-hidden="true" className="font-serif-display text-6xl text-white/30">{idol.name[0]}</span>
+                                <img
+                                    src={idol.img}
+                                    alt={idol.name}
+                                    loading="lazy"
+                                    onError={(e) => { e.currentTarget.style.display = "none" }}
+                                    className="absolute inset-0 h-full w-full object-cover grayscale transition duration-500 group-hover:scale-105 group-hover:grayscale-0"
+                                />
+                            </div>
+                            <div className="flex flex-col justify-center p-5 md:p-8">
+                                <h3 className="text-lg font-medium md:text-xl">{idol.name}</h3>
+                                <p className="mt-2 text-sm leading-relaxed text-[#D4E4FC] md:text-base">{idol.desc}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </section>
 
             {/* Footer */}
