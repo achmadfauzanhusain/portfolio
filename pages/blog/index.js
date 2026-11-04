@@ -46,7 +46,7 @@ const IDOLS = [
     {
         name: "Ted Kaczynski",
         img: "/idols/ted-kaczynski.webp",
-        desc: "Math prodigy who became a UC Berkeley professor. Later carried out the Unabomber attacks, which killed three people, and wrote an anti-technology manifesto.",
+        desc: "A math prodigy who entered Harvard at 16 and later became a UC Berkeley professor. He then became a domestic terrorist known as the Unabomber, whose mail bombs killed three people and injured 23, and he wrote an anti-technology manifesto.",
     },
 ]
 
