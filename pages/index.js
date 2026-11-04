@@ -38,11 +38,11 @@ const CLOUDS = [
 ]
 
 const PROJECTS = [
-    ["Grants DAO", "Grants DAO is a decentralized organization that manages pooled funds to finance community projects or initiatives through a member voting mechanism.", "https://grants-dao-two.vercel.app/"],
-    ["Virgo", "Virgo is a social media application that allows users to share moments, photos, and videos with their friends, as well as explore content from other users. However, this is only the backend code.", "https://github.com/achmadfauzanhusain/virgo-app-server"],
-    ["Kebunmu", "Kebunmu is an application that allows users to efficiently manage their gardens, fertilize, monitor plant growth, and is integrated with Gemini AI.", "https://kebunmu.vercel.app/"],
-    ["NFT Marketplace", "NFT Marketplace is a platform that allows users to buy & mint NFT fauzanchenko.", "https://github.com/achmadfauzanhusain/fauzanchenko-smartcontract"],
-    ["TBLO CHAIN", "Decentralized Supply Chain is a blockchain-based system that ensures transparency, data authenticity, and secure supply chain tracking without a central authority.", "https://tblochain.com/"],
+  ["TBLO CHAIN", "Decentralized Supply Chain is a blockchain-based system that ensures transparency, data authenticity, and secure supply chain tracking without a central authority.", "https://tblochain.com/"],
+  ["DropCaps", "Fair drop for artisan keycap maker", "https://fauzanhusain.com/startups/dropcaps"],
+  ["NFT Marketplace", "NFT Marketplace is a platform that allows users to buy & mint NFT fauzanchenko.", "https://github.com/achmadfauzanhusain/fauzanchenko-smartcontract"],
+  ["Grants DAO", "Grants DAO is a decentralized organization that manages pooled funds to finance community projects or initiatives through a member voting mechanism.", "https://grants-dao-two.vercel.app/"],
+  ["Kebunmu", "Kebunmu is an application that allows users to efficiently manage their gardens, fertilize, monitor plant growth, and is integrated with Gemini AI.", "https://kebunmu.vercel.app/"],
 ]
 
 const CERTS = [
@@ -442,7 +442,7 @@ const Home = () => {
             <footer className="border-t border-white/20 px-5 py-10 md:px-6 md:py-12">
                 <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 text-sm text-[#A9C8F6] md:flex-row">
                     <p className="font-semibold text-white">Fauzan Husain</p>
-                    <p>Fullstack Javascript Developer · Cryptography Engineer</p>
+                    <p>Fullstack Web3 Javascript Developer · Cryptography Engineer</p>
                 </div>
                 <p className="mx-auto mt-8 max-w-6xl text-xs text-[#8FB8F3] md:mt-10">© 2026 Fauzan Husain</p>
             </footer>
