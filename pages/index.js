@@ -1,423 +1,453 @@
-import { Baloo_2 } from 'next/font/google'
-import Link from 'next/link'
-import Image from 'next/image'
+"use client"
 
-const baloo = Baloo_2({ 
-  subsets: ['latin'], 
-  weight: ['400', '600', '800']
-})
+import { useEffect, useRef, useState } from "react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-export default function Home() {
-  return (
-    <div className="pb-10 md:pb-14">
-      {/* Board */}
-      <div className="flex justify-center items-center relative h-screen bg-[url('/doodle.webp')] bg-cover bg-left">
-        <div className="absolute inset-0 bg-gradient-to-b z-0" />
+gsap.registerPlugin(ScrollTrigger)
 
-        <div className="relative z-10 text-white w-fit mx-auto">
-          <h1 className={`${baloo.className} text-shadow-custom tracking-[-6px] font-extrabold text-5xl sm:text-7xl md:text-8xl 2xl:text-[160px] text-center`}>
-            Fauzan Husain
-          </h1>
+/*
+ * Palet (sama dengan Dropcaps)
+ * BLUE #1A6DE0 latar | BLUE-DEEP #1559B8 panel | WHITE teks
+ * TINT #F2F7FF / #E6EFFD / #D4E4FC (paragraf) / #A9C8F6 (label) / #8FB8F3
+ */
 
-          <div className="flex justify-between mt-[-9px] md:-[-12px] leading-3 md:leading-3 2xl:leading-4 w-full text-xs sm:text-sm md:text-base 2xl:text-xl font-bold">
-            <p className='text-shadow-custom'>Fullstack Javascript <br /> Developer</p>
-            <p className='text-shadow-custom'>Cryptography <br /> Engineer</p>
-          </div>
+const LINKEDIN_URL = "https://linkedin.com/in/achmadfauzanhusain/"
+
+const NAV_LINKS = [
+    { label: "Projects", href: "#projects" },
+    { label: "Certificates", href: "#certificates" },
+    { label: "Experience", href: "#experience" },
+    { label: "Research", href: "#research" },
+]
+
+const STARS_BG = [
+    "radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,.9), transparent)",
+    "radial-gradient(1px 1px at 90px 140px, rgba(255,255,255,.6), transparent)",
+    "radial-gradient(1.5px 1.5px at 160px 70px, rgba(255,255,255,.8), transparent)",
+    "radial-gradient(1px 1px at 230px 190px, rgba(255,255,255,.5), transparent)",
+    "radial-gradient(1px 1px at 300px 40px, rgba(255,255,255,.7), transparent)",
+].join(",")
+
+const CLOUDS = [
+    { top: 6, w: 38, o: 0.1, dur: 170, blur: 3, depth: 0.1, flip: false },
+    { top: 22, w: 26, o: 0.14, dur: 120, blur: 2, depth: 0.2, flip: true },
+    { top: 40, w: 44, o: 0.09, dur: 190, blur: 4, depth: 0.1, flip: true },
+    { top: 58, w: 22, o: 0.16, dur: 100, blur: 1.5, depth: 0.35, flip: false },
+    { top: 76, w: 36, o: 0.11, dur: 160, blur: 3, depth: 0.15, flip: false },
+]
+
+const PROJECTS = [
+    ["Grants DAO", "Grants DAO is a decentralized organization that manages pooled funds to finance community projects or initiatives through a member voting mechanism.", "https://grants-dao-two.vercel.app/"],
+    ["Virgo", "Virgo is a social media application that allows users to share moments, photos, and videos with their friends, as well as explore content from other users. However, this is only the backend code.", "https://github.com/achmadfauzanhusain/virgo-app-server"],
+    ["Kebunmu", "Kebunmu is an application that allows users to efficiently manage their gardens, fertilize, monitor plant growth, and is integrated with Gemini AI.", "https://kebunmu.vercel.app/"],
+    ["NFT Marketplace", "NFT Marketplace is a platform that allows users to buy & mint NFT fauzanchenko.", "https://github.com/achmadfauzanhusain/fauzanchenko-smartcontract"],
+    ["TBLO CHAIN", "Decentralized Supply Chain is a blockchain-based system that ensures transparency, data authenticity, and secure supply chain tracking without a central authority.", "https://tblochain.com/"],
+]
+
+const CERTS = [
+    ["Fullstack Javascript Developer", "In this bootcamp we learn to create and develop top up game voucher applications using MongoDB, Express.js, React.js, and Node.js.", "/certificate/certificate-1.webp"],
+    ["Backend Javascript Developer", "In this bootcamp I learned by working on several tasks, and the final project was to create an API project that connects to the database.", "/certificate/certificate-3.webp"],
+]
+
+const INTERNSHIPS = [
+    ["PT Trans Nasional Teknologi", "Front End Developer", "3 months · Makassar"],
+    ["Harisenin (Bootcamp)", "Full Stack Developer", "7 months · Jakarta Pusat"],
+    ["CMLabs", "Backend Developer", "2 months · Jakarta Selatan"],
+]
+
+const ORGS = [
+    ["Chevallier Software Laboratory", "Backend Developer", "7 months · Telkom University"],
+    ["Chess Telkom", "Not using tech", "Sep 2024 - Now · Telkom University"],
+    ["Web 3 Dev Bandung", "-", "Oct 2026 - Now · Bandung"],
+]
+
+const MATH = ["Math Basic", "Geometry", "Intermediate Algebra", "Math Logic", "Discrete Math", "Linear Algebra Basic"]
+
+const RESEARCH = [
+    ["Bitcoin", "/investment-research/bitcoin"],
+    ["Tempus AI", "/investment-research/tempus-ai"],
+]
+
+const LinkedInIcon = ({ className = "" }) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+        <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+    </svg>
+)
+
+const CloudShape = () => (
+    <svg viewBox="0 0 240 100" className="block h-auto w-full" fill="#ffffff" aria-hidden="true">
+        <circle cx="62" cy="64" r="26" />
+        <circle cx="108" cy="46" r="38" />
+        <circle cx="158" cy="56" r="32" />
+        <circle cx="198" cy="70" r="20" />
+        <rect x="40" y="64" width="176" height="26" rx="13" />
+    </svg>
+)
+
+const Clouds = () => {
+    const rootRef = useRef(null)
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const mm = gsap.matchMedia()
+            const clouds = gsap.utils.toArray("[data-cloud]")
+
+            mm.add("(prefers-reduced-motion: no-preference)", () => {
+                clouds.forEach((el, i) => {
+                    const c = CLOUDS[i]
+                    gsap.fromTo(
+                        el,
+                        { x: () => -el.offsetWidth },
+                        { x: () => window.innerWidth, duration: c.dur, ease: "none", repeat: -1, invalidateOnRefresh: true }
+                    ).progress((i * 0.37 + 0.1) % 1)
+
+                    gsap.to(el.firstElementChild, {
+                        y: -420 * c.depth,
+                        ease: "none",
+                        scrollTrigger: { trigger: document.documentElement, start: "top top", end: "bottom bottom", scrub: 1 },
+                    })
+                })
+            })
+
+            mm.add("(prefers-reduced-motion: reduce)", () => {
+                clouds.forEach((el, i) => gsap.set(el, { x: () => (i / clouds.length) * window.innerWidth * 0.85 }))
+            })
+        }, rootRef)
+
+        return () => ctx.revert()
+    }, [])
+
+    return (
+        <div ref={rootRef} aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+            {CLOUDS.map((c, i) => (
+                <div key={i} data-cloud className="absolute left-0 will-change-transform" style={{ top: `${c.top}%`, width: `clamp(160px, ${c.w}vw, 620px)` }}>
+                    <div style={{ opacity: c.o, filter: `blur(${c.blur}px)`, transform: c.flip ? "scaleX(-1)" : undefined }}>
+                        <CloudShape />
+                    </div>
+                </div>
+            ))}
         </div>
-      </div>
-
-      {/* social media */}
-      <div>
-        <div className="flex justify-center gap-6 sm:gap-12 mt-12">
-          <Link href="https://www.github.com/achmadfauzanhusain">
-            <Image src="/icon/github.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="GitHub" />
-          </Link>
-          <Link href="https://wa.me/6289684053091">
-            <Image src="/icon/whatsapp.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px]" alt="Portfolio" />
-          </Link>
-        </div>
-      </div>
-
-      {/* projects */}
-      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-16 md:mt-18">
-        {/* Judul */}
-        <h1
-          className={`${baloo.className} text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
-        >
-          {"REAL PROJECTS".split("").map((char, index) => (
-            <span
-              key={index}
-              className="inline-block transition-all hover:bg-[#9694FF] hover:text-white hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer"
-            >
-              {char === " " ? "\u00A0" : char}
-            </span>
-          ))}
-        </h1>
-        <p className="text-xs md:text-sm 2xl:text-lg text-gray-600">
-          Projects that I only want to showcase
-        </p>
-
-        {/* Grid Card */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 md:gap-6 mt-8">
-          <Link
-            href="https://grants-dao-two.vercel.app/"
-            className="bg-[url('/projects/grants.webp')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
-          >
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
-
-            {/* Text */}
-            <div className="relative z-10">
-              <p className={`${baloo.className} mt-2 font-bold text-lg md:text-2xl opacity-0 group-hover:opacity-100 text-white transition-all duration-300`}>
-                Grants Dao
-              </p>
-              <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
-                Grants DAO is a decentralized organization that manages pooled funds to finance community projects or initiatives through a member voting mechanism.
-              </p>
-            </div>
-          </Link>
-          <Link
-            href="https://github.com/achmadfauzanhusain/virgo-app-server"
-            className="bg-[url('/projects/virgo.webp')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
-          >
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
-
-            {/* Text */}
-            <div className="relative z-10">
-              <p className={`${baloo.className} mt-2 font-bold text-lg md:text-2xl opacity-0 group-hover:opacity-100 text-white transition-all duration-300`}>
-                Virgo
-              </p>
-              <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
-                Virgo is a social media application that allows users to share moments, photos, and videos with their friends, as well as explore content from other users. However, this is only the backend code.              </p>
-            </div>
-          </Link>
-          <Link
-            href="https://kebunmu.vercel.app/"
-            className="bg-[url('/projects/kebunmu.webp')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
-          >
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
-
-            {/* Text */}
-            <div className="relative z-10">
-              <p className={`${baloo.className} mt-2 font-bold text-lg md:text-2xl opacity-0 group-hover:opacity-100 text-white transition-all duration-300`}>
-                Kebunmu
-              </p>
-              <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
-                Kebunmu is an application that allows users to efficiently manage their gardens, fertilize, monitor plant growth, and is integrated with Gemini AI.
-              </p>
-            </div>
-          </Link>
-          <Link
-            href="https://github.com/achmadfauzanhusain/fauzanchenko-smartcontract"
-            className="bg-[url('/projects/nft-marketplace.webp')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
-          >
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
-
-            {/* Text */}
-            <div className="relative z-10">
-              <p className={`${baloo.className} mt-2 font-bold text-lg md:text-2xl opacity-0 group-hover:opacity-100 text-white transition-all duration-300`}>
-                NFT Marketplace
-              </p>
-              <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
-                NFT Marketplace is a platform that allows users to buy & mint NFT fauzanchenko
-              </p>
-            </div>
-          </Link>
-          <Link
-            href="https://tblochain.com"
-            className="bg-[url('/projects/tblochain.webp')] relative rounded-xl overflow-hidden shadow-lg group min-h-[300px] md:min-h-[400px] bg-cover bg-top md:bg-center p-2 md:p-3 flex flex-col"
-          >
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300"></div>
-
-            {/* Text */}
-            <div className="relative z-10">
-              <p className={`${baloo.className} mt-2 font-bold text-lg md:text-2xl opacity-0 group-hover:opacity-100 text-white transition-all duration-300`}>
-                TBLO CHAIN
-              </p>
-              <p className="text-xs md:text-sm opacity-0 group-hover:opacity-75 mt- leading-5 text-white transition-all duration-300">
-                Decentralized Supply Chain is a blockchain-based system that ensures transparency, data authenticity, and secure supply chain tracking without a central authority.
-              </p>
-            </div>
-          </Link>
-        </div>
-      </div>
-
-      {/* e-certificate */}
-      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-20 md:mt-28">
-        <h1
-          className={`${baloo.className} text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
-        >
-          {"E-Certificate".split("").map((char, index) => (
-            <span
-              key={index}
-              className="inline-block transition-all hover:bg-[#9694FF] hover:text-white hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer"
-            >
-              {char === " " ? "\u00A0" : char}
-            </span>
-          ))}
-        </h1>
-        <p className="text-xs md:text-sm 2xl:text-lg text-gray-600">
-          Certificate from the training I attended
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
-          {/* Card 1 */}
-          <div className="flex flex-col sm:flex-row md:flex-col gap-2 md:gap-4 bg-[#D9D9D9]/30 p-3 rounded-lg">
-            {/* Gambar */}
-            <div className="basis-1/2 md:basis-auto">
-              <Image
-                src="/certificate/certificate-1.webp"
-                width={200}
-                height={0}
-                className="rounded-lg w-full object-cover"
-              />
-            </div>
-
-            {/* Teks */}
-            <div className="flex flex-col justify-between basis-1/2 md:basis-auto mt-1">
-              <div>
-                <h2 className="text-sm 2xl:text-xl font-semibold">
-                  Bootcamp: Fullstack Javascript Developer
-                </h2>
-                <p className="text-xs 2xl:text-lg mt-1 2xl:mt-3 opacity-60">
-                  In this bootcamp we learn to create and develop
-                  <br className="hidden lg:block" />
-                  top up game voucher applications using mongodb,
-                  <br className="hidden lg:block" />
-                  expressjs, reactjs, and nodejs.
-                </p>
-              </div>
-              <div className="mt-4">
-                <Image
-                  src="/tech/tech1.png"
-                  width={200}
-                  height={0}
-                  className="w-[140px] md:w-[170px] 2xl:w-[200px]"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div className="flex flex-col sm:flex-row md:flex-col gap-2 md:gap-4 bg-[#D9D9D9]/30 p-3 rounded-lg">
-            {/* Gambar */}
-            <div className="basis-1/2 md:basis-auto order-none sm:order-2 md:order-none">
-              <Image
-                src="/certificate/certificate-2.webp"
-                width={200}
-                height={0}
-                className="rounded-lg w-full object-cover"
-              />
-            </div>
-
-            {/* Teks */}
-            <div className="flex flex-col justify-between basis-1/2 md:basis-auto mt-1 order-none sm:order-1 md:order-none">
-              <div>
-                <h2 className="text-sm 2xl:text-xl font-semibold">
-                  Bootcamp: CSS Introduction
-                </h2>
-                <p className="text-xs 2xl:text-lg mt-1 2xl:mt-3 opacity-60">
-                  In this bootcamp, we are only taught HTML and CSS.
-                </p>
-              </div>
-              <div className="mt-4">
-                <Image
-                  src="/tech/tech2.png"
-                  width={200}
-                  height={0}
-                  className="w-[60px] md:w-[70px] 2xl:w-[90px]"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3 */}
-          <div className="flex flex-col sm:flex-row md:flex-col gap-2 md:gap-4 bg-[#D9D9D9]/30 p-3 rounded-lg">
-            {/* Gambar */}
-            <div className="basis-1/2 md:basis-auto">
-              <Image
-                src="/certificate/certificate-3.webp"
-                width={200}
-                height={0}
-                className="rounded-lg w-full object-cover"
-              />
-            </div>
-
-            {/* Teks */}
-            <div className="flex flex-col justify-between basis-1/2 md:basis-auto mt-1">
-              <div>
-                <h2 className="text-sm 2xl:text-xl font-semibold">
-                  Bootcamp: Backend Javascript Developer
-                </h2>
-                <p className="text-xs 2xl:text-lg mt-1 2xl:mt-3 opacity-60">
-                  In this bootcamp I learned by working on several tasks,
-                  <br className="hidden lg:block" />
-                  and the final project was to create an API project
-                  <br className="hidden lg:block" />
-                  that connects to the database.
-                </p>
-              </div>
-              <div className="mt-4">
-                <Image
-                  src="/tech/tech1.png"
-                  width={200}
-                  height={0}
-                  className="w-[140px] md:w-[170px] 2xl:w-[200px]"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* art */}
-      <div className="bg-[url('/fauzanhusain.webp')] bg-cover bg-center w-full h-[100px] sm:h-[150px] md:h-[250px] mt-14 md:mt-20"></div>
-
-      {/* internship */}
-      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-12 md:mt-28">
-        <h1
-          className={`${baloo.className} text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
-        >
-          {"Internship".split("").map((char, index) => (
-            <span
-              key={index}
-              className="inline-block transition-all hover:bg-[#9694FF] hover:text-white hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer"
-            >
-              {char === " " ? "\u00A0" : char}
-            </span>
-          ))}
-        </h1>
-        <p className="text-xs md:text-sm 2xl:text-lg text-gray-600">
-          My internship in tech company
-        </p>
-
-        <div className='grid grid-cols-2 md:grid-cols-3 gap-2 mt-6'>
-          <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
-            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>PT TRANS NASIONAL TEKNOLOGI</h1>
-            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>3 month - Makassar</p>
-            <p className='opacity-60 text-xs 2xl:text-lg font-semibold'>Front End Developer</p>
-            <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
-          </div>
-          <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
-            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>HARISENIN (Bootcamp)</h1>
-            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>7 month - Jakarta Pusat</p>
-            <p className='opacity-60 text-xs 2xl:text-lg font-semibold'>Full Stack Developer</p>
-            <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
-          </div>
-          <div className='hover:bg-[#0A66C2] shadow-xl hover:text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
-            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CMLABS</h1>
-            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>2 month - Jakarta Selatan</p>
-            <p className='opacity-60 text-xs 2xl:text-lg font-semibold'>Backend Developer</p>
-            <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
-          </div>
-        </div>
-      </div>
-
-      {/* organization */}
-      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-12 md:mt-28">
-        <h1
-          className={`${baloo.className} text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
-        >
-          {"Organization".split("").map((char, index) => (
-            <span
-              key={index}
-              className="inline-block transition-all hover:bg-[#9694FF] hover:text-white hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer"
-            >
-              {char === " " ? "\u00A0" : char}
-            </span>
-          ))}
-        </h1>
-        <p className="text-xs md:text-sm 2xl:text-lg text-gray-600">
-          My organization experience in college
-        </p>
-
-        <div className='grid grid-cols-2 md:grid-cols-3 gap-2 mt-6'>
-          <div className='bg-[#FF6B35] hover:bg-[#EA580C] shadow-xl text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
-            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CHEVALLIER SOFTWARE LABORATORY</h1>
-            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>7 month - Telkom University</p>
-            <p className='opacity-60 text-xs 2xl:text-lg font-semibold'>Backend Developer</p>
-            <Image src="/tech/tech1.png" width={200} height={0} className='mt-2' />
-          </div>
-
-          <div className='bg-green-500 hover:bg-green-600 shadow-xl text-white hover:border transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
-            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>CHESS TELKOM</h1>
-            <p className='opacity-60 text-xs 2xl:text-lg mt-1 font-semibold'>2 year - Telkom University</p>
-
-            <p className='text-xs 2xl:text-lg mt-4 font-bold opacity-60'>Not Using Tech</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Math */}
-      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-12 md:mt-28">
-        <h1
-          className={`${baloo.className} text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
-        >
-          {"Math".split("").map((char, index) => (
-            <span
-              key={index}
-              className="inline-block transition-all hover:bg-[#9694FF] hover:text-white hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer"
-            >
-              {char === " " ? "\u00A0" : char}
-            </span>
-          ))}
-        </h1>
-        <p className="text-xs md:text-sm 2xl:text-lg text-gray-600">
-          the math I’ve mastered
-        </p>
-
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-6'>
-          <div className='bg-sky-500 shadow-xl text-white border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
-            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>Math Basic</h1>
-          </div>
-          <div className='bg-sky-500 shadow-xl text-white border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
-            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>Geometry</h1>
-          </div>
-          <div className='bg-sky-500 shadow-xl text-white border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
-            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>Intermediate Algebra</h1>
-          </div>
-          <div className='bg-sky-500 shadow-xl text-white border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
-            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>Math Logic</h1>
-          </div>
-          <div className='bg-sky-500 shadow-xl text-white border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
-            <h1 className='text-xs sm:text-sm 2xl:text-sm font-bold'>Discreate Math</h1>
-          </div>
-        </div>
-      </div>
-
-      {/* Investment Research */}
-      <div className="relative w-[95%] sm:w-[90%] lg:w-[80%] mx-auto mt-12 md:mt-28">
-        <h1
-          className={`${baloo.className} text-2xl sm:text-3xl md:text-4xl 2xl:text-5xl font-extrabold`}
-        >
-          {"Investment Research".split("").map((char, index) => (
-            <span
-              key={index}
-              className="inline-block transition-all hover:bg-[#9694FF] hover:text-white hover:rounded-full duration-200 hover:scale-125 hover:rotate-6 cursor-pointer"
-            >
-              {char === " " ? "\u00A0" : char}
-            </span>
-          ))}
-        </h1>
-        <p className="text-xs md:text-sm 2xl:text-lg text-gray-600">
-          the investment and trading research I’ve done
-        </p>
-
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mt-6'>
-          <Link href="/investment-research/bitcoin" className='shadow-xl hover:bg-black flex items-center text-xs sm:text-sm 2xl:text-sm font-bold hover:text-white font-bold border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
-            <Image src="/icon/bitcoin.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px] mr-2" alt="Bitcoin" />
-            Bitcoin
-          </Link>
-          <Link href="/investment-research/tempus-ai" className='shadow-xl hover:bg-black flex items-center text-xs sm:text-sm 2xl:text-sm font-bold hover:text-white font-bold border-2 border-white transition-all duration-300 cursor-pointer text-black p-3 sm:p-6 rounded-xl'>
-            <Image src="/icon/tempus.png" width={30} height={0} className="w-[20px] sm:w-[25px] 2xl:w-[40px] mr-2" alt="Tempus AI" />
-            Tempus AI
-          </Link>
-        </div>
-      </div>
-    </div>
-  )
+    )
 }
+
+const Home = () => {
+    const root = useRef(null)
+    const [menuOpen, setMenuOpen] = useState(false)
+
+    useEffect(() => {
+        const onKey = (e) => e.key === "Escape" && setMenuOpen(false)
+        window.addEventListener("keydown", onKey)
+        return () => window.removeEventListener("keydown", onKey)
+    }, [])
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const mm = gsap.matchMedia()
+
+            mm.add("(prefers-reduced-motion: no-preference)", () => {
+                gsap.from("[data-nav]", { y: -16, opacity: 0, duration: 0.7, stagger: 0.06, ease: "power3.out" })
+
+                gsap.to("[data-progress]", {
+                    scaleX: 1,
+                    ease: "none",
+                    scrollTrigger: { trigger: document.documentElement, start: "top top", end: "bottom bottom", scrub: 0.3 },
+                })
+
+                const heroScroll = { trigger: "#top", start: "top top", end: "bottom top+=80", scrub: 0.5 }
+                gsap.to("[data-hero-content]", { scale: 0.92, opacity: 0, yPercent: -8, ease: "none", scrollTrigger: heroScroll })
+                gsap.to("[data-hero-glow]", { opacity: 0.2, yPercent: 25, ease: "none", scrollTrigger: heroScroll })
+                gsap.to("[data-stars]", { y: -200, ease: "none", scrollTrigger: heroScroll })
+
+                gsap.utils.toArray("[data-heading]").forEach((h) => {
+                    gsap.from(h, { y: 48, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: h, start: "top 88%", once: true } })
+                })
+
+                const reveals = gsap.utils.toArray("[data-reveal]")
+                gsap.set(reveals, { opacity: 0, y: 50 })
+                ScrollTrigger.batch(reveals, {
+                    start: "top 90%",
+                    once: true,
+                    onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: "power3.out", overwrite: true }),
+                })
+
+                gsap.fromTo(
+                    "[data-cta]",
+                    { scale: 0.88, y: 60 },
+                    { scale: 1, y: 0, ease: "none", scrollTrigger: { trigger: "[data-cta]", start: "top bottom", end: "top 40%", scrub: 0.5 } }
+                )
+
+                gsap.timeline({ defaults: { ease: "power3.out" } })
+                    .from("[data-hero]", { y: 28, opacity: 0, duration: 0.9, stagger: 0.12 })
+                    .from("[data-window-wrap]", { y: 90, opacity: 0, duration: 1.1 }, "-=0.55")
+
+                gsap.fromTo(
+                    "[data-window]",
+                    { rotateX: 9, scale: 0.94 },
+                    { rotateX: 0, scale: 1, ease: "none", scrollTrigger: { trigger: "[data-window-wrap]", start: "top 85%", end: "top 25%", scrub: true } }
+                )
+            })
+
+            mm.add("(prefers-reduced-motion: reduce)", () => {
+                gsap.set("[data-progress]", { scaleX: 0 })
+            })
+        }, root)
+
+        return () => ctx.revert()
+    }, [])
+
+    const focus = "focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+
+    return (
+        <main ref={root} className="isolate min-h-screen overflow-x-hidden bg-[#1A6DE0] text-white antialiased">
+            <Clouds />
+            <style
+                dangerouslySetInnerHTML={{
+                    __html: `
+                        @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+                        .font-serif-display { font-family: "Instrument Serif", Georgia, "Times New Roman", serif; letter-spacing: 0.015em; }
+                    `,
+                }}
+            />
+
+            {/* Nav */}
+            <header className="fixed inset-x-0 top-0 z-50 border-b border-white/20 bg-[#1A6DE0]/85 backdrop-blur-md">
+                <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-6 md:py-4">
+                    <div data-nav>
+                        <a href="#top" className="text-base font-semibold tracking-[0.2em] md:text-lg md:tracking-[0.22em]">FAUZAN</a>
+                    </div>
+
+                    <ul className="hidden items-center gap-10 text-[14px] text-white/80 md:flex">
+                        {NAV_LINKS.map((l) => (
+                            <li key={l.label} data-nav>
+                                <a href={l.href} className={`transition-colors hover:text-white ${focus}`}>{l.label}</a>
+                            </li>
+                        ))}
+                    </ul>
+
+                    <div data-nav className="hidden md:block">
+                        <a href="https://github.com/achmadfauzanhusain" className={`rounded-full border border-white/40 px-5 py-2 text-[14px] transition-colors hover:bg-white hover:text-[#1A6DE0] ${focus}`}>
+                            GitHub
+                        </a>
+                    </div>
+
+                    <button
+                        data-nav
+                        type="button"
+                        className={`-mr-2 p-2 md:hidden ${focus}`}
+                        aria-label={menuOpen ? "Close menu" : "Open menu"}
+                        aria-expanded={menuOpen}
+                        aria-controls="mobile-menu"
+                        onClick={() => setMenuOpen((v) => !v)}
+                    >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+                            {menuOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+                        </svg>
+                    </button>
+                </nav>
+
+                {menuOpen && (
+                    <div id="mobile-menu" className="border-t border-white/20 bg-[#1A6DE0] md:hidden">
+                        <ul className="mx-auto flex max-w-7xl flex-col px-5 py-1">
+                            {NAV_LINKS.map((l) => (
+                                <li key={l.label} className="border-b border-white/20 last:border-b-0">
+                                    <a href={l.href} onClick={() => setMenuOpen(false)} className="block py-3.5 text-base text-white/90 hover:text-white">{l.label}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
+                <div
+                    data-progress
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -bottom-px left-0 h-[2px] w-full origin-left bg-gradient-to-r from-white/50 via-white to-white/50 will-change-transform"
+                    style={{ transform: "scaleX(0)" }}
+                />
+            </header>
+
+            {/* Hero */}
+            <section id="top" className="relative overflow-hidden px-5 pb-6 pt-28 text-center sm:pt-32 md:px-6 md:pb-10 md:pt-36">
+                <div
+                    data-stars
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-x-0 top-0 -bottom-[200px] opacity-50 will-change-transform"
+                    style={{ backgroundImage: STARS_BG, backgroundSize: "360px 260px" }}
+                />
+                <div data-hero-glow className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(60%_60%_at_50%_0%,rgba(255,255,255,0.2),transparent)] md:h-[520px]" />
+                <div data-hero-content className="relative mx-auto max-w-3xl">
+                    <p data-hero className="mb-4 text-xs text-[#D4E4FC] md:mb-6 md:text-sm">Portfolio</p>
+                    <h1 data-hero className="text-[3.2rem] font-serif-display font-normal leading-[1.1] sm:text-7xl md:text-8xl md:leading-[1.02]">
+                        Fauzan Husain
+                    </h1>
+                    <p data-hero className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-[#D4E4FC] md:mt-6 md:text-lg">
+                        Fullstack Web3 Javascript Developer and Cryptography Engineer.
+                    </p>
+                    <div data-hero className="mt-8 flex flex-col items-center gap-3 md:mt-10">
+                        <a href="#projects" className="rounded-full bg-white px-6 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:px-7">
+                            See my projects
+                        </a>
+                    </div>
+                </div>
+
+                {/* Jendela produk: ringkasan skill & peran */}
+                <div data-window-wrap className="mx-auto mt-14 max-w-5xl md:mt-20" style={{ perspective: 1400 }}>
+                    <div data-window className="overflow-hidden rounded-xl border border-white/20 bg-[#1559B8] text-left shadow-2xl shadow-blue-950/40 md:rounded-2xl">
+                        <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2.5 md:gap-2 md:px-4 md:py-3">
+                            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#3B86EA] md:h-3 md:w-3" />
+                            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#3B86EA] md:h-3 md:w-3" />
+                            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#3B86EA] md:h-3 md:w-3" />
+                            <span className="ml-2 truncate text-[11px] text-[#A9C8F6] md:ml-3 md:text-xs">fauzan.dev / about</span>
+                        </div>
+                        <div className="grid gap-px bg-white/10 md:grid-cols-3">
+                            {[
+                                ["Role", "Fullstack Web3 Javascript Developer"],
+                                ["Focus", "NFT & Tokenized Development, Circuit Development"],
+                                ["Stack", "MERN, Solidity, Circom"],
+                            ].map(([label, value]) => (
+                                <div key={label} className="bg-[#1559B8] p-5 md:p-8">
+                                    <p className="text-xs text-[#A9C8F6] md:text-sm">{label}</p>
+                                    <p className="mt-2 text-base text-[#F2F7FF] md:text-lg">{value}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Projects */}
+            <section id="projects" className="mx-auto max-w-6xl scroll-mt-16 px-5 py-20 md:px-6 md:py-32">
+                <div className="max-w-2xl">
+                    <h2 data-heading className="text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">Real Projects</h2>
+                    <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">Projects that I only want to showcase.</p>
+                </div>
+                <ul className="mt-10 divide-y divide-white/20 border-y border-white/20 md:mt-16">
+                    {PROJECTS.map(([title, body, href]) => (
+                        <li key={title} data-reveal>
+                            <a href={href} target="_blank" rel="noreferrer" className={`group grid gap-1.5 py-6 transition-colors hover:bg-white/5 md:grid-cols-[1fr_1.6fr_40px] md:items-baseline md:gap-6 md:py-8 ${focus}`}>
+                                <h3 className="text-lg font-medium md:text-xl">{title}</h3>
+                                <p className="text-[15px] leading-relaxed text-[#D4E4FC] md:text-base">{body}</p>
+                                <span aria-hidden="true" className="hidden text-xl text-[#A9C8F6] transition-transform group-hover:translate-x-1 group-hover:text-white md:block">↗</span>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            {/* Certificates */}
+            <section id="certificates" className="mx-auto max-w-6xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
+                <h2 data-heading className="max-w-xl text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">E-Certificate</h2>
+                <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">Certificate from the training I attended.</p>
+                <div className="mt-10 grid gap-8 md:mt-16 md:grid-cols-3 md:gap-10">
+                    {CERTS.map(([title, body, img]) => (
+                        <div key={title} data-reveal className="border-t border-white/40 pt-5 md:pt-6">
+                            <a
+                                href={img}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label={`View ${title} certificate`}
+                                className={`group block overflow-hidden rounded-xl border border-white/20 bg-[#1559B8] shadow-lg shadow-blue-950/30 ${focus}`}
+                            >
+                                <img
+                                    src={img}
+                                    alt={`${title} certificate`}
+                                    loading="lazy"
+                                    className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
+                                />
+                            </a>
+                            <p className="mt-5 text-xs text-[#A9C8F6] md:text-sm">Bootcamp</p>
+                            <h3 className="mt-1 text-lg font-medium md:text-xl">{title}</h3>
+                            <p className="mt-2 text-[15px] leading-relaxed text-[#D4E4FC] md:mt-3 md:text-base">{body}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Experience */}
+            <section id="experience" className="mx-auto max-w-6xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
+                <div className="grid gap-14 md:grid-cols-2 md:gap-16">
+                    {[
+                        ["Internship", "My internship in tech company", INTERNSHIPS],
+                        ["Organization", "My organization experience in college", ORGS],
+                    ].map(([title, sub, list]) => (
+                        <div key={title}>
+                            <h2 data-heading className="text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">{title}</h2>
+                            <p className="mt-4 text-base text-[#D4E4FC] md:text-lg">{sub}</p>
+                            <ul className="mt-8 divide-y divide-white/20 border-y border-white/20">
+                                {list.map(([name, role, meta]) => (
+                                    <li key={name} data-reveal>
+                                        <a
+                                            href={LINKEDIN_URL}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            aria-label={`${name}, ${role}. Open LinkedIn profile`}
+                                            className={`group flex items-center justify-between gap-4 px-0 py-5 transition-all duration-300 hover:bg-white/10 hover:px-4 md:py-6 ${focus}`}
+                                        >
+                                            <div>
+                                                <h3 className="text-lg font-medium">{name}</h3>
+                                                <p className="mt-1 text-[15px] text-[#E6EFFD]">{role}</p>
+                                                <p className="mt-1 text-sm text-[#A9C8F6]">{meta}</p>
+                                            </div>
+                                            <LinkedInIcon className="h-6 w-6 shrink-0 text-[#A9C8F6] transition-all duration-300 group-hover:scale-110 group-hover:text-white" />
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Math */}
+            <section className="mx-auto max-w-4xl px-5 pb-20 md:px-6 md:pb-32">
+                <h2 data-heading className="text-3xl font-serif-display font-normal sm:text-4xl md:text-5xl">Math</h2>
+                <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">The math I’ve mastered.</p>
+                <ul className="mt-8 flex flex-wrap gap-3">
+                    {MATH.map((m) => (
+                        <li key={m} data-reveal className="rounded-full border border-white/30 bg-white/10 px-5 py-2.5 text-sm text-[#F2F7FF]">{m}</li>
+                    ))}
+                </ul>
+            </section>
+
+            {/* Investment research */}
+            <section id="research" className="mx-auto max-w-4xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
+                <h2 data-heading className="text-3xl font-serif-display font-normal sm:text-4xl md:text-5xl">Investment Research</h2>
+                <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">The investment and trading research I’ve done.</p>
+                <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                    {RESEARCH.map(([name, href]) => (
+                        <a
+                            key={name}
+                            data-reveal
+                            href={href}
+                            className={`flex items-center justify-between rounded-2xl border border-white/25 bg-white/10 p-6 transition hover:border-white/60 hover:bg-white/[0.16] md:p-8 ${focus}`}
+                        >
+                            <span className="text-lg font-medium">{name}</span>
+                            <span aria-hidden="true" className="text-xl text-[#A9C8F6]">↗</span>
+                        </a>
+                    ))}
+                </div>
+            </section>
+
+            {/* CTA */}
+            <section className="px-5 pb-20 text-center md:px-6 md:pb-32">
+                <div data-cta className="mx-auto max-w-3xl rounded-3xl border border-white/25 bg-[radial-gradient(70%_100%_at_50%_0%,rgba(255,255,255,0.18),transparent)] px-5 py-14 md:px-6 md:py-24">
+                    <h2 data-heading className="text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">Let’s Build Something Together</h2>
+                    <a href="https://github.com/achmadfauzanhusain" className="mt-8 inline-block rounded-full bg-white px-7 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:mt-10 md:px-8">
+                        View my GitHub
+                    </a>
+                </div>
+            </section>
+
+            {/* Footer */}
+            <footer className="border-t border-white/20 px-5 py-10 md:px-6 md:py-12">
+                <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 text-sm text-[#A9C8F6] md:flex-row">
+                    <p className="font-semibold text-white">Fauzan Husain</p>
+                    <p>Fullstack Javascript Developer · Cryptography Engineer</p>
+                </div>
+                <p className="mx-auto mt-8 max-w-6xl text-xs text-[#8FB8F3] md:mt-10">© 2026 Fauzan Husain</p>
+            </footer>
+        </main>
+    )
+}
+
+export default Home
