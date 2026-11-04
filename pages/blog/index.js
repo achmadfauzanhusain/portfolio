@@ -215,7 +215,7 @@ const Blog = () => {
                 </p>
 
                 <p className="mt-16">my interesting field :</p>
-                <p className="mt-2">technology, art, finance, philosophy</p>
+                <p className="mt-2">technology, art, finance, libertarian philosophy</p>
             </section>
 
             {/* Footer */}
