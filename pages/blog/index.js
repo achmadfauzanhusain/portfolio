@@ -199,7 +199,7 @@ const Blog = () => {
                 />
             </header>
 
-            <section className="mx-auto min-h-screen max-w-4xl px-5 pb-20 pt-28 sm:pt-32 md:px-6 md:pb-32 md:pt-36 text-sm md:text-base">
+            <section className="mx-auto border-b min-h-screen max-w-4xl px-5 pb-20 pt-28 sm:pt-32 md:px-6 md:pb-32 md:pt-36 text-sm md:text-base">
                 <p>
                     hi, interested in tech industry when i was kid and started write my first code at 14-15 years old like 8th grade junior high school.
                     i started coding bcs mark zuckerberg and interested to build software company too.
@@ -217,6 +217,11 @@ const Blog = () => {
                 <p>
 
                 </p>
+            </section>
+
+            <section className="mx-auto min-h-screen max-w-4xl px-5 pb-20 pt-28 sm:pt-32 md:px-6 md:pb-32 md:pt-36 text-sm md:text-base">
+                <p>my interesting field :</p>
+                <p className="mt-2">technology, art, finance, philosophy</p>
             </section>
 
             {/* Footer */}
