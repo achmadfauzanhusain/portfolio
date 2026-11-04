@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 gsap.registerPlugin(ScrollTrigger)
 
 const LINKEDIN_URL = "https://linkedin.com/in/achmadfauzanhusain/"
+const GITHUB_URL = "https://github.com/achmadfauzanhusain"
 
 const FUND_USD = 10000
 const USD_IDR = 18000
@@ -151,13 +152,37 @@ const Clouds = () => {
 
 const Home = () => {
     const root = useRef(null)
+    const drawerRef = useRef(null)
     const [menuOpen, setMenuOpen] = useState(false)
 
+    // Tutup dengan Escape
     useEffect(() => {
         const onKey = (e) => e.key === "Escape" && setMenuOpen(false)
         window.addEventListener("keydown", onKey)
         return () => window.removeEventListener("keydown", onKey)
     }, [])
+
+    // Kunci scroll saat menu terbuka
+    useEffect(() => {
+        document.body.style.overflow = menuOpen ? "hidden" : ""
+        return () => { document.body.style.overflow = "" }
+    }, [menuOpen])
+
+    // Tutup otomatis saat layar melebar ke desktop
+    useEffect(() => {
+        const mq = window.matchMedia("(min-width: 768px)")
+        const onChange = (e) => e.matches && setMenuOpen(false)
+        mq.addEventListener("change", onChange)
+        return () => mq.removeEventListener("change", onChange)
+    }, [])
+
+    // `inert` lewat ref supaya aman di React 18 maupun 19
+    useEffect(() => {
+        const el = drawerRef.current
+        if (!el) return
+        if (menuOpen) el.removeAttribute("inert")
+        else el.setAttribute("inert", "")
+    }, [menuOpen])
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -224,6 +249,9 @@ const Home = () => {
                     __html: `
                         @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
                         .font-serif-display { font-family: "Instrument Serif", Georgia, "Times New Roman", serif; letter-spacing: 0.015em; }
+                        @media (prefers-reduced-motion: reduce) {
+                            .drawer-motion, .drawer-motion * { transition-duration: 0.01ms !important; transition-delay: 0ms !important; }
+                        }
                     `,
                 }}
             />
@@ -244,37 +272,26 @@ const Home = () => {
                     </ul>
 
                     <div data-nav className="hidden md:block">
-                        <a href="https://github.com/achmadfauzanhusain" className={`rounded-full border border-white/40 px-5 py-2 text-[14px] transition-colors hover:bg-white hover:text-[#1A6DE0] ${focus}`}>
+                        <a href={GITHUB_URL} className={`rounded-full border border-white/40 px-5 py-2 text-[14px] transition-colors hover:bg-white hover:text-[#1A6DE0] ${focus}`}>
                             GitHub
                         </a>
                     </div>
 
+                    {/* Hamburger → X */}
                     <button
                         data-nav
                         type="button"
-                        className={`-mr-2 p-2 md:hidden ${focus}`}
+                        className={`relative -mr-2 h-10 w-10 md:hidden ${focus}`}
                         aria-label={menuOpen ? "Close menu" : "Open menu"}
                         aria-expanded={menuOpen}
                         aria-controls="mobile-menu"
                         onClick={() => setMenuOpen((v) => !v)}
                     >
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
-                            {menuOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-                        </svg>
+                        <span className={`absolute left-1/2 top-1/2 h-[1.5px] w-6 -translate-x-1/2 bg-white transition-all duration-300 ${menuOpen ? "translate-y-0 rotate-45" : "-translate-y-[7px]"}`} />
+                        <span className={`absolute left-1/2 top-1/2 h-[1.5px] w-6 -translate-x-1/2 bg-white transition-all duration-300 ${menuOpen ? "scale-x-0 opacity-0" : ""}`} />
+                        <span className={`absolute left-1/2 top-1/2 h-[1.5px] w-6 -translate-x-1/2 bg-white transition-all duration-300 ${menuOpen ? "translate-y-0 -rotate-45" : "translate-y-[7px]"}`} />
                     </button>
                 </nav>
-
-                {menuOpen && (
-                    <div id="mobile-menu" className="border-t border-white/20 bg-[#1A6DE0] md:hidden">
-                        <ul className="mx-auto flex max-w-7xl flex-col px-5 py-1">
-                            {NAV_LINKS.map((l) => (
-                                <li key={l.label} className="border-b border-white/20 last:border-b-0">
-                                    <a href={l.href} onClick={() => setMenuOpen(false)} className="block py-3.5 text-base text-white/90 hover:text-white">{l.label}</a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
 
                 <div
                     data-progress
@@ -283,6 +300,83 @@ const Home = () => {
                     style={{ transform: "scaleX(0)" }}
                 />
             </header>
+
+            {/* Mobile drawer (di luar header agar tidak terikat backdrop-blur) */}
+            <div
+                className={`drawer-motion fixed inset-0 z-[60] md:hidden ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+                aria-hidden={!menuOpen}
+            >
+                {/* Backdrop */}
+                <div
+                    onClick={() => setMenuOpen(false)}
+                    className={`absolute inset-0 bg-[#06193A]/50 backdrop-blur-sm transition-opacity duration-500 ${menuOpen ? "opacity-100" : "opacity-0"}`}
+                />
+
+                {/* Panel */}
+                <aside
+                    ref={drawerRef}
+                    id="mobile-menu"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Navigation menu"
+                    className={`absolute right-0 top-0 flex h-full w-[84%] max-w-sm flex-col border-l border-white/20 bg-gradient-to-b from-[#1A6DE0] to-[#1559B8] shadow-2xl shadow-blue-950/60 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
+                >
+                    <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-[radial-gradient(70%_70%_at_80%_0%,rgba(255,255,255,0.18),transparent)]" />
+
+                    <div className="relative flex items-center justify-between px-6 py-4">
+                        <span className="text-sm text-[#A9C8F6]">Menu</span>
+                        <button
+                            type="button"
+                            aria-label="Close menu"
+                            onClick={() => setMenuOpen(false)}
+                            className={`-mr-2 rounded-full p-2 text-white/80 transition-colors hover:text-white ${focus}`}
+                        >
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <ul className="relative mt-4 flex flex-1 flex-col overflow-y-auto px-6">
+                        {NAV_LINKS.map((l, i) => (
+                            <li
+                                key={l.label}
+                                className={`border-b border-white/15 transition-all duration-500 ease-out ${menuOpen ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"}`}
+                                style={{ transitionDelay: menuOpen ? `${200 + i * 60}ms` : "0ms" }}
+                            >
+                                <a
+                                    href={l.href}
+                                    onClick={() => setMenuOpen(false)}
+                                    className={`group flex items-baseline justify-between py-4 ${focus}`}
+                                >
+                                    <span className="font-serif-display text-3xl text-white/90 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white">{l.label}</span>
+                                    <span aria-hidden="true" className="text-lg text-[#A9C8F6] opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">↗</span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+
+                    <div
+                        className={`relative space-y-4 border-t border-white/15 px-6 py-6 transition-all duration-500 ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+                        style={{ transitionDelay: menuOpen ? "560ms" : "0ms" }}
+                    >
+                        <a
+                            href={GITHUB_URL}
+                            className={`block rounded-full bg-white px-6 py-3 text-center text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 ${focus}`}
+                        >
+                            GitHub
+                        </a>
+                        <a
+                            href={LINKEDIN_URL}
+                            target="_blank"
+                            rel="noreferrer"
+                            className={`flex items-center justify-center gap-2 text-sm text-[#D4E4FC] transition-colors hover:text-white ${focus}`}
+                        >
+                            <LinkedInIcon className="h-4 w-4" /> LinkedIn
+                        </a>
+                    </div>
+                </aside>
+            </div>
 
             {/* Hero */}
             <section id="top" className="relative overflow-hidden px-5 pb-6 pt-28 text-center sm:pt-32 md:px-6 md:pb-10 md:pt-36">
@@ -520,7 +614,7 @@ const Home = () => {
             <section className="px-5 pb-20 text-center md:px-6 md:pb-32">
                 <div data-cta className="mx-auto max-w-3xl rounded-3xl border border-white/25 bg-[radial-gradient(70%_100%_at_50%_0%,rgba(255,255,255,0.18),transparent)] px-5 py-14 md:px-6 md:py-24">
                     <h2 data-heading className="text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">Let’s Build Something Together</h2>
-                    <a href="https://github.com/achmadfauzanhusain" className="mt-8 inline-block rounded-full bg-white px-7 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:mt-10 md:px-8">
+                    <a href={GITHUB_URL} className="mt-8 inline-block rounded-full bg-white px-7 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:mt-10 md:px-8">
                         View my GitHub
                     </a>
                 </div>
