@@ -283,7 +283,7 @@ const Home = () => {
                         Fauzan Husain
                     </h1>
                     <p data-hero className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-[#D4E4FC] md:mt-6 md:text-lg">
-                        Fullstack Web3 Javascript Developer and Cryptography Engineer.
+                        Fullstack Web3 Javascript Developer and Smart Contract Development.
                     </p>
                     <div data-hero className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row md:mt-10">
                         <a href="#projects" className={`rounded-full bg-white px-6 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:px-7 ${focus}`}>
