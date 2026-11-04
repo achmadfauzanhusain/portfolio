@@ -202,7 +202,15 @@ const Blog = () => {
             <section className="mx-auto min-h-screen max-w-4xl px-5 pb-20 pt-28 sm:pt-32 md:px-6 md:pb-32 md:pt-36">
                 <p>
                     Hi, interested in tech industry when i was kid and started write my first code at 14-15 years old like 8th grade junior high school.
+                </p>
 
+                <p className="mt-16">
+                    when elementary school, i am very math person, i love math, i love solve problem, i take privat lesson abt math and joining competition. but in junior high school - high school, i lost my interest in math.
+                    and i think my interest in math is back when i was college
+                </p>
+
+                <p>
+                    
                 </p>
             </section>
 
