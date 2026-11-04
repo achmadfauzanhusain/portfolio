@@ -8,12 +8,17 @@ gsap.registerPlugin(ScrollTrigger)
 
 const LINKEDIN_URL = "https://linkedin.com/in/achmadfauzanhusain/"
 
+const FUND_USD = 10000
+const USD_IDR = 18000
+const fmt = (n, cur) => new Intl.NumberFormat(cur === "IDR" ? "id-ID" : "en-US").format(n)
+
 const NAV_LINKS = [
     { label: "Projects", href: "#projects" },
     { label: "Open Source", href: "#open-source" },
     { label: "Certificates", href: "#certificates" },
     { label: "Experience", href: "#experience" },
-    { label: "Research", href: "#research" }
+    { label: "Research", href: "#research" },
+    { label: "Trading", href: "#trading" }
 ]
 
 const STARS_BG = [
@@ -230,7 +235,7 @@ const Home = () => {
                         <a href="#top" className="text-base font-semibold tracking-[0.2em] md:text-lg md:tracking-[0.22em]">FAUZANHUSAIN</a>
                     </div>
 
-                    <ul className="hidden items-center gap-10 text-[14px] text-white/80 md:flex">
+                    <ul className="hidden items-center gap-8 text-[14px] text-white/80 md:flex">
                         {NAV_LINKS.map((l) => (
                             <li key={l.label} data-nav>
                                 <a href={l.href} className={`transition-colors hover:text-white ${focus}`}>{l.label}</a>
@@ -487,6 +492,27 @@ const Home = () => {
                             <span aria-hidden="true" className="text-xl text-[#A9C8F6]">↗</span>
                         </a>
                     ))}
+                </div>
+            </section>
+
+            {/* Managed Capital */}
+            <section id="trading" className="mx-auto max-w-4xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
+                <h2 data-heading className="text-3xl font-serif-display font-normal sm:text-4xl md:text-5xl">Managed Capital</h2>
+                <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">
+                    I manage my own funds and actively trade them in US tech stocks.
+                </p>
+                <div data-reveal className="mt-8 rounded-2xl border border-white/25 bg-white/10 p-6 md:p-10">
+                    <p className="text-xs text-[#A9C8F6] md:text-sm">Capital under management</p>
+                    <p className="mt-2 text-4xl font-serif-display font-normal sm:text-5xl md:text-6xl">
+                        ${fmt(FUND_USD, "USD")}+
+                    </p>
+                    <p className="mt-2 text-xs text-[#A9C8F6] md:text-sm">
+                        ≈ Rp{fmt(FUND_USD * USD_IDR, "IDR")} (kurs ± Rp{fmt(USD_IDR, "IDR")}/USD)
+                    </p>
+                    <div className="mt-6 flex flex-wrap gap-3 border-t border-white/20 pt-6">
+                        <span className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm text-[#F2F7FF]">Market: US Tech Stocks</span>
+                        <span className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm text-[#F2F7FF]">Style: Position Trading</span>
+                    </div>
                 </div>
             </section>
 
