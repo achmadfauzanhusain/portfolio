@@ -624,7 +624,7 @@ const Home = () => {
             <footer className="border-t border-white/20 px-5 py-10 md:px-6 md:py-12">
                 <div className="mx-auto flex max-w-6xl flex-col justify-between gap-4 text-sm text-[#A9C8F6] md:flex-row">
                     <p className="font-semibold text-white">Fauzan Husain</p>
-                    <p>Fullstack Web3 Javascript Developer · NFT & Tokenized Development, Circuit Development</p>
+                    <p>Fullstack Web3 Javascript Developer · <br /> NFT & Tokenized Development, < br/>Circuit Development</p>
                 </div>
                 <p className="mx-auto mt-8 max-w-6xl text-xs text-[#8FB8F3] md:mt-10">© 2026 Fauzan Husain</p>
             </footer>
