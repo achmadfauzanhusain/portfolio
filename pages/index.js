@@ -60,6 +60,12 @@ const OPEN_SOURCE = [
         label: "Original",
         href: "https://github.com/achmadfauzanhusain/RSA-encryption-concept",
     },
+    {
+        name: "Merkle Tree Circuit",
+        body: "Learning the math & concept behind Merkle Tree circuits.",
+        label: "Original",
+        href: "https://github.com/achmadfauzanhusain/circuit-zkp-merkletree-poseidon",
+    },
 ]
 
 const CERTS = [
