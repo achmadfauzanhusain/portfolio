@@ -62,7 +62,7 @@ const OPEN_SOURCE = [
     },
     {
         name: "Merkle Tree Circuit",
-        body: "Learning the math & concept behind Merkle Tree circuits.",
+        body: "Learning the math & concept behind Zero KnowLedge Proof Merkle Tree",
         label: "Original",
         href: "https://github.com/achmadfauzanhusain/circuit-zkp-merkletree-poseidon",
     },
