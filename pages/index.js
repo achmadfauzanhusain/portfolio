@@ -568,7 +568,7 @@ const Home = () => {
             {/* Math */}
             <section className="mx-auto max-w-4xl px-5 pb-20 md:px-6 md:pb-32">
                 <h2 data-heading className="text-3xl font-serif-display font-normal sm:text-4xl md:text-5xl">Math</h2>
-                <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">The math I’ve mastered.</p>
+                <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">The math I’ve studied.</p>
                 <ul className="mt-8 flex flex-wrap gap-3">
                     {MATH.map((m) => (
                         <li key={m} data-reveal className="rounded-full border border-white/30 bg-white/10 px-5 py-2.5 text-sm text-[#F2F7FF]">{m}</li>
