@@ -76,7 +76,7 @@ const CERTS = [
 const INTERNSHIPS = [
     ["PT Trans Nasional Teknologi (High School Internship)", "Front End Developer", "Mar 2023 - Jun 2023 · 4 months · Makassar"],
     ["Harisenin (Bootcamp)", "Full Stack Developer", "Dec 2024 - Jun 2025 · 7 months · Jakarta Selatan"],
-    ["CMLABS", "Backend Developer", "Aug 2025 - Sep 2025 · 2 months · DKI Jakarta"],
+    ["CMLABS", "Backend Developer", "Aug 2025 - Sep 2025 · 2 months · Jakarta Pusat"],
     ["Ministry Digital of Communication and Informatics", "Fullstack Developer", "Oct 2026 - Present · Jakarta Pusat"],
     ["Reksa Karya", "Front End Developer", "Oct 2026 - Nov 2026 · Jakarta Pusat"],
 ]
