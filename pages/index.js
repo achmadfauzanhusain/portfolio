@@ -74,15 +74,15 @@ const CERTS = [
 ]
 
 const INTERNSHIPS = [
-    ["PT Trans Nasional Teknologi (High School Internship)", "Front End Developer", "3 months · Makassar"],
-    ["Harisenin (Bootcamp)", "Full Stack Developer", "7 months · Jakarta Pusat"],
-    ["CMLABS", "Backend Developer", "2 months · Jakarta Selatan"],
-    ["Ministry Digital of Communication and Informatics", "Fullstack Developer", "Oct - Now · Jakarta Pusat"],
-    ["Reksa Karya", "Front End Developer", "Oct - Now · Jakarta Pusat"],
+    ["PT Trans Nasional Teknologi (High School Internship)", "Front End Developer", "Mar 2023 - Jun 2023 · 4 months · Makassar"],
+    ["Harisenin (Bootcamp)", "Full Stack Developer", "Dec 2024 - Jun 2025 · 7 months · Jakarta Selatan"],
+    ["CMLABS", "Backend Developer", "Aug 2025 - Sep 2025 · 2 months · DKI Jakarta"],
+    ["Ministry Digital of Communication and Informatics", "Fullstack Developer", "Oct 2026 - Present · Jakarta Pusat"],
+    ["Reksa Karya", "Front End Developer", "Oct 2026 - Present · Jakarta Pusat"],
 ]
 
 const ORGS = [
-    ["Chevallier Software Laboratory", "Backend Developer", "7 months · Telkom University"],
+    ["Chevallier Software Laboratory", "Backend Developer", "Nov 2025 - Sep 2026 · 11 months · Telkom University"],
     ["Chess Telkom", "Not using tech", "Sep 2024 - Now · Telkom University"],
     ["Web 3 Dev Bandung", "-", "Oct 2026 - Now · Bandung"],
 ]
