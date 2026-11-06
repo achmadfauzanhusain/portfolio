@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import Link from "next/link"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -182,9 +183,9 @@ const Blog = () => {
                     </ul>
 
                     <div data-nav className="hidden md:block">
-                        <a href="https://github.com/achmadfauzanhusain" className={`rounded-full border border-white/40 px-5 py-2 text-[14px] transition-colors hover:bg-white hover:text-[#1A6DE0] ${focus}`}>
+                        <Link href="https://github.com/achmadfauzanhusain" className={`rounded-full border border-white/40 px-5 py-2 text-[14px] transition-colors hover:bg-white hover:text-[#1A6DE0] ${focus}`}>
                             GitHub
-                        </a>
+                        </Link>
                     </div>
 
                     <button
@@ -239,6 +240,10 @@ const Blog = () => {
 
                 <p className="mt-16">my interesting field :</p>
                 <p className="mt-2">technology, art, finance, libertarian philosophy</p>
+
+                <Link href="/collections" className={`inline-block mt-14 rounded-full border border-white/40 px-5 py-2 text-[14px] transition-colors hover:bg-white hover:text-[#1A6DE0] ${focus}`}>
+                    See My Art Collections
+                </Link>
 
                 <p className="mt-16">my idol :</p>
                 <div className="mt-6 space-y-6">

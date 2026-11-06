@@ -269,7 +269,7 @@ const Home = () => {
                         <a href="#top" className="text-base font-semibold tracking-[0.2em] md:text-lg md:tracking-[0.22em]">FAUZANHUSAIN</a>
                     </div>
 
-                    <ul className="hidden items-center gap-8 text-[14px] text-white/80 md:flex">
+                    <ul className="hidden items-center gap-8 text-[14px] text-white/80 lg:flex">
                         {NAV_LINKS.map((l) => (
                             <li key={l.label} data-nav>
                                 <a href={l.href} className={`transition-colors hover:text-white ${focus}`}>{l.label}</a>
@@ -277,7 +277,7 @@ const Home = () => {
                         ))}
                     </ul>
 
-                    <div data-nav className="hidden md:block">
+                    <div data-nav className="hidden lg:block">
                         <a href={GITHUB_URL} className={`rounded-full border border-white/40 px-5 py-2 text-[14px] transition-colors hover:bg-white hover:text-[#1A6DE0] ${focus}`}>
                             GitHub
                         </a>
@@ -287,7 +287,7 @@ const Home = () => {
                     <button
                         data-nav
                         type="button"
-                        className={`relative -mr-2 h-10 w-10 md:hidden ${focus}`}
+                        className={`relative -mr-2 h-10 w-10 lg:hidden ${focus}`}
                         aria-label={menuOpen ? "Close menu" : "Open menu"}
                         aria-expanded={menuOpen}
                         aria-controls="mobile-menu"
@@ -309,7 +309,7 @@ const Home = () => {
 
             {/* Mobile drawer (di luar header agar tidak terikat backdrop-blur) */}
             <div
-                className={`drawer-motion fixed inset-0 z-[60] md:hidden ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+                className={`drawer-motion fixed inset-0 z-[60] lg:hidden ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
                 aria-hidden={!menuOpen}
             >
                 {/* Backdrop */}
