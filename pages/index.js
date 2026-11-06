@@ -458,7 +458,7 @@ const Home = () => {
             {/* Open Source */}
             <section id="open-source" className="mx-auto max-w-6xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
                 <h2 data-heading className="max-w-xl text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">Open Source Projects</h2>
-                <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">Open source projects I’ve contributed to and built.</p>
+                <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">Just contribute, make and learn.</p>
                 <div className="mt-10 grid gap-4 md:mt-16 md:grid-cols-2 md:gap-6">
                     {OPEN_SOURCE.map(({ name, body, label, href, upstream }) => (
                         <div
