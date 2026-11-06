@@ -78,7 +78,7 @@ const INTERNSHIPS = [
     ["Harisenin (Bootcamp)", "Full Stack Developer", "Dec 2024 - Jun 2025 · 7 months · Jakarta Selatan"],
     ["CMLABS", "Backend Developer", "Aug 2025 - Sep 2025 · 2 months · DKI Jakarta"],
     ["Ministry Digital of Communication and Informatics", "Fullstack Developer", "Oct 2026 - Present · Jakarta Pusat"],
-    ["Reksa Karya", "Front End Developer", "Oct 2026 - Present · Jakarta Pusat"],
+    ["Reksa Karya", "Front End Developer", "Oct 2026 - Nov 2026 · Jakarta Pusat"],
 ]
 
 const ORGS = [
