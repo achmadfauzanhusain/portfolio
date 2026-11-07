@@ -344,6 +344,21 @@ const Collections = () => {
                                 </Link>
                             </h3>
                         </div>
+
+                        <div
+                            data-reveal
+                            className="group relative flex flex-col rounded-2xl border border-white/25 bg-white/10 p-6 transition hover:border-white/60 hover:bg-white/[0.16] md:p-8"
+                        >
+                            <h3 className="text-lg font-medium md:text-xl">
+                                <Link
+                                    href="/collections/mechkeyboard"
+                                    rel="noreferrer"
+                                    className={`break-words after:absolute after:inset-0 after:rounded-2xl ${focus}`}
+                                >
+                                    Mechanical Keyboard
+                                </Link>
+                            </h3>
+                        </div>
                     </div>
                 </section>
             </div>
