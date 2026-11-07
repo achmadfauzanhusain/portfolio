@@ -25,6 +25,19 @@ const CLOUDS = [
     { top: 76, w: 36, o: 0.11, dur: 160, blur: 3, depth: 0.15, flip: false },
 ]
 
+const keyboards = [
+    {
+        slug: "essential-75",
+        name: "Essential 75",
+        creator: "PRESSPLAY",
+        store: "Online",
+        buyDate: "8 Februari 2026",
+        priceIdr: "Rp 699.000",
+        priceUsd: "$ 39.05",
+    },
+    // tambah keyboard lain di sini
+]
+
 const LinkedInIcon = ({ className = "" }) => (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
         <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
@@ -330,49 +343,46 @@ const Keyboard = () => {
                     <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">My mechanical keyboard collections.</p>
 
                     <div className="mt-10 grid gap-4 md:mt-16 md:grid-cols-2 md:gap-6">
-                        <div
-                            data-reveal
-                            className="group relative flex flex-col rounded-2xl border border-white/25 bg-white/10 p-6 transition hover:border-white/60 hover:bg-white/[0.16] md:p-8"
-                        >
-                            {/* price */}
-                            <div className="flex items-center justify-between">
-                                <div className="flex gap-1 md:gap-2">
-                                    <span className="rounded-full border border-white/30 px-3 py-1 text-xs text-[#E6EFFD]">
-                                        Rp 699.000
-                                    </span>
-
-                                    <span className="rounded-full border border-white/30 px-3 py-1 text-xs text-[#E6EFFD]">
-                                        $ 39.05
-                                    </span>
+                        {keyboards.map((k) => (
+                            <div
+                                key={k.slug}
+                                data-reveal
+                                className="group relative flex flex-col rounded-2xl border border-white/25 bg-white/10 p-6 transition hover:border-white/60 hover:bg-white/[0.16] md:p-8"
+                            >
+                                {/* price */}
+                                <div className="flex items-center justify-between">
+                                    <div className="flex gap-1 md:gap-2">
+                                        <span className="rounded-full border border-white/30 px-3 py-1 text-xs text-[#E6EFFD]">{k.priceIdr}</span>
+                                        <span className="rounded-full border border-white/30 px-3 py-1 text-xs text-[#E6EFFD]">{k.priceUsd}</span>
+                                    </div>
+                                    <span aria-hidden="true" className="text-xl text-[#A9C8F6] transition-transform group-hover:translate-x-1 group-hover:text-white">↗</span>
                                 </div>
-                                <span aria-hidden="true" className="text-xl text-[#A9C8F6] transition-transform group-hover:translate-x-1 group-hover:text-white">↗</span>
+
+                                <h3 className="mt-5 text-lg font-medium md:text-xl">
+                                    <Link
+                                        href={`/collections/mechkeyboard/detail/${k.slug}`}
+                                        className={`break-words after:absolute after:inset-0 after:rounded-2xl ${focus}`}
+                                    >
+                                        {k.name}
+                                    </Link>
+                                </h3>
+
+                                <dl className="mt-4 space-y-2 text-[15px] md:text-base">
+                                    <div className="flex gap-2">
+                                        <dt className="text-[#A9C8F6]">Creator:</dt>
+                                        <dd className="text-[#D4E4FC]">{k.creator}</dd>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <dt className="text-[#A9C8F6]">Store:</dt>
+                                        <dd className="text-[#D4E4FC]">{k.store}</dd>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <dt className="text-[#A9C8F6]">Buy Date:</dt>
+                                        <dd className="text-[#D4E4FC]">{k.buyDate}</dd>
+                                    </div>
+                                </dl>
                             </div>
-
-                            <h3 className="mt-5 text-lg font-medium md:text-xl">
-                                <Link
-                                    href="/collections/keycaps/detail/mitsuro-kanroji"
-                                    rel="noreferrer"
-                                    className={`break-words after:absolute after:inset-0 after:rounded-2xl ${focus}`}
-                                >
-                                    Essential 75
-                                </Link>
-                            </h3>
-
-                            <dl className="mt-4 space-y-2 text-[15px] md:text-base">
-                                <div className="flex gap-2">
-                                    <dt className="text-[#A9C8F6]">Creator:</dt>
-                                    <dd className="text-[#D4E4FC]">PRESSPLAY</dd>
-                                </div>
-                                <div className="flex gap-2">
-                                    <dt className="text-[#A9C8F6]">Store:</dt>
-                                    <dd className="text-[#D4E4FC]">Online</dd>
-                                </div>
-                                <div className="flex gap-2">
-                                    <dt className="text-[#A9C8F6]">Buy Date:</dt>
-                                    <dd className="text-[#D4E4FC]">6 Februari 2026</dd>
-                                </div>
-                            </dl>
-                        </div>
+                        ))}
                     </div>
                 </section>
             </div>
