@@ -48,6 +48,12 @@ const PROJECTS = [
 
 const OPEN_SOURCE = [
     {
+        name: "bot crypto trading in binance",
+        body: "Trading with technical indicator & off-chain analysis from binance API. just for learn",
+        label: "Original",
+        href: "https://github.com/chang-capital",
+    },
+    {
         name: "one-time-pad-encryption",
         body: "A simple one-time pad cipher written in Node.js.",
         label: "Fork",
