@@ -39,11 +39,11 @@ const CLOUDS = [
 ]
 
 const PROJECTS = [
-  ["TBLO CHAIN", "Decentralized Supply Chain is a blockchain-based system that ensures transparency, data authenticity, and secure supply chain tracking without a central authority.", "https://tblochain.com/"],
-  ["DropCaps", "Fair drop for artisan keycap maker", "https://fauzanhusain.com/startups/dropcaps"],
-  ["NFT Marketplace", "NFT Marketplace is a platform that allows users to buy & mint NFT fauzanchenko.", "https://github.com/achmadfauzanhusain/fauzanchenko-smartcontract"],
-  ["TBLO Networks", "Social media without handing over your identity", "https://fauzanhusain.com/startups/tblonetworks"],
-  ["Grants DAO", "Grants DAO is a decentralized organization that manages pooled funds to finance community projects or initiatives through a member voting mechanism.", "https://grants-dao-two.vercel.app/"],
+    ["TBLO Networks", "Social media without handing over your identity", "https://fauzanhusain.com/startups/tblonetworks"],
+    ["NFT Marketplace", "NFT Marketplace is a platform that allows users to buy & mint NFT fauzanchenko.", "https://github.com/achmadfauzanhusain/fauzanchenko-smartcontract"],
+    ["TBLO CHAIN", "Decentralized Supply Chain is a blockchain-based system that ensures transparency, data authenticity, and secure supply chain tracking without a central authority.", "https://tblochain.com/"],
+    ["DropCaps", "Fair drop for artisan keycap maker", "https://fauzanhusain.com/startups/dropcaps"],
+    ["Grants DAO", "Grants DAO is a decentralized organization that manages pooled funds to finance community projects or initiatives through a member voting mechanism.", "https://grants-dao-two.vercel.app/"],
 ]
 
 const OPEN_SOURCE = [

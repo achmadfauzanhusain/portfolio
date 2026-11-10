@@ -73,12 +73,12 @@ const Clouds = () => {
 // ---------- DATA ----------
 const keyboard = {
     name: "Essential 75",
-    theme: "Demon Slayer",
+    theme: "Orange - Black",
     creator: "PRESSPLAY",
     store: "Online",
     buyDate: "2026-02-08",
     price: { idr: 699000, usd: 39.05 },
-    image: "/collections/keycaps/keycap1.jpeg",
+    image: "/collections/keyboard/keyboard1.jpeg",
     description: "my first join artisan keycap community in real life by buying ths keycaps",
 }
 
