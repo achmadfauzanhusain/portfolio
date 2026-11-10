@@ -14,12 +14,7 @@ gsap.registerPlugin(ScrollTrigger)
  */
 
 const NAV_LINKS = [
-    { label: "Projects", href: "#projects" },
-    { label: "Open Source", href: "#open-source" },
-    { label: "Certificates", href: "#certificates" },
-    { label: "Experience", href: "#experience" },
-    { label: "Research", href: "#research" },
-    { label: "Trading", href: "#trading" }
+
 ]
 
 const CLOUDS = [
