@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import Keycap3D from "./keycap3d"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -438,7 +437,7 @@ const DropCaps = () => {
                         <span className="text-xs text-[#A9C8F6]">Buyers need no wallet · Makers pay per drop in USDT</span>
                     </div>
                     <div data-hero className="mx-auto mt-6 h-[300px] w-full max-w-xl sm:h-[380px] md:mt-8 md:h-[460px]">
-                        <Keycap3D />
+                        
                     </div>
                 </div>
 
