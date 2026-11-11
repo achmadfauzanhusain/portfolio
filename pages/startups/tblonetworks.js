@@ -28,7 +28,7 @@ const floaters = [
     {
         src: '/developers/founders3.jpeg',
         alt: 'Founder Tblo Networks',
-        caption: 'Komdigi, Jakarta',
+        caption: '',
         pos: 'right-4 bottom-6 w-20 rotate-6 sm:right-[6%] sm:w-24 lg:right-[1%] lg:bottom-[10%] lg:w-32 xl:right-[3%] xl:w-40 2xl:w-52',
     },
 ]
