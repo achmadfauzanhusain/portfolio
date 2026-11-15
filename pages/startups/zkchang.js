@@ -131,7 +131,7 @@ const ZKChang = () => {
                             <div className="mt-10 sm:mt-14 lg:ml-[20%] border-l-2 border-[#00ff9c] bg-[#05080f]/80 p-6 sm:p-10 flex gap-6">
                                 <span className="hidden sm:block text-7xl font-light leading-none text-[#22d3ee] font-['Chakra_Petch',sans-serif]">↘</span>
                                 <div>
-                                    <p className="text-base sm:text-lg text-[#22d3ee]">Pitch deck · ZK audit marketplace</p>
+                                    <p className="text-base sm:text-lg text-[#22d3ee]">Competitive Audit</p>
                                     <h2 className="font-['Chakra_Petch',sans-serif] font-light text-3xl sm:text-5xl leading-[1.15] mt-3 text-white">
                                         Code4rena for Zero-Knowledge
                                     </h2>
