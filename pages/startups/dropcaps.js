@@ -19,6 +19,7 @@ gsap.registerPlugin(ScrollTrigger)
  */
 
 const NAV_LINKS = [
+    { label: "Use cases", href: "#use-cases" },
     { label: "How it works", href: "#how" },
     { label: "Why Dropcaps", href: "#why" },
     { label: "Pricing", href: "#pricing" },
@@ -62,30 +63,40 @@ const TICKETS = [
 ]
 const WINNERS = [3, 7, 13, 18]
 
+// Daftar use case: apa saja yang jumlahnya terbatas dan banyak peminat
+const USE_CASES = [
+    ["Sneaker drops", "Limited pairs, thousands of hopefuls. Replace the checkout race with a draw that every entrant can verify."],
+    ["Merchandise", "Tour merch, collabs, and capsule collections. Fans sign up once and the odds stay equal for everyone."],
+    ["Event tickets", "Fair access to high-demand shows and conferences, without the page crashing the second sales open."],
+    ["Giveaways & raffles", "Publish the entry list and the method up front, so nobody has to wonder if the winner was picked fairly."],
+    ["Limited slots", "Workshops, beta access, waitlists, early-bird spots, and cohort seats. Any scarce slot can be allocated fairly."],
+]
+
 const STEPS = [
-    ["Open signup", "Buyers sign up over several days. Minute one and minute last carry the same odds, so speed stops mattering."],
-    ["Lock the list", "When signup closes, we publish every ticket code and a hash of the full list. Nobody can add or swap entries afterwards."],
-    ["Pull a future blockchain block", "The random number is the hash of a blockchain block that did not exist when the list was locked. Nobody can predict or influence it: not the maker, not bots, and not us."],
+    ["Open signup", "Entrants sign up over a set window. Minute one and minute last carry the same odds, so speed stops mattering."],
+    ["Lock the list", "When signup closes, we publish every entry code and a hash of the full list. Nobody can add or swap entries afterwards."],
+    ["Pull a future blockchain block", "The random number is the hash of a blockchain block that did not exist when the list was locked. Nobody can predict or influence it: not the organizer, not bots, and not us."],
     ["Draw", "A published formula turns the locked list and the random number into the winners."],
     ["Verify", "Anyone can rerun the formula and get the same result. No trust required."],
 ]
 
-// Fokus ke pembuat keycap (yang membayar), bukan kolektor atau komunitas
+// Fokus ke penyelenggara drop (yang membayar), bukan peserta
 const REASONS = [
-    ["Nobody can accuse you", "Run drops free of favoritism claims. Share one link, publish the proof, and keep your community on your side."],
+    ["Nobody can accuse you", "Run any limited release free of favoritism claims. Share one link, publish the proof, and keep your community on your side."],
     ["Not even we can cheat", "The draw uses a blockchain block from the future as its random number. No one controls it, including you and including us, and anyone can check it."],
-    ["Your buyers keep it simple", "Buyers sign up and pay the way they always do. No wallet, no crypto knowledge. Payments go straight to you."],
+    ["Your entrants keep it simple", "Entrants sign up and pay the way they always do. No wallet, no crypto knowledge. Payments go straight to you."],
 ]
 
 const PLANS = [
     {
         name: "Single drop",
-        blurb: "For makers running fair drops. You pay in USDT (crypto). Your buyers pay the usual way.",
+        blurb: "For organizers running fair allocations. You pay in USDT (crypto). Your entrants pay the usual way.",
         price: "3 USDT",
         unit: "/ drop",
         items: [
             "Pay with USDT, a crypto stablecoin",
             "Up to 750 entries",
+            "Works for any limited release or giveaway",
             "Locked list with public hash",
             "Draw from a future blockchain block",
             "Public verification page",
@@ -94,20 +105,21 @@ const PLANS = [
     },
 ]
 
-// Langkah pembayaran untuk maker (USDT)
+// Langkah pembayaran untuk penyelenggara (USDT)
 const PAY_STEPS = [
-    ["Book your drop", "Message us on WhatsApp with your release details."],
+    ["Book your drop", "Message us on WhatsApp with your release or giveaway details."],
     ["Get the wallet address", "We send the USDT wallet address and the network to use."],
     ["Pay 3 USDT", "Send the payment from any wallet or exchange. Your drop is confirmed once it arrives."],
 ]
 
 const FAQS = [
-    ["What is Dropcaps?", "Dropcaps runs your limited releases as a verifiable lottery instead of a race. Buyers sign up during an open window, the entry list is locked and published, and winners are drawn with a number nobody can control."],
+    ["What is Dropcaps?", "Dropcaps is provably fair allocation for anything limited: sneaker drops, merchandise, event tickets, giveaways, and scarce slots. Entrants sign up during an open window, the entry list is locked and published, and winners are drawn with a number nobody can control."],
+    ["What can I run on Dropcaps?", "Any release where demand is bigger than supply: sneakers, merch, tickets, raffles and giveaways, waitlist spots, workshop seats, beta access. If you have a fixed number of winners and a list of entrants, it works."],
     ["Why use a blockchain?", "Only for one thing: a random number that nobody can set, not you and not us. The hash of a future block cannot be predicted when the list is locked, and anyone can look it up. That is all the blockchain does here."],
-    ["Do my buyers need a crypto wallet?", "No. Buyers sign up and pay with normal methods. The blockchain block is a technical detail they can inspect if they want to."],
-    ["Does this stop scalpers completely?", "No, and we do not claim it does. It removes the speed advantage of bots, so being fastest no longer wins. Winners can still resell, so you can set your own resale rules."],
-    ["Do you hold the money?", "No. Your buyers' payments go straight to you through your own payment provider. The only money Dropcaps receives is the drop fee, paid in USDT."],
-    ["How do I pay for a drop?", "Makers pay Dropcaps in USDT (a crypto stablecoin), 3 USDT per drop. When you book, we send the wallet address and the network to use, so you can pay before your drop opens. Only you, the maker, need USDT. Your buyers still pay the usual way."],
+    ["Do my entrants need a crypto wallet?", "No. Entrants sign up and pay with normal methods. The blockchain block is a technical detail they can inspect if they want to."],
+    ["Does this stop scalpers completely?", "No, and we do not claim it does. It removes the speed advantage of bots, so being fastest no longer wins. Winners can still resell, so you can set your own resale or transfer rules."],
+    ["Do you hold the money?", "No. Your entrants' payments go straight to you through your own payment provider. The only money Dropcaps receives is the drop fee, paid in USDT."],
+    ["How do I pay for a drop?", "Organizers pay Dropcaps in USDT (a crypto stablecoin), 3 USDT per drop. When you book, we send the wallet address and the network to use, so you can pay before your drop opens. Only you, the organizer, need USDT. Your entrants still pay the usual way."],
     ["I don't have any crypto. Can I still use Dropcaps?", "Yes. Buy USDT on any major exchange, send it to the address we give you, and you're set. If you get stuck, message us on WhatsApp and we'll walk you through it."],
     ["What proves the draw was fair?", "The hash of the locked list is published before the random block exists. After the draw, anyone can recompute the winners from the published list and block hash."],
 ]
@@ -244,7 +256,7 @@ const DropCaps = () => {
                     )
                 })
 
-                // Kartu alasan, pricing, dan FAQ: muncul bergelombang
+                // Kartu use case, alasan, pricing, dan FAQ: muncul bergelombang
                 const reveals = gsap.utils.toArray("[data-reveal]")
                 gsap.set(reveals, { opacity: 0, y: 50 })
                 ScrollTrigger.batch(reveals, {
@@ -349,7 +361,7 @@ const DropCaps = () => {
                         <a href="#top" className="text-base font-semibold tracking-[0.2em] md:text-lg md:tracking-[0.22em]">DROPCAPS</a>
                     </div>
 
-                    <ul className="hidden items-center gap-10 text-[14px] text-white/80 md:flex">
+                    <ul className="hidden items-center gap-8 text-[14px] text-white/80 md:flex lg:gap-10">
                         {NAV_LINKS.map((l) => (
                             <li key={l.label} data-nav>
                                 <a
@@ -423,21 +435,18 @@ const DropCaps = () => {
                 />
                 <div data-hero-glow className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(60%_60%_at_50%_0%,rgba(255,255,255,0.2),transparent)] md:h-[520px]" />
                 <div data-hero-content className="relative mx-auto max-w-3xl">
-                    <p data-hero className="mb-4 text-xs text-[#D4E4FC] md:mb-6 md:text-sm">For artisan keycap makers</p>
+                    <p data-hero className="mb-4 text-xs text-[#D4E4FC] md:mb-6 md:text-sm">Provably fair allocation</p>
                     <h1 data-hero className="text-[2.85rem] font-serif-display font-normal leading-[1.1] sm:text-6xl md:text-8xl md:leading-[1.02]">
-                        Fair Drops for<br />Artisan Keycaps
+                        Fair Drops for<br />Anything Limited
                     </h1>
                     <p data-hero className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-[#D4E4FC] md:mt-6 md:text-lg">
-                        Open signup, a locked list, and a draw nobody can rig, not even us. Bots lose their speed advantage, and your buyers stop refreshing the page.
+                        Sneakers, merch, tickets, giveaways, and limited slots. Open signup, a locked list, and a draw nobody can rig, not even us. Bots lose their speed advantage, and your community stops refreshing the page.
                     </p>
                     <div data-hero className="mt-8 flex flex-col items-center gap-3 md:mt-10">
-                        <a href="#start" className="rounded-full bg-pink-600 px-6 py-3 text-sm font-medium text-white transition hover:bg-sky-100 md:px-7">
+                        <a href="#start" className="rounded-full bg-white px-6 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:px-7">
                             Run your first drop
                         </a>
-                        <span className="text-xs text-[#A9C8F6]">Buyers need no wallet · Makers pay per drop in USDT</span>
-                    </div>
-                    <div data-hero className="mx-auto mt-6 h-[300px] w-full max-w-xl sm:h-[380px] md:mt-8 md:h-[460px]">
-                        
+                        <span className="text-xs text-[#A9C8F6]">Entrants need no wallet · Organizers pay per drop in USDT</span>
                     </div>
                 </div>
 
@@ -448,15 +457,15 @@ const DropCaps = () => {
                             <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#3B86EA] md:h-3 md:w-3" />
                             <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#3B86EA] md:h-3 md:w-3" />
                             <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#3B86EA] md:h-3 md:w-3" />
-                            <span className="ml-2 truncate text-[11px] text-[#A9C8F6] md:ml-3 md:text-xs">dropcaps.app / drops / aurora-014</span>
+                            <span className="ml-2 truncate text-[11px] text-[#A9C8F6] md:ml-3 md:text-xs">dropcaps.app / drops / sneaker-014</span>
                         </div>
 
                         <div className="grid gap-px bg-white/10 text-left md:grid-cols-[1fr_300px]">
                             <div data-draw className="bg-[#1559B8] p-4 sm:p-6 md:p-8">
                                 <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
                                     <div>
-                                        <h3 className="text-base font-medium md:text-lg">Aurora resin keycap</h3>
-                                        <p className="mt-1 text-xs text-[#A9C8F6] md:text-sm">20 entries · 4 available · list locked</p>
+                                        <h3 className="text-base font-medium md:text-lg">Limited sneaker release</h3>
+                                        <p className="mt-1 text-xs text-[#A9C8F6] md:text-sm">20 entries · 4 pairs available · list locked</p>
                                     </div>
                                     <span data-verified className="translate-y-2 whitespace-nowrap rounded-full border border-white/40 bg-white/15 px-3 py-1 text-xs text-white opacity-0">
                                         Draw verified
@@ -490,7 +499,7 @@ const DropCaps = () => {
                                     <p className="mt-1 text-[#F2F7FF]">Closed Oct 30, 20:00</p>
                                 </div>
                                 <div>
-                                    <p className="text-[#A9C8F6]">Drop fee (paid by maker)</p>
+                                    <p className="text-[#A9C8F6]">Drop fee (paid by organizer)</p>
                                     <p className="mt-1 text-[#F2F7FF]">3 USDT</p>
                                 </div>
                                 <div className="rounded-lg border border-white/20 p-3 text-[#D4E4FC]">
@@ -502,8 +511,26 @@ const DropCaps = () => {
                 </div>
             </section>
 
+            {/* Use cases */}
+            <section id="use-cases" className="mx-auto max-w-6xl scroll-mt-16 px-5 py-20 md:px-6 md:py-32">
+                <div className="max-w-2xl">
+                    <h2 data-heading className="text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">One Fair Method.<br />Every Limited Release.</h2>
+                    <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">
+                        If demand is bigger than supply, someone has to decide who gets in. Make that decision provable.
+                    </p>
+                </div>
+                <div className="mt-10 grid gap-8 sm:grid-cols-2 md:mt-16 md:grid-cols-3 md:gap-10">
+                    {USE_CASES.map(([title, body]) => (
+                        <div key={title} data-reveal className="border-t border-white/40 pt-5 md:pt-6">
+                            <h3 className="text-lg font-medium md:text-xl">{title}</h3>
+                            <p className="mt-2 text-[15px] leading-relaxed text-[#D4E4FC] md:mt-3 md:text-base">{body}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
             {/* How it works */}
-            <section id="how" className="mx-auto max-w-6xl scroll-mt-16 px-5 py-20 md:px-6 md:py-32">
+            <section id="how" className="mx-auto max-w-6xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
                 <div className="max-w-2xl">
                     <h2 data-heading className="text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">Stop Racing.<br />Start Drawing.</h2>
                     <p className="mt-4 text-base text-[#D4E4FC] md:mt-5 md:text-lg">
@@ -521,9 +548,9 @@ const DropCaps = () => {
                 </ol>
             </section>
 
-            {/* Why Dropcaps (untuk pembuat keycap) */}
+            {/* Why Dropcaps (untuk penyelenggara drop) */}
             <section id="why" className="mx-auto max-w-6xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
-                <h2 data-heading className="max-w-xl text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">Built for Artisan Keycap Makers</h2>
+                <h2 data-heading className="max-w-xl text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">Built for Brands, Creators &amp; Organizers</h2>
                 <div className="mt-10 grid gap-8 md:mt-16 md:grid-cols-3 md:gap-10">
                     {REASONS.map(([title, body]) => (
                         <div key={title} data-reveal className="border-t border-white/40 pt-5 md:pt-6">
@@ -534,12 +561,12 @@ const DropCaps = () => {
                 </div>
             </section>
 
-            {/* Cara maker membayar */}
+            {/* Cara penyelenggara membayar */}
             <section id="how-it-works" className="mx-auto max-w-4xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
                 <div data-reveal className="mx-auto mt-8 max-w-2xl rounded-2xl scroll-mt-16 border border-white/25 bg-white/10 p-5 md:mt-10 md:p-7">
-                    <p className="text-sm font-medium md:text-base">How makers pay</p>
+                    <p className="text-sm font-medium md:text-base">How organizers pay</p>
                     <p className="mt-1 text-sm text-[#D4E4FC]">
-                        The drop fee is paid in USDT, a crypto stablecoin pegged to the US dollar. Only you, the maker, need it.
+                        The drop fee is paid in USDT, a crypto stablecoin pegged to the US dollar. Only you, the organizer, need it.
                     </p>
                     <ol className="mt-4 space-y-3 text-sm">
                         {PAY_STEPS.map(([title, body], i) => (
@@ -555,7 +582,7 @@ const DropCaps = () => {
                         ))}
                     </ol>
                     <p className="mt-4 border-t border-white/20 pt-4 text-xs text-[#A9C8F6]">
-                        Your buyers never touch crypto. They pay you directly through your own payment provider.
+                        Your entrants never touch crypto. They pay you directly through your own payment provider.
                     </p>
                 </div>
             </section>
@@ -564,7 +591,7 @@ const DropCaps = () => {
             <section id="pricing" className="mx-auto max-w-4xl scroll-mt-16 px-5 pb-20 md:px-6 md:pb-32">
                 <h2 data-heading className="text-3xl font-serif-display font-normal sm:text-4xl md:text-5xl">Simple Pricing</h2>
                 <p className="mt-4 max-w-xl text-sm text-[#D4E4FC] md:mt-5 md:text-lg">
-                    Pay per drop, in USDT. No subscription, no hidden fees.
+                    Pay per drop, in USDT. Same price for a sneaker release, a ticket sale, or a giveaway. No subscription, no hidden fees.
                 </p>
 
                 <div className="mt-8 grid max-w-md gap-4 md:mt-10">
@@ -631,7 +658,7 @@ const DropCaps = () => {
                 <div data-cta className="mx-auto max-w-3xl rounded-3xl border border-white/25 bg-[radial-gradient(70%_100%_at_50%_0%,rgba(255,255,255,0.18),transparent)] px-5 py-14 md:px-6 md:py-24">
                     <h2 data-heading className="text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">Ready for Your First Fair Drop?</h2>
                     <p className="mx-auto mt-4 max-w-md text-base text-[#D4E4FC] md:mt-5 md:text-lg">
-                        Tell us about your next release and we will set it up with you. The drop fee is 3 USDT.
+                        Tell us what you are releasing, whether sneakers, merch, tickets, a giveaway, or limited slots, and we will set it up with you. The drop fee is 3 USDT.
                     </p>
                     <a href="https://wa.me/6289684053091" className="mt-8 inline-block rounded-full bg-white px-7 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:mt-10 md:px-8">
                         Run a drop
@@ -644,11 +671,12 @@ const DropCaps = () => {
                 <div className="mx-auto flex max-w-6xl flex-col justify-between gap-8 text-sm text-[#A9C8F6] md:flex-row">
                     <div>
                         <p className="font-semibold text-white">Dropcaps</p>
-                        <p className="mt-2">Fair drops for artisan keycap makers.</p>
+                        <p className="mt-2">Provably fair allocation for anything limited.</p>
                     </div>
                     <div className="flex gap-12 md:gap-16">
                         <div className="space-y-2">
                             <p className="text-[#E6EFFD]">Product</p>
+                            <a href="#use-cases" className="block hover:text-white">Use cases</a>
                             <a href="#how" className="block hover:text-white">How it works</a>
                             <a href="#pricing" className="block hover:text-white">Pricing</a>
                             <a href="#faq" className="block hover:text-white">FAQ</a>
