@@ -109,7 +109,7 @@ const PLANS = [
 const PAY_STEPS = [
     ["Book your drop", "Message us on WhatsApp with your release or giveaway details."],
     ["Get the wallet address", "We send the USDT wallet address and the network to use."],
-    ["Pay 3 USDT", "Send the payment from any wallet or exchange. Your drop is confirmed once it arrives."],
+    ["Pay 1 USDT", "Send the payment from any wallet or exchange. Your drop is confirmed once it arrives."],
 ]
 
 const FAQS = [
@@ -119,7 +119,7 @@ const FAQS = [
     ["Do my entrants need a crypto wallet?", "No. Entrants sign up and pay with normal methods. The blockchain block is a technical detail they can inspect if they want to."],
     ["Does this stop scalpers completely?", "No, and we do not claim it does. It removes the speed advantage of bots, so being fastest no longer wins. Winners can still resell, so you can set your own resale or transfer rules."],
     ["Do you hold the money?", "No. Your entrants' payments go straight to you through your own payment provider. The only money Dropcaps receives is the drop fee, paid in USDT."],
-    ["How do I pay for a drop?", "Organizers pay Dropcaps in USDT (a crypto stablecoin), 3 USDT per drop. When you book, we send the wallet address and the network to use, so you can pay before your drop opens. Only you, the organizer, need USDT. Your entrants still pay the usual way."],
+    ["How do I pay for a drop?", "Organizers pay Dropcaps in USDT (a crypto stablecoin), 1 USDT per drop. When you book, we send the wallet address and the network to use, so you can pay before your drop opens. Only you, the organizer, need USDT. Your entrants still pay the usual way."],
     ["I don't have any crypto. Can I still use Dropcaps?", "Yes. Buy USDT on any major exchange, send it to the address we give you, and you're set. If you get stuck, message us on WhatsApp and we'll walk you through it."],
     ["What proves the draw was fair?", "The hash of the locked list is published before the random block exists. After the draw, anyone can recompute the winners from the published list and block hash."],
 ]
@@ -500,7 +500,7 @@ const DropCaps = () => {
                                 </div>
                                 <div>
                                     <p className="text-[#A9C8F6]">Drop fee (paid by organizer)</p>
-                                    <p className="mt-1 text-[#F2F7FF]">3 USDT</p>
+                                    <p className="mt-1 text-[#F2F7FF]">1 USDT</p>
                                 </div>
                                 <div className="rounded-lg border border-white/20 p-3 text-[#D4E4FC]">
                                     Rerun the formula yourself and get the same four winners.
@@ -658,7 +658,7 @@ const DropCaps = () => {
                 <div data-cta className="mx-auto max-w-3xl rounded-3xl border border-white/25 bg-[radial-gradient(70%_100%_at_50%_0%,rgba(255,255,255,0.18),transparent)] px-5 py-14 md:px-6 md:py-24">
                     <h2 data-heading className="text-3xl font-serif-display font-normal leading-tight sm:text-4xl md:text-5xl">Ready for Your First Fair Drop?</h2>
                     <p className="mx-auto mt-4 max-w-md text-base text-[#D4E4FC] md:mt-5 md:text-lg">
-                        Tell us what you are releasing, whether sneakers, merch, tickets, a giveaway, or limited slots, and we will set it up with you. The drop fee is 3 USDT.
+                        Tell us what you are releasing, whether sneakers, merch, tickets, a giveaway, or limited slots, and we will set it up with you. The drop fee is 1 USDT.
                     </p>
                     <a href="https://wa.me/6289684053091" className="mt-8 inline-block rounded-full bg-white px-7 py-3 text-sm font-medium text-[#1A6DE0] transition hover:bg-sky-100 md:mt-10 md:px-8">
                         Run a drop
