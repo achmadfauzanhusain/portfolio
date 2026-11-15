@@ -91,7 +91,7 @@ const PLANS = [
     {
         name: "Single drop",
         blurb: "For organizers running fair allocations. You pay in USDT (crypto). Your entrants pay the usual way.",
-        price: "3 USDT",
+        price: "1 USDT",
         unit: "/ drop",
         items: [
             "Pay with USDT, a crypto stablecoin",
