@@ -38,7 +38,7 @@ const navLinks = [
     { label: 'Blog', href: '#contact' },
 ]
 
-const trustedBy = ['Casa Aurelia', 'Bottega Nova', 'Studio Fiorenza', 'Arte Digitale', 'Lumen & Co']
+// const trustedBy = ['Casa Aurelia', 'Bottega Nova', 'Studio Fiorenza', 'Arte Digitale', 'Lumen & Co']
 
 const benefits = [
     {
