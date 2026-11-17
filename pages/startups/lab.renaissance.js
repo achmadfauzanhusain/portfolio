@@ -65,7 +65,7 @@ const founders = [
         role: 'Founder & CEO',
         photo: null,
         bio: 'Product strategist who has led software teams from first prototype to launch. Replace this text with your own background, education and previous companies.',
-        link: '#',
+        link: 'https://fauzanhusain.com',
     }
 ]
 
@@ -85,12 +85,6 @@ const LogoMark = ({ className = '' }) => (
         <rect x="3" y="3" width="26" height="26" />
         <circle cx="16" cy="16" r="10.5" />
         <path d="M16 3v26M3 16h26" strokeWidth="0.8" />
-    </svg>
-)
-
-const Chevron = () => (
-    <svg viewBox="0 0 12 12" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
-        <path d="M2 4.5 6 8.5l4-4" />
     </svg>
 )
 
