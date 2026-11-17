@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Poppins, Cormorant_Garamond } from 'next/font/google'
 
 const serif = Cormorant_Garamond({
@@ -99,19 +100,24 @@ const Chevron = () => (
     </svg>
 )
 
-const SocialX = () => (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-        <path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.2-8.3L2 3h6.4l4.4 5.8L17.8 3Zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5Z" />
+const SocialInstagram = () => (
+    <svg
+        viewBox="0 0 24 24"
+        className="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+    >
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4.2" />
+        <circle cx="17.4" cy="6.6" r="0.9" fill="currentColor" stroke="none" />
     </svg>
 )
 
-const SocialLinkedIn = () => (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
-        <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11Z" />
-    </svg>
-)
-
-const LabReinassance = () => {
+const LabRenaissance = () => {
     const [scrolled, setScrolled] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -131,13 +137,13 @@ const LabReinassance = () => {
                 }`}
             >
                 <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-                    <a href="#home" className="flex items-center gap-3" aria-label="Lab Reinassance, home">
+                    <Link href="#home" className="flex items-center gap-3" aria-label="Lab Renaissance, home">
                         <LogoMark className="h-8 w-8" />
-                        <span className={`${serif.className} text-2xl font-semibold tracking-wide`}>Lab Reinassance</span>
-                    </a>
+                        <span className={`${serif.className} text-2xl font-semibold tracking-wide`}>Lab Renaissance</span>
+                    </Link>
 
                     <nav className="hidden items-center gap-9 text-sm font-light lg:flex" aria-label="Main">
-                        <a href="#home" className="transition-opacity hover:opacity-70">Home</a>
+                        <Link href="#home" className="transition-opacity hover:opacity-70">Home</Link>
 
                         <div className="group relative">
                             <button type="button" className="flex items-center gap-1.5 font-light transition-opacity hover:opacity-70">
@@ -146,23 +152,23 @@ const LabReinassance = () => {
                             <div className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-4 opacity-0 transition-opacity duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
                                 <div className="w-52 rounded-xl bg-white p-2 text-neutral-900 shadow-xl ring-1 ring-black/5">
                                     {craftLinks.map((item) => (
-                                        <a key={item.label} href={item.href} className="block rounded-lg px-4 py-2.5 text-sm hover:bg-neutral-100">
+                                        <Link key={item.label} href={item.href} className="block rounded-lg px-4 py-2.5 text-sm hover:bg-neutral-100">
                                             {item.label}
-                                        </a>
+                                        </Link>
                                     ))}
                                 </div>
                             </div>
                         </div>
 
                         {navLinks.slice(1).map((item) => (
-                            <a key={item.label} href={item.href} className="transition-opacity hover:opacity-70">
+                            <Link key={item.label} href={item.href} className="transition-opacity hover:opacity-70">
                                 {item.label}
-                            </a>
+                            </Link>
                         ))}
                     </nav>
 
                     <div className="flex items-center gap-3">
-                        <a
+                        <Link
                             href="https://wa.me/6289684053091"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -171,7 +177,7 @@ const LabReinassance = () => {
                             }`}
                         >
                             Get in touch
-                        </a>
+                        </Link>
                         <button
                             type="button"
                             className="p-2 lg:hidden"
@@ -189,16 +195,16 @@ const LabReinassance = () => {
                 {menuOpen && (
                     <div className="border-t border-black/5 bg-white px-6 pb-6 pt-2 text-neutral-900 lg:hidden">
                         {[navLinks[0], { label: 'Craft', href: '#craft' }, ...navLinks.slice(1)].map((item) => (
-                            <a
+                            <Link
                                 key={item.label}
                                 href={item.href}
                                 onClick={() => setMenuOpen(false)}
                                 className="block border-b border-black/5 py-3.5 text-base"
                             >
                                 {item.label}
-                            </a>
+                            </Link>
                         ))}
-                        <a
+                        <Link
                             href="https://wa.me/6289684053091"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -206,7 +212,7 @@ const LabReinassance = () => {
                             className="mt-5 block w-full rounded-full bg-neutral-900 py-3 text-center text-sm font-medium text-white"
                         >
                             Get in touch
-                        </a>
+                        </Link>
                     </div>
                 )}
             </header>
@@ -215,7 +221,7 @@ const LabReinassance = () => {
                 <section id="home" className="relative flex h-screen min-h-[680px] w-full flex-col justify-end overflow-hidden text-white">
                     <Image
                         src={IMG1}
-                        alt="Renaissance painting, the visual theme of Lab Reinassance"
+                        alt="Renaissance painting, the visual theme of Lab Renaissance"
                         fill
                         priority
                         sizes="100vw"
@@ -224,36 +230,36 @@ const LabReinassance = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/45" />
 
                     <div className="relative mx-auto w-full max-w-7xl px-6 pb-10">
-                        <a
+                        <Link
                             href="#manifesto"
                             className="mb-8 inline-block rounded-full border border-white/40 bg-white/10 px-5 py-2 text-sm font-light backdrop-blur transition-colors hover:bg-white/20"
                         >
-                            Read our manifesto at labreinassance.com/manifesto
-                        </a>
+                            Read our manifesto at labrenaissance.com/manifesto
+                        </Link>
 
                         <h1 className={`${serif.className} max-w-4xl text-5xl font-medium leading-[1.02] sm:text-6xl lg:text-8xl`}>
                             Software crafted like a masterpiece
                         </h1>
                         <p className="mt-6 max-w-xl text-base font-light leading-relaxed text-white/85 sm:text-lg">
-                            Lab Reinassance is a software house that brings the discipline of the Renaissance workshop, where art, science and engineering
+                            Lab Renaissance is a software house that brings the discipline of the Renaissance workshop, where art, science and engineering
                             worked as one, to the products you ship today.
                         </p>
 
                         <div className="mt-8 flex flex-wrap gap-3">
-                            <a
+                            <Link
                                 href="https://wa.me/6289684053091"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="rounded-full bg-white px-7 py-3 text-sm font-medium text-neutral-900 transition-colors hover:bg-white/85"
                             >
                                 Start a project
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="#works"
                                 className="rounded-full border border-white/50 px-7 py-3 text-sm font-medium transition-colors hover:bg-white/15"
                             >
                                 See our works
-                            </a>
+                            </Link>
                         </div>
 
                         <div className="mt-12 flex flex-col gap-4 border-t border-white/25 pt-6 sm:flex-row sm:items-center sm:gap-10">
@@ -270,7 +276,7 @@ const LabReinassance = () => {
                 </section>
 
                 {/* ---------------------------------------------------- */}
-                {/* Why Lab Reinassance (3 images)                       */}
+                {/* Why Lab Renaissance (3 images)                       */}
                 {/* ---------------------------------------------------- */}
                 <section id="craft" className="mx-auto max-w-7xl px-6 py-24 sm:py-32">
                     <div className="max-w-3xl">
@@ -314,13 +320,13 @@ const LabReinassance = () => {
                             <p className="mt-6 max-w-lg text-base font-light leading-relaxed text-neutral-600 sm:text-lg">
                                 Learn how we plan, design and build digital products, and why we believe careful work outlasts fast work.
                             </p>
-                            <p className="mt-2 text-base font-light text-neutral-600">Read the full manifesto at labreinassance.com/manifesto</p>
-                            <a
-                                href="#"
+                            <p className="mt-2 text-base font-light text-neutral-600">Read the full manifesto at labrenaissance.com/manifesto</p>
+                            <Link
+                                href="#manifesto"
                                 className="mt-8 inline-block rounded-full bg-neutral-900 px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-700"
                             >
                                 View our manifesto
-                            </a>
+                            </Link>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
@@ -390,20 +396,20 @@ const LabReinassance = () => {
                                     <h3 className={`${serif.className} mt-6 text-3xl font-semibold`}>{f.name}</h3>
                                     <p className="mt-1 text-sm font-medium text-neutral-500">{f.role}</p>
                                     <p className="mt-4 text-sm font-light leading-relaxed text-neutral-600">{f.bio}</p>
-                                    <a
+                                    <Link
                                         href={f.link}
                                         className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:opacity-70"
                                         aria-label={`${f.name} on LinkedIn`}
                                     >
                                         Portfolio
-                                    </a>
+                                    </Link>
                                 </article>
                             ))}
                         </div>
 
-                        <a href="#" className="mt-12 inline-block text-sm font-medium underline underline-offset-4 hover:opacity-70">
+                        <Link href="#" className="mt-12 inline-block text-sm font-medium underline underline-offset-4 hover:opacity-70">
                             Meet the rest of the team
-                        </a>
+                        </Link>
                     </div>
                 </section>
 
@@ -434,14 +440,14 @@ const LabReinassance = () => {
                         <p className="mx-auto mt-6 max-w-xl text-base font-light leading-relaxed text-white/85 sm:text-lg">
                             Looking for a software partner, or want to join the workshop? Reach out and tell us what you are making.
                         </p>
-                        <a
+                        <Link
                             href="https://wa.me/6289684053091"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="mt-10 inline-block rounded-full bg-white px-8 py-3.5 text-sm font-medium text-neutral-900 transition-colors hover:bg-white/85"
                         >
                             Get in touch
-                        </a>
+                        </Link>
                     </div>
                 </section>
             </main>
@@ -450,33 +456,36 @@ const LabReinassance = () => {
                 <div className="mx-auto max-w-7xl px-6 py-14">
                     <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
                         <div>
-                            <a href="#home" className="flex items-center gap-3">
+                            <Link href="#home" className="flex items-center gap-3">
                                 <LogoMark className="h-8 w-8" />
-                                <span className={`${serif.className} text-2xl font-semibold tracking-wide`}>Lab Reinassance</span>
-                            </a>
+                                <span className={`${serif.className} text-2xl font-semibold tracking-wide`}>Lab Renaissance</span>
+                            </Link>
                             <p className="mt-4 max-w-xs text-sm font-light text-neutral-600">A software house with the discipline of a Renaissance workshop.</p>
                         </div>
 
                         <nav aria-label="Footer" className="grid grid-cols-2 gap-x-14 gap-y-3 text-sm font-light sm:grid-cols-3">
                             {footerLinks.map((item) => (
-                                <a key={item.label} href={item.href} className="hover:opacity-60">
+                                <Link key={item.label} href={item.href} className="hover:opacity-60">
                                     {item.label}
-                                </a>
+                                </Link>
                             ))}
                         </nav>
 
                         <div className="flex items-center gap-5">
-                            <a href="#" aria-label="Lab Reinassance on X" className="hover:opacity-60">
-                                <SocialX />
-                            </a>
-                            <a href="#" aria-label="Lab Reinassance on LinkedIn" className="hover:opacity-60">
-                                <SocialLinkedIn />
-                            </a>
+                            <Link
+                                href="https://instagram.com/lab.reinassance"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Lab Renaissance on Instagram"
+                                className="hover:opacity-60"
+                            >
+                                <SocialInstagram />
+                            </Link>
                         </div>
                     </div>
 
                     <div className="mt-12 flex flex-col gap-2 border-t border-black/10 pt-6 text-xs font-light text-neutral-500 sm:flex-row sm:justify-between">
-                        <p>&copy; {new Date().getFullYear()} Lab Reinassance. All rights reserved.</p>
+                        <p>&copy; {new Date().getFullYear()} Lab Renaissance. All rights reserved.</p>
                         <p>Jl. Contoh No. 1, Jakarta, Indonesia</p>
                     </div>
                 </div>
@@ -485,4 +494,4 @@ const LabReinassance = () => {
     )
 }
 
-export default LabReinassance
+export default LabRenaissance
