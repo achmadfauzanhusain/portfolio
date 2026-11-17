@@ -1,13 +1,9 @@
 'use client'
-// Hapus baris 'use client' di atas jika kamu memakai Pages Router.
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Poppins, Cormorant_Garamond } from 'next/font/google'
 
-/* ------------------------------------------------------------------ */
-/*  Fonts: 1 serif + Poppins (sans-serif)                              */
-/* ------------------------------------------------------------------ */
 const serif = Cormorant_Garamond({
     subsets: ['latin'],
     weight: ['400', '500', '600', '700'],
@@ -21,17 +17,11 @@ const poppins = Poppins({
     display: 'swap',
 })
 
-/* ------------------------------------------------------------------ */
-/*  Images (folder: /public/labreinassance)                            */
-/* ------------------------------------------------------------------ */
 const IMG1 = '/labreinassance/reinassance.jpeg'
 const IMG2 = '/labreinassance/reinassance2.jpg'
 const IMG3 = '/labreinassance/reinassance3.jpg'
 const IMG4 = '/labreinassance/reinassance4.jpg'
 
-/* ------------------------------------------------------------------ */
-/*  Content (ganti sesuai kebutuhan)                                   */
-/* ------------------------------------------------------------------ */
 const craftLinks = [
     { label: 'Web platforms', href: '#craft' },
     { label: 'Mobile apps', href: '#craft' },
@@ -47,7 +37,6 @@ const navLinks = [
     { label: 'Blog', href: '#contact' },
 ]
 
-// Nama klien/partner di bawah ini hanya placeholder. Ganti dengan logo asli.
 const trustedBy = ['Casa Aurelia', 'Bottega Nova', 'Studio Fiorenza', 'Arte Digitale', 'Lumen & Co']
 
 const benefits = [
@@ -72,34 +61,17 @@ const benefits = [
 ]
 
 const partners = [
-    'Casa Aurelia', 'Bottega Nova', 'Studio Fiorenza', 'Arte Digitale', 'Lumen & Co', 'Atelier Verde',
-    'Officina Nord', 'Palazzo Labs', 'Fondaco', 'Vetro Capital', 'Scuola Digitale', 'Orsini Group',
-    'Campanile', 'Marmo Ventures', 'Sala Dorata', 'Torre Bianca',
+    'Ministry of Communication and Digital', 'fauzanhusain'
 ]
 
-// Nama & deskripsi founder hanya placeholder. Isi `photo` dengan path gambar jika ada.
 const founders = [
     {
-        name: 'Founder Name',
-        role: 'Co-Founder & CEO',
+        name: 'Fauzan Husain',
+        role: 'Founder & CEO',
         photo: null,
         bio: 'Product strategist who has led software teams from first prototype to launch. Replace this text with your own background, education and previous companies.',
         link: '#',
-    },
-    {
-        name: 'Founder Name',
-        role: 'Co-Founder & CTO',
-        photo: null,
-        bio: 'Full-stack and systems engineer with years of experience building scalable platforms. Replace this text with your own background and notable projects.',
-        link: '#',
-    },
-    {
-        name: 'Founder Name',
-        role: 'Co-Founder & Design Lead',
-        photo: null,
-        bio: 'Designer focused on typography, motion and brand systems. Replace this text with your own background and notable work.',
-        link: '#',
-    },
+    }
 ]
 
 const featured = ['Gazzetta Digitale', 'Il Codice', 'Tech Rinascita', 'The Atelier Post', 'Forum Mercatorum', 'Studio Magazine', 'Via Nova', 'Opus Weekly']
@@ -113,11 +85,7 @@ const footerLinks = [
     { label: 'Blog', href: '#contact' },
 ]
 
-/* ------------------------------------------------------------------ */
-/*  Small pieces                                                       */
-/* ------------------------------------------------------------------ */
 const LogoMark = ({ className = '' }) => (
-    // Lingkaran dalam persegi, rujukan ke Vitruvian Man
     <svg viewBox="0 0 32 32" className={className} fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
         <rect x="3" y="3" width="26" height="26" />
         <circle cx="16" cy="16" r="10.5" />
@@ -143,9 +111,6 @@ const SocialLinkedIn = () => (
     </svg>
 )
 
-/* ------------------------------------------------------------------ */
-/*  Page                                                               */
-/* ------------------------------------------------------------------ */
 const LabReinassance = () => {
     const [scrolled, setScrolled] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
@@ -160,9 +125,6 @@ const LabReinassance = () => {
     const solid = scrolled || menuOpen
     return (
         <div className={`${poppins.className} min-h-screen bg-white text-neutral-900 antialiased`}>
-            {/* ---------------------------------------------------- */}
-            {/* Navbar                                               */}
-            {/* ---------------------------------------------------- */}
             <header
                 className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
                     solid ? 'border-b border-black/5 bg-white/95 text-neutral-900 backdrop-blur' : 'bg-transparent text-white'
@@ -250,9 +212,6 @@ const LabReinassance = () => {
             </header>
 
             <main>
-                {/* ---------------------------------------------------- */}
-                {/* Hero (full screen, reinassance1.jpeg)                */}
-                {/* ---------------------------------------------------- */}
                 <section id="home" className="relative flex h-screen min-h-[680px] w-full flex-col justify-end overflow-hidden text-white">
                     <Image
                         src={IMG1}
@@ -436,7 +395,7 @@ const LabReinassance = () => {
                                         className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:opacity-70"
                                         aria-label={`${f.name} on LinkedIn`}
                                     >
-                                        <SocialLinkedIn /> LinkedIn
+                                        Portfolio
                                     </a>
                                 </article>
                             ))}
@@ -487,9 +446,6 @@ const LabReinassance = () => {
                 </section>
             </main>
 
-            {/* ---------------------------------------------------- */}
-            {/* Footer                                               */}
-            {/* ---------------------------------------------------- */}
             <footer className="border-t border-black/10">
                 <div className="mx-auto max-w-7xl px-6 py-14">
                     <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
