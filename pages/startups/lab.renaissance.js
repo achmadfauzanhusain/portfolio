@@ -62,7 +62,7 @@ const benefits = [
 ]
 
 const partners = [
-    'Ministry of Communication and Digital', 'fauzanhusain'
+    'Ministry of Communication and Digital', 'fauzanhusain', 'Bandung Techno Park'
 ]
 
 const founders = [
@@ -473,7 +473,7 @@ const LabRenaissance = () => {
 
                         <div className="flex items-center gap-5">
                             <Link
-                                href="https://instagram.com/lab.reinassance"
+                                href="https://instagram.com/lab.renaissance"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Lab Renaissance on Instagram"
@@ -486,7 +486,7 @@ const LabRenaissance = () => {
 
                     <div className="mt-12 flex flex-col gap-2 border-t border-black/10 pt-6 text-xs font-light text-neutral-500 sm:flex-row sm:justify-between">
                         <p>&copy; {new Date().getFullYear()} Lab Renaissance. All rights reserved.</p>
-                        <p>Jl. Contoh No. 1, Jakarta, Indonesia</p>
+                        <p>We dont have office for now</p>
                     </div>
                 </div>
             </footer>
