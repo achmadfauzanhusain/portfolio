@@ -105,7 +105,7 @@ const SocialInstagram = () => (
     </svg>
 )
 
-const LabRenaissance = () => {
+const RenaissanceSoftware = () => {
     const [scrolled, setScrolled] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -125,9 +125,9 @@ const LabRenaissance = () => {
                 }`}
             >
                 <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-                    <Link href="#home" className="flex items-center gap-3" aria-label="Lab Renaissance, home">
+                    <Link href="#home" className="flex items-center gap-3" aria-label="Renaissance Software, home">
                         <LogoMark className="h-8 w-8" />
-                        <span className={`${serif.className} text-2xl font-semibold tracking-wide`}>Lab Renaissance</span>
+                        <span className={`${serif.className} text-2xl font-semibold tracking-wide`}>Renaissance Software</span>
                     </Link>
 
                     <nav className="hidden items-center gap-9 text-sm font-light lg:flex" aria-label="Main">
@@ -194,7 +194,7 @@ const LabRenaissance = () => {
                 <section id="home" className="relative flex h-screen min-h-[680px] w-full flex-col justify-end overflow-hidden text-white">
                     <Image
                         src={IMG1}
-                        alt="Renaissance painting, the visual theme of Lab Renaissance"
+                        alt="Renaissance painting, the visual theme of Renaissance Software"
                         fill
                         priority
                         sizes="100vw"
@@ -207,14 +207,14 @@ const LabRenaissance = () => {
                             href="#manifesto"
                             className="mb-8 inline-block rounded-full border border-white/40 bg-white/10 px-5 py-2 text-sm font-light backdrop-blur transition-colors hover:bg-white/20"
                         >
-                            Read our manifesto at labrenaissance.com/manifesto
+                            Read our manifesto at renaissance.software/manifesto
                         </Link>
 
                         <h1 className={`${serif.className} max-w-4xl text-5xl font-medium leading-[1.02] sm:text-6xl lg:text-8xl`}>
                             Software crafted like a masterpiece
                         </h1>
                         <p className="mt-6 max-w-xl text-base font-light leading-relaxed text-white/85 sm:text-lg">
-                            Lab Renaissance is a software house that brings the discipline of the Renaissance workshop, where art, science and engineering
+                            Renaissance Software is a software house that brings the discipline of the Renaissance workshop, where art, science and engineering
                             worked as one, to the products you ship today.
                         </p>
 
@@ -249,7 +249,7 @@ const LabRenaissance = () => {
                 </section>
 
                 {/* ---------------------------------------------------- */}
-                {/* Why Lab Renaissance (3 images)                       */}
+                {/* Why Renaissance Software (3 images)                  */}
                 {/* ---------------------------------------------------- */}
                 <section id="craft" className="mx-auto max-w-7xl px-6 py-24 sm:py-32">
                     <div className="max-w-3xl">
@@ -293,7 +293,7 @@ const LabRenaissance = () => {
                             <p className="mt-6 max-w-lg text-base font-light leading-relaxed text-neutral-600 sm:text-lg">
                                 Learn how we plan, design and build digital products, and why we believe careful work outlasts fast work.
                             </p>
-                            <p className="mt-2 text-base font-light text-neutral-600">Read the full manifesto at labrenaissance.com/manifesto</p>
+                            <p className="mt-2 text-base font-light text-neutral-600">Read the full manifesto at renaissance.software/manifesto</p>
                             <Link
                                 href="#manifesto"
                                 className="mt-8 inline-block rounded-full bg-neutral-900 px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-700"
@@ -431,7 +431,7 @@ const LabRenaissance = () => {
                         <div>
                             <Link href="#home" className="flex items-center gap-3">
                                 <LogoMark className="h-8 w-8" />
-                                <span className={`${serif.className} text-2xl font-semibold tracking-wide`}>Lab Renaissance</span>
+                                <span className={`${serif.className} text-2xl font-semibold tracking-wide`}>Renaissance Software</span>
                             </Link>
                             <p className="mt-4 max-w-xs text-sm font-light text-neutral-600">A software house with the discipline of a Renaissance workshop.</p>
                         </div>
@@ -446,10 +446,10 @@ const LabRenaissance = () => {
 
                         <div className="flex items-center gap-5">
                             <Link
-                                href="https://instagram.com/lab.renaissance"
+                                href="https://instagram.com/renaissance.software"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label="Lab Renaissance on Instagram"
+                                aria-label="Renaissance Software on Instagram"
                                 className="hover:opacity-60"
                             >
                                 <SocialInstagram />
@@ -458,7 +458,7 @@ const LabRenaissance = () => {
                     </div>
 
                     <div className="mt-12 flex flex-col gap-2 border-t border-black/10 pt-6 text-xs font-light text-neutral-500 sm:flex-row sm:justify-between">
-                        <p>&copy; {new Date().getFullYear()} Lab Renaissance. All rights reserved.</p>
+                        <p>&copy; {new Date().getFullYear()} Renaissance Software. All rights reserved.</p>
                         <p>We dont have office for now</p>
                     </div>
                 </div>
@@ -467,4 +467,4 @@ const LabRenaissance = () => {
     )
 }
 
-export default LabRenaissance
+export default RenaissanceSoftware
