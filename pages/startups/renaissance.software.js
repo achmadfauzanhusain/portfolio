@@ -29,7 +29,6 @@ const navLinks = [
     { label: 'Craft', href: '#craft' },
     { label: 'Works', href: '#works' },
     { label: 'Careers', href: '#contact' },
-    { label: 'Blog', href: '#contact' },
 ]
 
 // const trustedBy = ['Casa Aurelia', 'Bottega Nova', 'Studio Fiorenza', 'Arte Digitale', 'Lumen & Co']
