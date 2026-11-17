@@ -263,13 +263,13 @@ const LabRenaissance = () => {
                         </div>
 
                         <div className="mt-12 flex flex-col gap-4 border-t border-white/25 pt-6 sm:flex-row sm:items-center sm:gap-10">
-                            <span className="shrink-0 text-sm font-light text-white/75">Trusted by</span>
+                            {/* <span className="shrink-0 text-sm font-light text-white/75">Trusted by</span> */}
                             <ul className="flex flex-wrap items-center gap-x-9 gap-y-3">
-                                {trustedBy.map((name) => (
+                                {/* {trustedBy.map((name) => (
                                     <li key={name} className={`${serif.className} text-xl font-semibold tracking-wide text-white/90 sm:text-2xl`}>
                                         {name}
                                     </li>
-                                ))}
+                                ))} */}
                             </ul>
                         </div>
                     </div>
