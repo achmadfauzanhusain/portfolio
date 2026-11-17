@@ -22,6 +22,7 @@ const IMG1 = '/labreinassance/reinassance.jpeg'
 const IMG2 = '/labreinassance/reinassance2.jpg'
 const IMG3 = '/labreinassance/reinassance3.jpg'
 const IMG4 = '/labreinassance/reinassance4.jpg'
+const IMG5 = '/labreinassance/renaissance5.jpg'
 
 const navLinks = [
     { label: 'Home', href: '#home' },
@@ -302,7 +303,7 @@ const RenaissanceSoftware = () => {
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                            {[IMG2, IMG3, IMG4, IMG1].map((src, i) => (
+                            {[IMG2, IMG3, IMG4, IMG5].map((src, i) => (
                                 <div
                                     key={i}
                                     className={`relative aspect-[3/4] overflow-hidden rounded-2xl bg-neutral-100 ${i % 2 === 1 ? 'translate-y-8' : ''}`}
