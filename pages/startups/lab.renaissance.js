@@ -23,16 +23,10 @@ const IMG2 = '/labreinassance/reinassance2.jpg'
 const IMG3 = '/labreinassance/reinassance3.jpg'
 const IMG4 = '/labreinassance/reinassance4.jpg'
 
-const craftLinks = [
-    { label: 'Web platforms', href: '#craft' },
-    { label: 'Mobile apps', href: '#craft' },
-    { label: 'AI and data', href: '#craft' },
-    { label: 'Design systems', href: '#craft' },
-]
-
 const navLinks = [
     { label: 'Home', href: '#home' },
     { label: 'Team', href: '#team' },
+    { label: 'Craft', href: '#craft' },
     { label: 'Works', href: '#works' },
     { label: 'Careers', href: '#contact' },
     { label: 'Blog', href: '#contact' },
@@ -144,21 +138,6 @@ const LabRenaissance = () => {
 
                     <nav className="hidden items-center gap-9 text-sm font-light lg:flex" aria-label="Main">
                         <Link href="#home" className="transition-opacity hover:opacity-70">Home</Link>
-
-                        <div className="group relative">
-                            <button type="button" className="flex items-center gap-1.5 font-light transition-opacity hover:opacity-70">
-                                Craft <Chevron />
-                            </button>
-                            <div className="invisible absolute left-1/2 top-full -translate-x-1/2 pt-4 opacity-0 transition-opacity duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                                <div className="w-52 rounded-xl bg-white p-2 text-neutral-900 shadow-xl ring-1 ring-black/5">
-                                    {craftLinks.map((item) => (
-                                        <Link key={item.label} href={item.href} className="block rounded-lg px-4 py-2.5 text-sm hover:bg-neutral-100">
-                                            {item.label}
-                                        </Link>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
 
                         {navLinks.slice(1).map((item) => (
                             <Link key={item.label} href={item.href} className="transition-opacity hover:opacity-70">
