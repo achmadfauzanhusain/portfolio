@@ -62,7 +62,7 @@ const benefits = [
 ]
 
 const partners = [
-    'Ministry of Communication and Digital', 'fauzanhusain', 'Bandung Techno Park'
+    'fauzanhusain', 'Ministry of Communication and Digital', 'Bandung Techno Park'
 ]
 
 const founders = [
